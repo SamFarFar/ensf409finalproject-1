@@ -61,7 +61,6 @@ public class OrderForm {
             myWriter.write("Original Request: " + this.originalRequestName + ", " + this.originalRequestAmount + '\n');
             myWriter.write('\n');
             myWriter.write("Items Ordered\n");
-            myWriter.write('\n');
             for(int i = 0; i < this.itemsOrdered.length; i++) {
                 myWriter.write("ID: " + this.itemsOrdered[i] + "\n");
             }
@@ -74,6 +73,4 @@ public class OrderForm {
             e.printStackTrace();
           }
     }
-
-    
 }

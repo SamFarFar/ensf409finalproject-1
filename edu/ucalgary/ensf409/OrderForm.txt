@@ -7,7 +7,6 @@ Date: date
 Original Request: originalRequestName, 1
 
 Items Ordered
-
 ID: Chair
 ID: Dog
 ID: Sam
