@@ -22,4 +22,5 @@ public class Request {
 	public int getQuantity() {
 		return quantity;
 	}
+
 }
