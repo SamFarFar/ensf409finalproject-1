@@ -103,7 +103,7 @@ public class InventoryLink {
 					furniture = "lamp";
 					break;
 				default:
-					return null;
+					return;
 			}
             String query = "DELETE FROM " + furniture + " WHERE ID = ?";
             PreparedStatement myStmt = dbConnect.prepareStatement(query);
