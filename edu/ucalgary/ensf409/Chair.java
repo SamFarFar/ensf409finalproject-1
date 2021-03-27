@@ -6,7 +6,7 @@ public class Chair extends Furniture {
     private boolean Seat;
     private boolean Cushion;
 
-  public Chair(int ID,String type, boolean legs,boolean arms, boolean seat,
+  public Chair(String ID,String type, boolean legs,boolean arms, boolean seat,
                boolean cushion,int price,String manuID){
       super(ID,type,price,manuID);
       setArms(arms);
@@ -15,7 +15,7 @@ public class Chair extends Furniture {
       setSeat(seat);
 
   }
-    public Chair(int ID, String type, int price, int manuID){
+    public Chair(String ID, String type, int price, String manuID){
         super(ID,type,price,manuID);
     }
 

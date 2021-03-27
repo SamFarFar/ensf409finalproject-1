@@ -6,7 +6,7 @@ public class Desk extends Furniture{
     private boolean Drawer;
     private boolean Cushion;
 
-    public Desk(int ID, String type, int price, String manuID){
+    public Desk(String ID, String type, int price, String manuID){
         super(ID,type,price,manuID);
     }
     public void setLegs(boolean legs) {
