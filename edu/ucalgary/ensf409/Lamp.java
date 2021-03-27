@@ -1,10 +1,15 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 class Lamp {
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> d58efdb711699ab004fb3d393d3a4ef23168f749
 package edu.ucalgary.ensf409;
+
 public class Lamp{
 
+<<<<<<< HEAD
         }
 =======
 public class Lamp {
@@ -12,3 +17,6 @@ public class Lamp {
     
 }
 >>>>>>> 18500f2623c9ca808f346fcae24b315486c5c2e0
+=======
+        }
+>>>>>>> d58efdb711699ab004fb3d393d3a4ef23168f749
