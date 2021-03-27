@@ -35,8 +35,8 @@ public class Chair extends Furniture {
         Seat = seat;
     }
 
-    public void setManuID(int manuID) {
-        this.manuID = manuID;
+    public void setManuID(String manuID) {
+        super.setManuID(manuID);
     }
 
     public boolean isArms() {
@@ -54,7 +54,7 @@ public class Chair extends Furniture {
     public boolean isSeat() {
         return Seat;
     }
-    public int getManuID() {
-        return manuID;
+    public String getManuID() {
+        return super.getManuID();
     }
 }
