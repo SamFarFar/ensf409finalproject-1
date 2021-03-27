@@ -1,3 +1,3 @@
-public class Lamp {
+class Lamp {
     
 }
