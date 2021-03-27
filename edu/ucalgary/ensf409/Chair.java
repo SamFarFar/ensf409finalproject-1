@@ -35,7 +35,7 @@ public class Chair extends Furniture {
         Seat = seat;
     }
 
-    
+
 
     public boolean isArms() {
         return Arms;
