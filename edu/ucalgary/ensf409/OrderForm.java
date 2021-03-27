@@ -5,7 +5,9 @@ import java.io.IOException;
 
 public class OrderForm {
     public static void main(String[] args) {
-
+        String[] items = {"Chair", "Dog", "Sam"};
+        OrderForm testForm = new OrderForm("facultyName", "contact", "date", "originalRequestName", 1, items, 100);
+        testForm.initOrderForm();
     }
 
     private String facultyName = "";
