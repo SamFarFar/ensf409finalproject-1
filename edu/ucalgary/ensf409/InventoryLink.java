@@ -30,7 +30,6 @@ public class InventoryLink {
 		try {                    
             Statement myStmt = dbConnect.createStatement();
             results = myStmt.executeQuery("SELECT * FROM " + request.getFurniture());
-            
             // go through all furniture items in the request's type, if their 
             // type matches the request's type, add their ID to an ArrayList to return
             while (results.next()){
@@ -38,7 +37,6 @@ public class InventoryLink {
 					retVal.add(results.getString("ID"));
 				}
             }
-            
             myStmt.close();
 		} catch(SQLException ex) {
             ex.printStackTrace();
@@ -86,6 +84,35 @@ public class InventoryLink {
             ex.printStackTrace();
         }
 		return null;
+	}
+	
+	public void deleteFurniture(String ID){
+		try {
+			String furniture = null;
+			switch(ID.charAt(0)){
+				case 'C':
+					furniture = "chair";
+					break;
+				case 'D':
+					furniture = "desk";
+					break;
+				case 'F':
+					furniture = "filing";
+					break;
+				case 'L':
+					furniture = "lamp";
+					break;
+				default:
+					return null;
+			}
+            String query = "DELETE FROM " + furniture + " WHERE ID = ?";
+            PreparedStatement myStmt = dbConnect.prepareStatement(query);
+            myStmt.setString(1, ID); 
+            int rowCount = myStmt.executeUpdate();
+            myStmt.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 	}
 	
 	public void close() {
