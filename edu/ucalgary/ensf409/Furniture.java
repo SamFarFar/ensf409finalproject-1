@@ -1,6 +1,6 @@
 package edu.ucalgary.ensf409;
 
-abstract class Furniture {
+public abstract class Furniture {
     private String ID;
     private String type;
     private int price;
