@@ -49,89 +49,43 @@ public class InventoryLink {
 	public boolean[] getValidParts(String ID) {
 		boolean[] retVal;
 		String furniture = null;
-		switch(ID.charAt(0)){
-			case 'C':
-				retVal = new boolean[4];
-				furniture = "chair";
-				break;
-			case 'D':
-				retVal = new boolean[3];
-				furniture = "desk";
-				break;
-			case 'F':
-				retVal = new boolean[3];
-				furniture = "filing";
-				break;
-			case 'L':
-				retVal = new boolean[2];
-				furniture = "lamp";
-				break;
-			default:
-				return null;
-		}
-		int index = 0;
+		int numberOfParts = 0;
 		try {                    
             Statement myStmt = dbConnect.createStatement();
-            results = myStmt.executeQuery("SELECT * FROM " + furniture);
+            switch(ID.charAt(0)){
+				case 'C':
+					numberOfParts = 4;
+					results = myStmt.executeQuery("SELECT Legs,Arms,Seat,Cushion FROM chair WHERE ID = '" + ID + "'");
+					break;
+				case 'D':
+					numberOfParts = 3;
+					results = myStmt.executeQuery("SELECT Legs,Top,Drawer FROM desk WHERE ID = '" + ID + "'");
+					break;
+				case 'F':
+					numberOfParts = 3;
+					results = myStmt.executeQuery("SELECT Rails,Drawers,Cabinet FROM filing WHERE ID = '" + ID + "'");
+					break;
+				case 'L':
+					numberOfParts = 2;
+					results = myStmt.executeQuery("SELECT Base,Bulb FROM lamp WHERE ID = '" + ID + "'");
+					break;
+				default:
+					return null;
+			}
+            retVal = new boolean[numberOfParts];
             while (results.next()){
-				if(ID.equals(results.getString("ID"))){
-					if(furniture.equals("chair")){
-						
-						if(results.getString("Legs").equals("Y")){
-							retVal[index++] = true;
-						} else retVal[index++] = false;
-						if(results.getString("Arms").equals("Y")){
-							retVal[index++] = true;
-						} else retVal[index++] = false;
-						if(results.getString("Seat").equals("Y")){
-							retVal[index++] = true;
-						} else retVal[index++] = false;
-						if(results.getString("Cushion").equals("Y")){
-							retVal[index++] = true;
-						} else retVal[index++] = false;
-						
-					} else if(furniture.equals("desk")){
-						
-						if(results.getString("Legs").equals("Y")){
-							retVal[index++] = true;
-						} else retVal[index++] = false;
-						if(results.getString("Top").equals("Y")){
-							retVal[index++] = true;
-						} else retVal[index++] = false;
-						if(results.getString("Drawer").equals("Y")){
-							retVal[index++] = true;
-						} else retVal[index++] = false;
-						
-					} else if(furniture.equals("filing")){
-						
-						if(results.getString("Rails").equals("Y")){
-							retVal[index++] = true;
-						} else retVal[index++] = false;
-						if(results.getString("Drawers").equals("Y")){
-							retVal[index++] = true;
-						} else retVal[index++] = false;
-						if(results.getString("Cabinet").equals("Y")){
-							retVal[index++] = true;
-						} else retVal[index++] = false;
-						
-					} else if(furniture.equals("lamp")){
-						
-						if(results.getString("Base").equals("Y")){
-							retVal[index++] = true;
-						} else retVal[index++] = false;
-						if(results.getString("Bulb").equals("Y")){
-							retVal[index++] = true;
-						} else retVal[index++] = false;
-						
-					}
-					
+				for(int i = 0; i < numberOfParts; i++){
+					if(results.getString(i).equals("Y")){
+						retVal[i] = true;
+					} else retVal[i] = false;
 				}
-            }
+			}
             myStmt.close();
+            return retVal;
 		} catch(SQLException ex) {
             ex.printStackTrace();
         }
-		return retVal;
+		return null;
 	}
 	
 	public void close() {
