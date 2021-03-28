@@ -1,5 +1,31 @@
 package edu.ucalgary.ensf409;
+public class Lamp extends Furniture {
+    private boolean Base;
+    private boolean Bulb;
 
-public class Lamp {
+    public Lamp(String ID, String type, int price, String manuID) {
+        super(ID, type, price, manuID);
+    }
 
+    public Lamp(String ID, String type, int price, String manuID, boolean base, boolean bulb) {
+        super(ID, type, price, manuID);
+        setBase(base);
+        setBulb(bulb);
+    }
+
+    public boolean isBase() {
+        return Base;
+    }
+
+    public boolean isBulb() {
+        return Bulb;
+    }
+
+    public void setBase(boolean base) {
+        Base = base;
+    }
+
+    public void setBulb(boolean bulb) {
+        Bulb = bulb;
+    }
 }

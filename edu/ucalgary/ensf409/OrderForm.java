@@ -10,13 +10,13 @@ public class OrderForm {
         testForm.initOrderForm();
     }
 
-    private String facultyName = "";
-    private String contact = "";
-    private String date = "";
-    private String originalRequestName = "";
-    private int originalRequestAmount = -1;
+    private String facultyName;
+    private String contact;
+    private String date;
+    private String originalRequestName;
+    private int originalRequestAmount;
     private String[] itemsOrdered;
-    private int totalPrice = 0;
+    private int totalPrice;
 
     public OrderForm(String facultyName, String contact, String date, String originalRequestName,
     int originalRequestAmount, String[] itemsOrdered, int totalPrice) {
