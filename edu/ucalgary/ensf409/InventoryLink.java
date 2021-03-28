@@ -71,7 +71,7 @@ public class InventoryLink {
 					return null;
 			}
             retVal = new boolean[numberOfParts];
-            while (results.next()){
+            while(results.next()){
 				for(int i = 0; i < numberOfParts; i++){
 					if(results.getString(i).equals("Y")){
 						retVal[i] = true;
@@ -87,7 +87,33 @@ public class InventoryLink {
 	}
 	
 	private int getPrice(String ID) {
-		
+		int price = -1;
+		try {
+            Statement myStmt = dbConnect.createStatement();
+            switch(ID.charAt(0)){
+				case 'C':
+					results = myStmt.executeQuery("SELECT Price FROM chair WHERE ID = '" + ID + "'");
+					break;
+				case 'D':
+					results = myStmt.executeQuery("SELECT Price FROM desk WHERE ID = '" + ID + "'");
+					break;
+				case 'F':
+					results = myStmt.executeQuery("SELECT Price FROM filing WHERE ID = '" + ID + "'");
+					break;
+				case 'L':
+					results = myStmt.executeQuery("SELECT Price FROM lamp WHERE ID = '" + ID + "'");
+					break;
+				default:
+					return price;
+			}
+            while(results.next()){
+				price = results.getInt(0);
+			}
+            myStmt.close();
+		} catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return price;
 	}
 	
 	public void deleteFurniture(String ID){
