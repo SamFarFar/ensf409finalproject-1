@@ -19,7 +19,6 @@ public class Input {
 		Scanner scanner = null;
 		
 		try{
-			
 			scanner = new Scanner(System.in);
 			System.out.println(WELCOME);
 			System.out.println(DBURLINPUT);
