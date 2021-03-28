@@ -17,7 +17,7 @@ public class Input {
 
 	public static void main(String[] args) {
 		Scanner scanner = null;
-
+		
 		try{
 			scanner = new Scanner(System.in);
 			System.out.println(WELCOME);
@@ -33,13 +33,21 @@ public class Input {
 			if(!match.find()){
 				throw new CommandArgumentNotProvidedException();
 			}else{
-				Request userRequest = new Request(match.group(1),
-				match.group(2),Integer.parseInt(match.group(3)));
+				String type = match.group(1).toLowerCase();
+				type = type.substring(0,1).toUpperCase() + type.substring(1);
+				Request userRequest = new Request(type,
+								match.group(2).toLowerCase(),
+								Integer.parseInt(match.group(3)));
 				InventoryLink inLink = new InventoryLink(url,user,pass);
 				inLink.initializeConnection();
 				ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
 				for (int i = 0; i < possibleItems.size(); i++) {
-					inLink.getValidParts(possibleItems.get(i));
+					
+					boolean[] parts = inLink.getValidParts(possibleItems.get(i));
+					if(userRequest.getFurniture().equals("chair")){
+						Chair ch = new Chair();
+					}
+					
 				}
 			}
 		}catch(Exception e){

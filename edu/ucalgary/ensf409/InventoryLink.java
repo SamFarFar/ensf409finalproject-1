@@ -48,7 +48,7 @@ public class InventoryLink {
 		boolean[] retVal;
 		String furniture = null;
 		int numberOfParts = 0;
-		try {                    
+		try {
             Statement myStmt = dbConnect.createStatement();
             switch(ID.charAt(0)){
 				case 'C':
@@ -84,6 +84,10 @@ public class InventoryLink {
             ex.printStackTrace();
         }
 		return null;
+	}
+	
+	private int getPrice(String ID) {
+		
 	}
 	
 	public void deleteFurniture(String ID){
