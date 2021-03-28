@@ -19,6 +19,7 @@ public class Input {
 		Scanner scanner = null;
 		
 		try{
+			
 			scanner = new Scanner(System.in);
 			System.out.println(WELCOME);
 			System.out.println(DBURLINPUT);
@@ -30,25 +31,65 @@ public class Input {
 			System.out.println(PROMPTINPUT);
 			Pattern pattern = Pattern.compile(scanner.nextLine());
 			Matcher match = pattern.matcher(REGEX);
+			
 			if(!match.find()){
 				throw new CommandArgumentNotProvidedException();
 			}else{
 				String type = match.group(1).toLowerCase();
 				type = type.substring(0,1).toUpperCase() + type.substring(1);
+				if(type.equals("Swing arm")) type = "Swing Arm";
+				
 				Request userRequest = new Request(type,
 								match.group(2).toLowerCase(),
 								Integer.parseInt(match.group(3)));
+								
 				InventoryLink inLink = new InventoryLink(url,user,pass);
 				inLink.initializeConnection();
+				 
 				ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
-				for (int i = 0; i < possibleItems.size(); i++) {
-					
-					boolean[] parts = inLink.getValidParts(possibleItems.get(i));
-					if(userRequest.getFurniture().equals("chair")){
-						Chair ch = new Chair();
+				
+				if(userRequest.getFurniture().equals("chair")){
+					for (int i = 0; i < possibleItems.size(); i++) {
+						boolean[] parts = inLink.getValidParts(possibleItems.get(i));
+						int price = inLink.getPrice(possibleItems.get(i));
+						
+						Chair ch = new Chair(possibleItems.get(i), type, 
+											parts[0], parts[1], parts[2], 
+											parts[3], price);
+											
 					}
+				} else if(userRequest.getFurniture().equals("desk")){
+					for (int i = 0; i < possibleItems.size(); i++) {
+						boolean[] parts = inLink.getValidParts(possibleItems.get(i));
+						int price = inLink.getPrice(possibleItems.get(i));
+						
+						Desk dk = new Desk(possibleItems.get(i), type, 
+											parts[0], parts[1], parts[2], 
+											price);
+											
+					}
+				} else if(userRequest.getFurniture().equals("filing")){
+					for (int i = 0; i < possibleItems.size(); i++) {
+						boolean[] parts = inLink.getValidParts(possibleItems.get(i));
+						int price = inLink.getPrice(possibleItems.get(i));
+						
+						Filing fl = new Filing(possibleItems.get(i), type, 
+											parts[0], parts[1], parts[2], 
+											price);
+											
+					}
+				} else if(userRequest.getFurniture().equals("lamp")){
+					for (int i = 0; i < possibleItems.size(); i++) {
+						boolean[] parts = inLink.getValidParts(possibleItems.get(i));
+						int price = inLink.getPrice(possibleItems.get(i));
+						
+						Lamp fl = new Lamp(possibleItems.get(i), type, 
+											parts[0], parts[1], price);
+											
+					}
+				} // else maybe throw an input error cuz they fucked up
 					
-				}
+				
 			}
 		}catch(Exception e){
 			System.out.println("Error occurred");

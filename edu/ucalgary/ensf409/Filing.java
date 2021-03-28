@@ -6,8 +6,16 @@ private boolean Cabinet;
     public Filing(String ID, String type, int price, String manuID){
         super(ID,type,price,manuID);
     }
-    public Filing(String ID, String type, int price, String manuID,boolean rails, boolean drawers, boolean cabinet){
+    public Filing(String ID, String type, boolean rails, boolean drawers, 
+					boolean cabinet, int price, String manuID){
         super(ID,type,price,manuID);
+        setCabinet(cabinet);
+        setDrawers(drawers);
+        setRails(rails);
+    }
+    public Filing(String ID, String type, boolean rails, boolean drawers, 
+					boolean cabinet, int price){
+        super(ID,type,price);
         setCabinet(cabinet);
         setDrawers(drawers);
         setRails(rails);

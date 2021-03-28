@@ -86,7 +86,7 @@ public class InventoryLink {
 		return null;
 	}
 	
-	private int getPrice(String ID) {
+	public int getPrice(String ID) {
 		int price = -1;
 		try {
             Statement myStmt = dbConnect.createStatement();
