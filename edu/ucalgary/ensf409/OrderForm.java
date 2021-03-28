@@ -4,10 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class OrderForm {
-    public static void main(String[] args) {
-        String[] items = {"Chair", "Dog", "Sam"};
-        OrderForm testForm = new OrderForm("originalRequestName", 1, items, 100);
-    }
 
     private String facultyName;
     private String contact;
