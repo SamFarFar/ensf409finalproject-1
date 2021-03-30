@@ -4,6 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 
+/*
+ * 
+ *  Hey Dipler, just fyi we're gunna try and keep all the sql code within the 
+ *  InventoryLink class just to better compartmentalize it.  I'll run through 
+ *  it later and try to correct
+ * 
+ */
+
 public class InvalidRequest {
     private Connection dbConnect;
     private ResultSet results;

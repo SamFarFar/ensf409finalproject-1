@@ -47,47 +47,54 @@ public class Input {
 				 
 				ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
 				
+				
+				
+				/*
 				if(userRequest.getFurniture().equals("chair")){
+					Chair[] objArray = new Chair[possibleItems.size()];
 					for (int i = 0; i < possibleItems.size(); i++) {
 						boolean[] parts = inLink.getValidParts(possibleItems.get(i));
 						int price = inLink.getPrice(possibleItems.get(i));
-						
-						Chair ch = new Chair(possibleItems.get(i), type, 
+						objArray[i] = new Chair(possibleItems.get(i), type, 
 											parts[0], parts[1], parts[2], 
 											parts[3], price);
-											
 					}
 				} else if(userRequest.getFurniture().equals("desk")){
+					Desk[] objArray = new Desk[possibleItems.size()];
 					for (int i = 0; i < possibleItems.size(); i++) {
 						boolean[] parts = inLink.getValidParts(possibleItems.get(i));
 						int price = inLink.getPrice(possibleItems.get(i));
-						
-						Desk dk = new Desk(possibleItems.get(i), type, 
+						objArray[i] = new Desk(possibleItems.get(i), type, 
 											parts[0], parts[1], parts[2], 
 											price);
-											
 					}
 				} else if(userRequest.getFurniture().equals("filing")){
+					Filing[] objArray = new Filing[possibleItems.size()];
 					for (int i = 0; i < possibleItems.size(); i++) {
 						boolean[] parts = inLink.getValidParts(possibleItems.get(i));
 						int price = inLink.getPrice(possibleItems.get(i));
-						
-						Filing fl = new Filing(possibleItems.get(i), type, 
+						objArray[i] = new Filing(possibleItems.get(i), type, 
 											parts[0], parts[1], parts[2], 
 											price);
-											
 					}
 				} else if(userRequest.getFurniture().equals("lamp")){
+					Lamp[] objArray = new Lamp[possibleItems.size()];
 					for (int i = 0; i < possibleItems.size(); i++) {
 						boolean[] parts = inLink.getValidParts(possibleItems.get(i));
 						int price = inLink.getPrice(possibleItems.get(i));
-						
-						Lamp fl = new Lamp(possibleItems.get(i), type, 
+						objArray[i] = new Lamp(possibleItems.get(i), type, 
 											parts[0], parts[1], price);
-											
 					}
 				} // else maybe throw an input error cuz they fucked up
-					
+				
+				// by now objArray is an array of all possible objects
+				
+				for(int i = 0; i < userRequest.getQuantity(); i++){
+					for(int j = 0; j < objArray.length; j++){
+						
+					}
+				}
+				*/
 				
 			}
 		}catch(Exception e){

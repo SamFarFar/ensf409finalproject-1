@@ -23,6 +23,7 @@ public class Request {
 	private static String type;
 	private static String furniture;
 	private static int quantity;
+	private static int partNum;
 	
 	public Request(String t, String f, int q){
 		checkValidity(t,f,q);
@@ -39,23 +40,28 @@ public class Request {
 					t.equals("Executive") || t.equals("Ergonomic")){
 					valid = true;
 				}
+				partNum = 4;
 				break;
 			case "desk":
 				if(t.equals("Traditional") || t.equals("Adjustable") || t.equals("Standing")){
 					valid = true;
 				}
+				partNum = 3;
 				break;
 			case "filing":
 				if(t.equals("Small") || t.equals("Medium") || t.equals("Large")){
 					valid = true;
 				}
+				partNum = 3;
 				break;
 			case "lamp":
 				if(t.equals("Desk") || t.equals("Swing Arm") || t.equals("Study")){
 					valid = true;
 				}
+				partNum = 2;
 				break;
 			default:
+				partNum = 0;
 				break;
 		}
 		if(q < 0){
@@ -64,6 +70,10 @@ public class Request {
 		if(!valid){
 			throw new IllegalArgumentException("Invalid Request");
 		}
+	}
+	
+	public int getPartNum(){
+		return partNum;
 	}
 	
 	public String getType() {
