@@ -16,7 +16,7 @@ public class InvalidRequest {
 
     public InvalidRequest(String dburl, String user, String pass) {
         StringBuffer manufacture = new StringBuffer();
-        
+
         // connect to database
         try{
             dbConnect = DriverManager.getConnection(dburl, user, pass);
@@ -29,6 +29,7 @@ public class InvalidRequest {
             Statement myStmt = dbConnect.createStatement();
             results = myStmt.executeQuery("SELECT * FROM MANUFACTURER");
             while(results.next()) {
+                /// PRINT OUT STATEMENT
                 manufacture.append(results.getString("Name") + ", " + results.getString("Phone") + ", " + results.getString("Province"));
                 manufacture.append('\n');
             }
