@@ -32,11 +32,13 @@ public class Input {
 			Matcher match = pattern.matcher(REGEX);
 			
 			if(!match.find()){
-				throw new CommandArgumentNotProvidedException();
+				throw new InvalidRequestException();
 			}else{
 				String type = match.group(1).toLowerCase();
 				type = type.substring(0,1).toUpperCase() + type.substring(1);
-				if(type.equals("Swing arm")) type = "Swing Arm";
+				if(type.equals("Swing arm")) {
+					type = "Swing Arm";
+				}
 				
 				Request userRequest = new Request(type,
 								match.group(2).toLowerCase(),
@@ -64,8 +66,9 @@ public class Input {
 						possibleItems.remove(i);
 					else if(four[0] != -1 && four[0] != i && four[1] != i && four[2] != i && four[3] != i)
 						possibleItems.remove(i);
-					//else
-						// NO SOLUTION FOUND
+					else{
+						inLink.invalidRequest(possibleItems.toArray(new String[possibleItems.size()]));
+				}
 				}
 				
 			}
