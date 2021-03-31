@@ -26,6 +26,7 @@ public class InventoryLink {
 	}
 	
 	public ArrayList<String> getPossibleItems(Request request) {
+		// sort by price
 		ArrayList<String> retVal = new ArrayList<String>();
 		try {                    
             Statement myStmt = dbConnect.createStatement();
