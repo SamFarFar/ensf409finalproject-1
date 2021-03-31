@@ -1,7 +1,6 @@
 package JUnit;
 
 import edu.ucalgary.ensf409.Chair;
-import edu.ucalgary.ensf409.CommandArgumentNotProvidedException;
 import edu.ucalgary.ensf409.Input;
 import org.junit.Test;
 import static org.junit.Assert.*;
