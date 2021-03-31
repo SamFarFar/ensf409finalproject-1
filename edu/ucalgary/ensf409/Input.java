@@ -64,7 +64,7 @@ public class Input {
 						possibleItems.remove(i);
 					else if(four[0] != -1 && four[0] != i && four[1] != i && four[2] != i && four[3] != i)
 						possibleItems.remove(i);
-					else
+					//else
 						// NO SOLUTION FOUND
 				}
 				
@@ -80,7 +80,7 @@ public class Input {
 	}
 	
 	
-	public int[] getTwo(ArrayList<String> pI, InventoryLink inLink){
+	public static int[] getTwo(ArrayList<String> pI, InventoryLink inLink){
 		int[] results = {-1,-1};
 		for(int i = 0; i < pI.size(); i++){
 			for(int j = 0; j < pI.size(); j++){
@@ -94,7 +94,7 @@ public class Input {
 		}
 		return results;
 	}
-	public int[] getThree(ArrayList<String> pI, InventoryLink inLink){
+	public static int[] getThree(ArrayList<String> pI, InventoryLink inLink){
 		int[] results = {-1,-1,-1};
 		for(int m = 0; m < pI.size(); m++){
 			for(int i = 0; i < pI.size(); i++){
@@ -112,7 +112,7 @@ public class Input {
 		}
 		return results;
 	}
-	public int[] getFour(ArrayList<String> pI, InventoryLink inLink){
+	public static int[] getFour(ArrayList<String> pI, InventoryLink inLink){
 		int[] results = {-1,-1,-1,-1};
 		for(int n = 0; n < pI.size(); n++){
 			for(int m = 0; m < pI.size(); m++){
@@ -135,28 +135,31 @@ public class Input {
 		return results;
 	}
 	
-	private boolean combine(boolean[] one, boolean[] two){
+	private static boolean combine(boolean[] one, boolean[] two){
 		boolean retVal = true;
 		for(int i = 0; i < one.length; i++){
 			if(!(one[i] || two[i])){
 				retVal = false;
 			}
+		}
 		return retVal;
 	}
-	private boolean combine(boolean[] one, boolean[] two, boolean[] three){
+	private static boolean combine(boolean[] one, boolean[] two, boolean[] three){
 		boolean retVal = true;
 		for(int i = 0; i < one.length; i++){
 			if(!(one[i] || two[i] || three[i])){
 				retVal = false;
 			}
+		}
 		return retVal;
 	}
-	private boolean combine(boolean[] one, boolean[] two, boolean[] three, boolean[] four){
+	private static boolean combine(boolean[] one, boolean[] two, boolean[] three, boolean[] four){
 		boolean retVal = true;
 		for(int i = 0; i < one.length; i++){
 			if(!(one[i] || two[i] || three[i] || four[i])){
 				retVal = false;
 			}
+		}
 		return retVal;
 	}
 	
