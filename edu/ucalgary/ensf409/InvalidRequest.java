@@ -15,28 +15,23 @@ public class InvalidRequest {
     private ResultSet results;
 
     public InvalidRequest(String dburl, String user, String pass) {
-        StringBuffer manufacture = new StringBuffer();
-
-        // connect to database
         try{
             dbConnect = DriverManager.getConnection(dburl, user, pass);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        // create map manufacturers
+        System.out.println("Cannot Process Request. Suggested Manufacturer\n");
         try {
             Statement myStmt = dbConnect.createStatement();
             results = myStmt.executeQuery("SELECT * FROM MANUFACTURER");
             while(results.next()) {
-                /// PRINT OUT STATEMENT
-                manufacture.append(results.getString("Name") + ", " + results.getString("Phone") + ", " + results.getString("Province"));
-                manufacture.append('\n');
+                System.out.println(results.getString("Name"));
             }
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         } 
+
     }
     
 }
