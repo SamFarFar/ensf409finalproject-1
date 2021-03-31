@@ -47,54 +47,26 @@ public class Input {
 				 
 				ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
 				
+				// sort by price first
 				
-				
-				/*
-				if(userRequest.getFurniture().equals("chair")){
-					Chair[] objArray = new Chair[possibleItems.size()];
-					for (int i = 0; i < possibleItems.size(); i++) {
-						boolean[] parts = inLink.getValidParts(possibleItems.get(i));
-						int price = inLink.getPrice(possibleItems.get(i));
-						objArray[i] = new Chair(possibleItems.get(i), type, 
-											parts[0], parts[1], parts[2], 
-											parts[3], price);
-					}
-				} else if(userRequest.getFurniture().equals("desk")){
-					Desk[] objArray = new Desk[possibleItems.size()];
-					for (int i = 0; i < possibleItems.size(); i++) {
-						boolean[] parts = inLink.getValidParts(possibleItems.get(i));
-						int price = inLink.getPrice(possibleItems.get(i));
-						objArray[i] = new Desk(possibleItems.get(i), type, 
-											parts[0], parts[1], parts[2], 
-											price);
-					}
-				} else if(userRequest.getFurniture().equals("filing")){
-					Filing[] objArray = new Filing[possibleItems.size()];
-					for (int i = 0; i < possibleItems.size(); i++) {
-						boolean[] parts = inLink.getValidParts(possibleItems.get(i));
-						int price = inLink.getPrice(possibleItems.get(i));
-						objArray[i] = new Filing(possibleItems.get(i), type, 
-											parts[0], parts[1], parts[2], 
-											price);
-					}
-				} else if(userRequest.getFurniture().equals("lamp")){
-					Lamp[] objArray = new Lamp[possibleItems.size()];
-					for (int i = 0; i < possibleItems.size(); i++) {
-						boolean[] parts = inLink.getValidParts(possibleItems.get(i));
-						int price = inLink.getPrice(possibleItems.get(i));
-						objArray[i] = new Lamp(possibleItems.get(i), type, 
-											parts[0], parts[1], price);
-					}
-				} // else maybe throw an input error cuz they fucked up
-				
-				// by now objArray is an array of all possible objects
-				
-				for(int i = 0; i < userRequest.getQuantity(); i++){
-					for(int j = 0; j < objArray.length; j++){
-						
-					}
+				int[] two = getTwo(possibleItems, inLink);
+				int[] three = new int[3];
+				int[] four = new int[4];
+				if(two[0] == -1){
+					three = getThree(possibleItems, inLink);
+					if(three[0] == -1)
+						four = getFour(possibleItems, inLink);
 				}
-				*/
+				for(int i = 0; i < possibleItems.size(); i++){
+					if(two[0] != -1 && two[0] != i && two[1] != i)
+						possibleItems.remove(i);
+					else if(three[0] != -1 && three[0] != i && three[1] != i && three[2] != i)
+						possibleItems.remove(i);
+					else if(four[0] != -1 && four[0] != i && four[1] != i && four[2] != i && four[3] != i)
+						possibleItems.remove(i);
+					else
+						// NO SOLUTION FOUND
+				}
 				
 			}
 		}catch(Exception e){
@@ -106,4 +78,88 @@ public class Input {
 	public static String getREGEX() {
 		return REGEX;
 	}
+	
+	
+	public int[] getTwo(ArrayList<String> pI, InventoryLink inLink){
+		int[] results = {-1,-1};
+		for(int i = 0; i < pI.size(); i++){
+			for(int j = 0; j < pI.size(); j++){
+				boolean[] one = inLink.getValidParts(pI.get(i));
+				boolean[] two = inLink.getValidParts(pI.get(j));
+				if(combine(one,two)){
+					results[0] = i;
+					results[1] = j;
+				}
+			}
+		}
+		return results;
+	}
+	public int[] getThree(ArrayList<String> pI, InventoryLink inLink){
+		int[] results = {-1,-1,-1};
+		for(int m = 0; m < pI.size(); m++){
+			for(int i = 0; i < pI.size(); i++){
+				for(int j = 0; j < pI.size(); j++){
+					boolean[] one = inLink.getValidParts(pI.get(m));
+					boolean[] two = inLink.getValidParts(pI.get(i));
+					boolean[] three = inLink.getValidParts(pI.get(j));
+					if(combine(one,two,three)){
+						results[0] = m;
+						results[1] = i;
+						results[2] = j;
+					}
+				}
+			}
+		}
+		return results;
+	}
+	public int[] getFour(ArrayList<String> pI, InventoryLink inLink){
+		int[] results = {-1,-1,-1,-1};
+		for(int n = 0; n < pI.size(); n++){
+			for(int m = 0; m < pI.size(); m++){
+				for(int i = 0; i < pI.size(); i++){
+					for(int j = 0; j < pI.size(); j++){
+						boolean[] one = inLink.getValidParts(pI.get(m));
+						boolean[] two = inLink.getValidParts(pI.get(i));
+						boolean[] three = inLink.getValidParts(pI.get(j));
+						boolean[] four = inLink.getValidParts(pI.get(n));
+						if(combine(one,two,three,four)){
+							results[0] = n;
+							results[1] = m;
+							results[2] = i;
+							results[3] = j;
+						}
+					}
+				}
+			}
+		}
+		return results;
+	}
+	
+	private boolean combine(boolean[] one, boolean[] two){
+		boolean retVal = true;
+		for(int i = 0; i < one.length; i++){
+			if(!(one[i] || two[i])){
+				retVal = false;
+			}
+		return retVal;
+	}
+	private boolean combine(boolean[] one, boolean[] two, boolean[] three){
+		boolean retVal = true;
+		for(int i = 0; i < one.length; i++){
+			if(!(one[i] || two[i] || three[i])){
+				retVal = false;
+			}
+		return retVal;
+	}
+	private boolean combine(boolean[] one, boolean[] two, boolean[] three, boolean[] four){
+		boolean retVal = true;
+		for(int i = 0; i < one.length; i++){
+			if(!(one[i] || two[i] || three[i] || four[i])){
+				retVal = false;
+			}
+		return retVal;
+	}
+	
+		
+	
 }
