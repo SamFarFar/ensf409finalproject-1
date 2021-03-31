@@ -134,7 +134,7 @@ public class Input {
 		}
 		return results;
 	}
-	
+
 	private static boolean combine(boolean[] one, boolean[] two){
 		boolean retVal = true;
 		for(int i = 0; i < one.length; i++){
@@ -162,7 +162,5 @@ public class Input {
 		}
 		return retVal;
 	}
-	
-		
-	
+
 }
