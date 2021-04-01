@@ -10,13 +10,29 @@ public class InventoryLink {
     public final String PASSWORD; //store the user's account password
     private Connection dbConnect;
     private ResultSet results;
-	
-	public InventoryLink(String dburl, String user, String pass) {
-		this.DBURL = dburl;
+    private ArrayList<String> possibleItems;
+
+	/**
+	 * constructor for the InventoryLink object that stores the database information and
+	 * request information. It also creates an ArrayList that is stored internally and contains
+	 * possible items that match the request based on what is still left in the Inventory
+	 * database.
+	 * @param DBurl
+	 * @param user
+	 * @param pass
+	 * @param userRequest
+	 */
+	public InventoryLink(String DBurl, String user, String pass, Request userRequest) {
+		this.DBURL = DBurl;
 		this.USERNAME = user;
-		this.PASSWORD = pass;		
+		this.PASSWORD = pass;
+		ArrayList<String> possibleItems = getPossibleItems(userRequest);
+		setPossibleItems(possibleItems);
 	}
-	
+
+	/**
+	 * Initializes the connection to the database from the database information provided.
+	 */
 	public void initializeConnection() {
 		try{
             dbConnect = DriverManager.getConnection(this.DBURL, this.USERNAME, this.PASSWORD);
@@ -24,7 +40,13 @@ public class InventoryLink {
             e.printStackTrace();
         }
 	}
-	
+
+	/**
+	 * By taking in a request this method can convert
+	 * the request into an ArrayList of type String.
+	 * @param request to be read for ArrayList creation.
+	 * @return an ArrayList with potential Furniture
+	 */
 	public ArrayList<String> getPossibleItems(Request request) {
 		// sort by price
 		ArrayList<String> retVal = new ArrayList<>();
@@ -85,7 +107,7 @@ public class InventoryLink {
         }
 		return null;
 	}
-	
+
 	public int getPrice(String ID) {
 		int price = -1;
 		try {
@@ -160,6 +182,28 @@ public String[] arrListToArray(ArrayList<String> arrayList){
 		}
 		return ManuID;
 	}
+
+	/* Need a method that adds a piece of furniture back into database so that we
+	 * can start testing the program!
+	 */
+	public void addDesk(String ID){
+		try {
+			int firstLetter = ID.charAt(0); // cast first letter as its corresponding ASCII number
+
+			if(firstLetter == 68){
+			throw new InvalidIDException();
+			}
+			String query = "INSERT INTO  ? ()";
+			PreparedStatement myStmt = dbConnect.prepareStatement(query);
+			myStmt.setString(2, ID);
+			myStmt.executeUpdate();
+			myStmt.close();
+		} catch (SQLException | InvalidIDException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+
 	public void deleteFurniture(String ID){
 		try {
 			String furniture = null;
@@ -215,5 +259,28 @@ public String[] arrListToArray(ArrayList<String> arrayList){
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * returns the ArrayList of possible items.
+	 * @return possibleItems data member
+	 */
+	public ArrayList<String> getPossibleItems() {
+		return possibleItems;
+	}
+
+	/**
+	 * sets the ArrayList possibleItems.
+	 * @param possibleItems data member
+	 */
+	public void setPossibleItems(ArrayList<String> possibleItems) {
+		this.possibleItems = possibleItems;
+	}
+
+	/**
+	 * sorts the possible items by lowest to highest price
+	 */
+	public void sort() {
+
 	}
 }

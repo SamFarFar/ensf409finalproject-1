@@ -15,12 +15,18 @@ public class Input {
 			"<Type> <Furniture>, <Amount>\n" + "Example: mesh chair, 1";
 	private final static String REGEX = "([a-zA-z]{1,9})\\s([a-zA-z]{1,9})[,]\\s([0-9])";
 private static String originalRequest;
+
+	/**
+	 * Basic main function that runs through the program.
+	 * @param args unused arguments that need to be supplied
+	 */
 	public static void main(String[] args) {
 		Scanner scanner = null;
 		
 		try{
 			scanner = new Scanner(System.in);
 			System.out.println(WELCOME);
+			// this will be edited out later when the SQL login is supplied
 			System.out.println(DBURLINPUT);
 			String url = scanner.nextLine();
 			System.out.println(DBUSERINPUT);
@@ -42,42 +48,44 @@ private static String originalRequest;
 								match.group(2).toLowerCase(),
 								Integer.parseInt(match.group(3)));
 
-				InventoryLink inLink = new InventoryLink(url,user,pass);
+				InventoryLink inLink = new InventoryLink(url,user,pass,userRequest);
 				inLink.initializeConnection();
 
 				ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
+				inLink.setPossibleItems(possibleItems);
 
 				// sort by price first
+				inLink.sort();
 
-
-				int[] two = getTwo(possibleItems, inLink);
+				int[] two = getTwo(inLink.getPossibleItems(), inLink);
 				int[] three = new int[3];
 				int[] four = new int[4];
 				if(two[0] == -1){
-					three = getThree(possibleItems, inLink);
+					three = getThree(inLink.getPossibleItems(), inLink);
 					if(three[0] == -1)
-						four = getFour(possibleItems, inLink);
+						four = getFour(inLink.getPossibleItems(), inLink);
 				}
-				for(int i = 0; i < possibleItems.size(); i++){
+				for(int i = 0; i < inLink.getPossibleItems().size(); i++){
 					if(two[0] != -1 && two[0] != i && two[1] != i)
-						possibleItems.remove(i);
+						inLink.getPossibleItems().remove(i);
 					else if(three[0] != -1 && three[0] != i && three[1] != i && three[2] != i)
-						possibleItems.remove(i);
+						inLink.getPossibleItems().remove(i);
 					else if(four[0] != -1 && four[0] != i && four[1] != i && four[2] != i && four[3] != i)
-						possibleItems.remove(i);
+						inLink.getPossibleItems().remove(i);
 					else{
-						inLink.invalidRequest(possibleItems.toArray(new String[possibleItems.size()]));
+						inLink.invalidRequest(inLink.getPossibleItems().toArray(new String[inLink.getPossibleItems().size()]));
 				}
 
 					int totalPrice = 0;
-					for (int j = 0; j < possibleItems.size(); j++) {
-						totalPrice = inLink.getPrice(possibleItems.get(j));
+					for (int j = 0; j < inLink.getPossibleItems().size(); j++) {
+						totalPrice = inLink.getPrice(inLink.getPossibleItems().get(j));
 					}
 
 
 					OrderForm out = new OrderForm(userRequest.getType() + userRequest.getFurniture(),
-							userRequest.getQuantity(), inLink.arrListToArray(possibleItems),totalPrice);
+							userRequest.getQuantity(), inLink.arrListToArray(inLink.getPossibleItems()),totalPrice);
 					out.printOrderForm();
+					inLink.close();
 				}
 
 			} else {
@@ -91,11 +99,20 @@ private static String originalRequest;
 
 	}
 
+	/**
+	 * Returns the REGEX data member of class
+	 * @return REGEX data member
+	 */
 	public static String getREGEX() {
 		return REGEX;
 	}
-	
-	
+
+	/**
+	 * By providing an arraylist of potential IDs and a link to the database
+	 * @param pI
+	 * @param inLink
+	 * @return
+	 */
 	public static int[] getTwo(ArrayList<String> pI, InventoryLink inLink){
 		int[] results = {-1,-1};
 		for(int i = 0; i < pI.size(); i++){
