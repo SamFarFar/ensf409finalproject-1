@@ -23,5 +23,16 @@ public class FPTest {
         Matcher match = pattern.matcher(Input.getREGEX());
         assertEquals(match.find(), true);
     }
+    @Test
+    public void ChairConstructor1(){
+        Chair chair1 = new Chair("C1234","standing",50,"w2123");
+        String[] expected = {"C1234","standing","50","w2123"};
+       String[] actual = new String[4];
+       actual[0] = chair1.getID();
+        actual[1] = chair1.getType();
+        actual[2] = String.valueOf(chair1.getPrice());
+        actual[3] = chair1.getManuID();
+        assertArrayEquals(expected,actual);
+    }
 
 }

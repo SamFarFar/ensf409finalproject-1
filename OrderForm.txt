@@ -1,8 +1,8 @@
 Furniture Order Form
 
-Faculty Name: 
-Contact: 
-Date: 
+Faculty Name: null
+Contact: null
+Date: null
 
 Original Request: originalRequestName, 1
 

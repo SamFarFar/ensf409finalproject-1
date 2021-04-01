@@ -97,6 +97,7 @@ public class Input {
 		}
 		return results;
 	}
+
 	public static int[] getThree(ArrayList<String> pI, InventoryLink inLink){
 		int[] results = {-1,-1,-1};
 		for(int m = 0; m < pI.size(); m++){
@@ -115,6 +116,7 @@ public class Input {
 		}
 		return results;
 	}
+
 	public static int[] getFour(ArrayList<String> pI, InventoryLink inLink){
 		int[] results = {-1,-1,-1,-1};
 		for(int n = 0; n < pI.size(); n++){
@@ -147,6 +149,7 @@ public class Input {
 		}
 		return retVal;
 	}
+
 	private static boolean combine(boolean[] one, boolean[] two, boolean[] three){
 		boolean retVal = true;
 		for(int i = 0; i < one.length; i++){
@@ -156,6 +159,7 @@ public class Input {
 		}
 		return retVal;
 	}
+	
 	private static boolean combine(boolean[] one, boolean[] two, boolean[] three, boolean[] four){
 		boolean retVal = true;
 		for(int i = 0; i < one.length; i++){
@@ -165,5 +169,4 @@ public class Input {
 		}
 		return retVal;
 	}
-
 }

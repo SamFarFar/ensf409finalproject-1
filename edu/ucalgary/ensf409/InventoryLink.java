@@ -181,7 +181,7 @@ public class InventoryLink {
             ex.printStackTrace();
         }
 	}
-	
+
 	public void close() {
 		try {
             results.close();
@@ -191,9 +191,9 @@ public class InventoryLink {
         }
 	}
 
-
 	public void invalidRequest(String[] ID){
 		String[] MIDPossible = IDTOManuID(ID);
+<<<<<<< HEAD
 
 		try {
 			String query = "SELECT Name FROM MANUFACTURER" +" WHERE ManuID = ?";
@@ -202,6 +202,11 @@ public class InventoryLink {
 				myStmt.setString(1, MIDPossible[i]);
 				results = myStmt.executeUpdate();
 				while (results.next()) {
+=======
+		try {
+			String query = "SELECT * FROM MANUFACTURER" +" WHERE ManuID = ?";
+			PreparedStatement myStmt = dbConnect.prepareStatement(query);
+>>>>>>> 66eb72ceadcb686b6ef0448acaf3ba1278ca3539
 
 				}
 			}
