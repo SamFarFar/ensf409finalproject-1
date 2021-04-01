@@ -10,7 +10,6 @@ public class InventoryLink {
     public final String PASSWORD; //store the user's account password
     private Connection dbConnect;
     private ResultSet results;
-    private ArrayList<String> possibleItems;
 
 	/**
 	 * constructor for the InventoryLink object that stores the database information and
@@ -26,8 +25,6 @@ public class InventoryLink {
 		this.DBURL = DBurl;
 		this.USERNAME = user;
 		this.PASSWORD = pass;
-		ArrayList<String> possibleItems = getPossibleItems(userRequest);
-		setPossibleItems(possibleItems);
 	}
 
 	/**
@@ -259,22 +256,6 @@ public String[] arrListToArray(ArrayList<String> arrayList){
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * returns the ArrayList of possible items.
-	 * @return possibleItems data member
-	 */
-	public ArrayList<String> getPossibleItems() {
-		return possibleItems;
-	}
-
-	/**
-	 * sets the ArrayList possibleItems.
-	 * @param possibleItems data member
-	 */
-	public void setPossibleItems(ArrayList<String> possibleItems) {
-		this.possibleItems = possibleItems;
 	}
 
 	/**

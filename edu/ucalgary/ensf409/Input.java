@@ -38,6 +38,7 @@ private static String originalRequest;
 			Matcher match = pattern.matcher(REGEX);
 
 			if (match.find()) {
+				
 				String type = match.group(1).toLowerCase();
 				originalRequest = type + " " + match.group(2).toLowerCase();
 						type = type.substring(0,1).toUpperCase() + type.substring(1);
@@ -57,35 +58,35 @@ private static String originalRequest;
 				// sort by price first
 				inLink.sort();
 
-				int[] two = getTwo(inLink.getPossibleItems(), inLink);
+				int[] two = getTwo(possibleItems, inLink);
 				int[] three = new int[3];
 				int[] four = new int[4];
 				if(two[0] == -1){
-					three = getThree(inLink.getPossibleItems(), inLink);
+					three = getThree(possibleItems, inLink);
 					if(three[0] == -1)
-						four = getFour(inLink.getPossibleItems(), inLink);
+						four = getFour(possibleItems, inLink);
 				}
-				for(int i = 0; i < inLink.getPossibleItems().size(); i++){
+				for(int i = 0; i < possibleItems.size(); i++){
 					if(two[0] != -1 && two[0] != i && two[1] != i)
-						inLink.getPossibleItems().remove(i);
+						possibleItems.remove(i);
 					else if(three[0] != -1 && three[0] != i && three[1] != i && three[2] != i)
-						inLink.getPossibleItems().remove(i);
+						possibleItems.remove(i);
 					else if(four[0] != -1 && four[0] != i && four[1] != i && four[2] != i && four[3] != i)
-						inLink.getPossibleItems().remove(i);
-					else{
-						inLink.invalidRequest(inLink.getPossibleItems().toArray(new String[inLink.getPossibleItems().size()]));
+						possibleItems.remove(i);
+					else
+						inLink.invalidRequest(possibleItems.toArray(new String[possibleItems.size()]));
 				}
 
-					int totalPrice = 0;
-					for (int j = 0; j < inLink.getPossibleItems().size(); j++) {
-						totalPrice = inLink.getPrice(inLink.getPossibleItems().get(j));
-					}
+				int totalPrice = 0;
+				for (int j = 0; j < possibleItems.size(); j++) {
+					totalPrice = inLink.getPrice(possibleItems.get(j));
+				}
 
-
-					OrderForm out = new OrderForm(userRequest.getType() + userRequest.getFurniture(),
+				OrderForm out = new OrderForm(userRequest.getType() + userRequest.getFurniture(),
 							userRequest.getQuantity(), inLink.arrListToArray(inLink.getPossibleItems()),totalPrice);
-					out.printOrderForm();
-					inLink.close();
+				out.printOrderForm();
+				inLink.close();
+				
 				}
 
 			} else {
