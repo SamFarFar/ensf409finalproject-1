@@ -53,10 +53,9 @@ private static String originalRequest;
 				inLink.initializeConnection();
 
 				ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
-				inLink.setPossibleItems(possibleItems);
 
 				// sort by price first
-				inLink.sort();
+				possibleItems = inLink.sort(possibleItems);
 
 				int[] two = getTwo(possibleItems, inLink);
 				int[] three = new int[3];
@@ -74,7 +73,7 @@ private static String originalRequest;
 					else if(four[0] != -1 && four[0] != i && four[1] != i && four[2] != i && four[3] != i)
 						possibleItems.remove(i);
 					else
-						inLink.invalidRequest(possibleItems.toArray(new String[possibleItems.size()]));
+						inLink.invalidRequest(possibleItems.toArray(new String[filing.size()]));
 				}
 
 				int totalPrice = 0;
@@ -83,11 +82,9 @@ private static String originalRequest;
 				}
 
 				OrderForm out = new OrderForm(userRequest.getType() + userRequest.getFurniture(),
-							userRequest.getQuantity(), inLink.arrListToArray(inLink.getPossibleItems()),totalPrice);
+							userRequest.getQuantity(), inLink.arrListToArray(possibleItems),totalPrice);
 				out.printOrderForm();
 				inLink.close();
-				
-				}
 
 			} else {
 				throw new InvalidRequestException();

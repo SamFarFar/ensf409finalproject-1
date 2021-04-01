@@ -134,14 +134,15 @@ public class InventoryLink {
         }
         return price;
 	}
-public String[] arrListToArray(ArrayList<String> arrayList){
+	
+	public String[] arrListToArray(ArrayList<String> arrayList){
 		String[] array = new String[arrayList.size()];
-	for (int i = 0; i < arrayList.size(); i++) {
-		array[i] = arrayList.get(i);
-	}
+		for (int i = 0; i < arrayList.size(); i++) {
+			array[i] = arrayList.get(i);
+		}
 		return array;
-
-}
+	}
+	
 	public String[] IDTOManuID(String[] ID){
 		String[] ManuID = new String[ID.length];
 		for (int i = 0; i < ID.length; i++) {
@@ -149,6 +150,7 @@ public String[] arrListToArray(ArrayList<String> arrayList){
 		}
 		return ManuID;
 	}
+	
 	// function that takes an ID array and converts it to its corresponding manuID array
 	private String getManuID(String ID){
 		String ManuID= "";
@@ -156,16 +158,16 @@ public String[] arrListToArray(ArrayList<String> arrayList){
 			Statement myStmt = dbConnect.createStatement();
 			switch(ID.charAt(0)){
 				case 'C':
-					results = myStmt.executeQuery("SELECT INVENTORY.CHAIR.ManuID FROM INVENTORY.CHAIR WHERE ID = '" + ID + "'");
+					results = myStmt.executeQuery("SELECT ManuID FROM chair WHERE ID = '" + ID + "'");
 					break;
 				case 'D':
-					results = myStmt.executeQuery("SELECT INVENTORY.DESK.ManuID  FROM INVENTORY.DESK WHERE ID = '" + ID + "'");
+					results = myStmt.executeQuery("SELECT ManuID  FROM desk WHERE ID = '" + ID + "'");
 					break;
 				case 'F':
-					results = myStmt.executeQuery("SELECT INVENTORY.FILING.ManuID  FROM INVENTORY.FILING WHERE ID = '" + ID + "'");
+					results = myStmt.executeQuery("SELECT ManuID  FROM filing WHERE ID = '" + ID + "'");
 					break;
 				case 'L':
-					results = myStmt.executeQuery("SELECT INVENTORY.LAMP.ManuID  FROM INVENTORY.LAMP WHERE ID = '" + ID + "'");
+					results = myStmt.executeQuery("SELECT ManuID  FROM lamp WHERE ID = '" + ID + "'");
 					break;
 				default:
 					throw new IllegalArgumentException("The ID provided does not have a manufacturer");
@@ -186,9 +188,8 @@ public String[] arrListToArray(ArrayList<String> arrayList){
 	public void addDesk(String ID){
 		try {
 			int firstLetter = ID.charAt(0); // cast first letter as its corresponding ASCII number
-
 			if(firstLetter == 68){
-			throw new InvalidIDException();
+				throw new InvalidIDException();
 			}
 			String query = "INSERT INTO  ? ()";
 			PreparedStatement myStmt = dbConnect.prepareStatement(query);
@@ -199,7 +200,6 @@ public String[] arrListToArray(ArrayList<String> arrayList){
 			ex.printStackTrace();
 		}
 	}
-
 
 	public void deleteFurniture(String ID){
 		try {
@@ -241,7 +241,6 @@ public String[] arrListToArray(ArrayList<String> arrayList){
 
 	public void invalidRequest(String[] ID){
 		String[] MIDPossible = IDTOManuID(ID);
-
 		try {
 			String query = "SELECT Name FROM MANUFACTURER" + " WHERE ManuID = ?";
 			PreparedStatement myStmt = dbConnect.prepareStatement(query);
@@ -261,7 +260,16 @@ public String[] arrListToArray(ArrayList<String> arrayList){
 	/**
 	 * sorts the possible items by lowest to highest price
 	 */
-	public void sort() {
-
+	public ArrayList<String> sort(ArrayList<String> pI) {
+		
+		
+		
+		
+		
 	}
+	
+	
+	
 }
+
+
