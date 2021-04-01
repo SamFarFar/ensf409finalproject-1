@@ -53,7 +53,7 @@ VALUES ('C1320', 'Kneeling', 'Y', 'N', 'N', 'N', 50, '002'),
        ('C8138', 'Mesh', 'N', 'N', 'Y', 'N', 75, '005');
 
 DROP TABLE IF EXISTS DESK;
-CREATE TABLE DESK
+CREATE TABLE  DESK
 (
     ID     char(5) not null,
     Type   varchar(25),

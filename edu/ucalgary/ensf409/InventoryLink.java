@@ -115,7 +115,14 @@ public class InventoryLink {
         }
         return price;
 	}
+public String[] arrListToArray(ArrayList<String> arrayList){
+		String[] array = new String[arrayList.size()];
+	for (int i = 0; i < arrayList.size(); i++) {
+		array[i] = arrayList.get(i);
+	}
+		return array;
 
+}
 	public String[] IDTOManuID(String[] ID){
 		String[] ManuID = new String[ID.length];
 		for (int i = 0; i < ID.length; i++) {
@@ -193,21 +200,15 @@ public class InventoryLink {
 
 	public void invalidRequest(String[] ID){
 		String[] MIDPossible = IDTOManuID(ID);
-<<<<<<< HEAD
 
 		try {
-			String query = "SELECT Name FROM MANUFACTURER" +" WHERE ManuID = ?";
+			String query = "SELECT Name FROM MANUFACTURER" + " WHERE ManuID = ?";
 			PreparedStatement myStmt = dbConnect.prepareStatement(query);
 			for (int i = 0; i < MIDPossible.length; i++) {
 				myStmt.setString(1, MIDPossible[i]);
-				results = myStmt.executeUpdate();
+				myStmt.executeUpdate();
 				while (results.next()) {
-=======
-		try {
-			String query = "SELECT * FROM MANUFACTURER" +" WHERE ManuID = ?";
-			PreparedStatement myStmt = dbConnect.prepareStatement(query);
->>>>>>> 66eb72ceadcb686b6ef0448acaf3ba1278ca3539
-
+					System.out.println(results.toString());
 				}
 			}
 			myStmt.close();

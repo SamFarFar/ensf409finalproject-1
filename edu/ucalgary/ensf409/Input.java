@@ -14,7 +14,7 @@ public class Input {
 			"\nPlease specify below your request in the format of:\n"+
 			"<Type> <Furniture>, <Amount>\n" + "Example: mesh chair, 1";
 	private final static String REGEX = "([a-zA-z]{1,9})\\s([a-zA-z]{1,9})[,]\\s([0-9])";
-
+private static String originalRequest;
 	public static void main(String[] args) {
 		Scanner scanner = null;
 		
@@ -30,27 +30,26 @@ public class Input {
 			System.out.println(PROMPTINPUT);
 			Pattern pattern = Pattern.compile(scanner.nextLine());
 			Matcher match = pattern.matcher(REGEX);
-			
-			if(!match.find()){
-				throw new InvalidRequestException();
-			}else{
+
+			if (match.find()) {
 				String type = match.group(1).toLowerCase();
-				type = type.substring(0,1).toUpperCase() + type.substring(1);
+				originalRequest = type + " " + match.group(2).toLowerCase();
+						type = type.substring(0,1).toUpperCase() + type.substring(1);
 				if(type.equals("Swing arm")) {
 					type = "Swing Arm";
 				}
-				
 				Request userRequest = new Request(type,
 								match.group(2).toLowerCase(),
 								Integer.parseInt(match.group(3)));
-								
+
 				InventoryLink inLink = new InventoryLink(url,user,pass);
 				inLink.initializeConnection();
-				 
+
 				ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
-				
+
 				// sort by price first
-				
+
+
 				int[] two = getTwo(possibleItems, inLink);
 				int[] three = new int[3];
 				int[] four = new int[4];
@@ -69,13 +68,27 @@ public class Input {
 					else{
 						inLink.invalidRequest(possibleItems.toArray(new String[possibleItems.size()]));
 				}
+
+					int totalPrice = 0;
+					for (int j = 0; j < possibleItems.size(); j++) {
+						totalPrice = inLink.getPrice(possibleItems.get(j));
+					}
+
+
+					OrderForm out = new OrderForm(userRequest.getType() + userRequest.getFurniture(),
+							userRequest.getQuantity(), inLink.arrListToArray(possibleItems),totalPrice);
+					out.printOrderForm();
 				}
-				
+
+			} else {
+				throw new InvalidRequestException();
 			}
 		}catch(Exception e){
 			System.out.println("Error occurred");
 			e.printStackTrace();
 		}
+
+
 	}
 
 	public static String getREGEX() {

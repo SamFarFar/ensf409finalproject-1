@@ -30,6 +30,7 @@ public class Request {
 		type = t;
 		furniture = f;
 		quantity = q;
+
 	}
 	
 	private void checkValidity(String t, String f, int q){
