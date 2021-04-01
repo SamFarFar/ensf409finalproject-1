@@ -10,6 +10,14 @@ public class OrderForm {
     private String[] itemsOrdered;
     private int totalPrice;
 
+    /**
+     * Constructor for the OrderForm class that takes the request name and amount with a String
+     * Array of the item ID's ordered and the total price of the order.
+     * @param originalRequestName to be printed to the order form.
+     * @param originalRequestAmount to be printed to the order form.
+     * @param itemsOrdered to be printed to the order form.
+     * @param totalPrice to be printed to the order form.
+     */
     public OrderForm( String originalRequestName,
     int originalRequestAmount, String[] itemsOrdered, int totalPrice) {
         this.originalRequestName = originalRequestName;
@@ -18,11 +26,14 @@ public class OrderForm {
         this.totalPrice = totalPrice;
     }
 
+    /**
+     * printOrderForm method creates the "OrderForm.txt" file that can be used for printing
+     */
     public void printOrderForm(){
         try {
             File myObj = new File("OrderForm.txt");
             if (myObj.createNewFile()) {
-                System.out.println("Order Form Created Succesfully");
+                System.out.println("Order Form Created Successfully");
             }
         } catch (IOException e) {
             System.out.println("Error #1: Order Form Creation Error");

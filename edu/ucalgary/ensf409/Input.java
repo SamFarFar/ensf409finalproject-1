@@ -128,6 +128,12 @@ private static String originalRequest;
 		return results;
 	}
 
+	/**
+	 *
+	 * @param pI
+	 * @param inLink
+	 * @return
+	 */
 	public static int[] getThree(ArrayList<String> pI, InventoryLink inLink){
 		int[] results = {-1,-1,-1};
 		for(int m = 0; m < pI.size(); m++){

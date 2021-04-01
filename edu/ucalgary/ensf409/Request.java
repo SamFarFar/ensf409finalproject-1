@@ -24,8 +24,15 @@ public class Request {
 	private static String furniture;
 	private static int quantity;
 	private static int partNum;
-	
-	public Request(String t, String f, int q){
+
+	/**
+	 * Standard constructor for the Request class that sets the type, furniture and quantity
+	 * @param t
+	 * @param f
+	 * @param q
+	 * @throws InvalidRequestException
+	 */
+	public Request(String t, String f, int q) throws InvalidRequestException {
 		checkValidity(t,f,q);
 		type = t;
 		furniture = f;
@@ -33,7 +40,7 @@ public class Request {
 
 	}
 	
-	private void checkValidity(String t, String f, int q){
+	private void checkValidity(String t, String f, int q) throws InvalidRequestException {
 		boolean valid = false;
 		switch(f){
 			case "chair":
@@ -69,7 +76,7 @@ public class Request {
 			valid = false;
 		}
 		if(!valid){
-			throw new IllegalArgumentException("Invalid Request");
+			throw new InvalidRequestException();
 		}
 	}
 	
