@@ -27,7 +27,7 @@ public class InventoryLink {
 	
 	public ArrayList<String> getPossibleItems(Request request) {
 		// sort by price
-		ArrayList<String> retVal = new ArrayList<String>();
+		ArrayList<String> retVal = new ArrayList<>();
 		try {                    
             Statement myStmt = dbConnect.createStatement();
             results = myStmt.executeQuery("SELECT * FROM " + request.getFurniture());
@@ -47,7 +47,6 @@ public class InventoryLink {
 	
 	public boolean[] getValidParts(String ID) {
 		boolean[] retVal;
-		String furniture = null;
 		int numberOfParts = 0;
 		try {
             Statement myStmt = dbConnect.createStatement();
@@ -196,14 +195,15 @@ public class InventoryLink {
 	public void invalidRequest(String[] ID){
 		String[] MIDPossible = IDTOManuID(ID);
 
-
 		try {
-			String query = "SELECT * FROM MANUFACTURER" +" WHERE ManuID = ?";
-			PreparedStatement myStmt = dbConnect.prepareStatement();
+			String query = "SELECT Name FROM MANUFACTURER" +" WHERE ManuID = ?";
+			PreparedStatement myStmt = dbConnect.prepareStatement(query);
+			for (int i = 0; i < MIDPossible.length; i++) {
+				myStmt.setString(1, MIDPossible[i]);
+				results = myStmt.executeUpdate();
+				while (results.next()) {
 
-			results = myStmt.executeQuery(query);
-			while(results.next()) {
-				System.out.println(results.getString("Name"));
+				}
 			}
 			myStmt.close();
 		} catch (Exception e) {
