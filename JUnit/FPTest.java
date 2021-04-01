@@ -1,5 +1,4 @@
 package JUnit;
-
 import edu.ucalgary.ensf409.Chair;
 import edu.ucalgary.ensf409.Input;
 import org.junit.Test;
@@ -34,5 +33,6 @@ public class FPTest {
         actual[3] = chair1.getManuID();
         assertArrayEquals(expected,actual);
     }
+    
 
 }

@@ -182,7 +182,7 @@ public class InventoryLink {
             ex.printStackTrace();
         }
 	}
-	
+
 	public void close() {
 		try {
             results.close();
@@ -192,14 +192,11 @@ public class InventoryLink {
         }
 	}
 
-
 	public void invalidRequest(String[] ID){
 		String[] MIDPossible = IDTOManuID(ID);
-
-
 		try {
 			String query = "SELECT * FROM MANUFACTURER" +" WHERE ManuID = ?";
-			PreparedStatement myStmt = dbConnect.prepareStatement();
+			PreparedStatement myStmt = dbConnect.prepareStatement(query);
 
 			results = myStmt.executeQuery(query);
 			while(results.next()) {
