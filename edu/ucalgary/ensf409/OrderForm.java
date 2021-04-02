@@ -40,7 +40,7 @@ public class OrderForm {
             System.out.println("Error #1: Order Form Creation Error");
             e.printStackTrace();
         }
-
+		String output = "Purchase ";
         try {
             FileWriter myWriter = new FileWriter("OrderForm.txt");
             myWriter.write("Furniture Order Form\n\n");
@@ -51,14 +51,18 @@ public class OrderForm {
             myWriter.write("Items Ordered\n");
             for(int i = 0; i < this.itemsOrdered.size(); i++) {
                 myWriter.write("ID: " + this.itemsOrdered.get(i) + "\n");
+                output += (this.itemsOrdered.get(i) + " ");
+                if(i < this.itemsOrdered.size()-1)
+					output += "and ";
             }
             myWriter.write("\nTotal Price: $" + this.totalPrice);
             myWriter.close();
-            System.out.println("Order Form Processing Completed.");
         } catch (IOException e) {
             System.out.println("Error #2: Order Form Processing Could Not Be Completed");
             e.printStackTrace();
         }
+        output += ("for " + this.totalPrice);
+        System.out.println(output);
     }
 
 }
