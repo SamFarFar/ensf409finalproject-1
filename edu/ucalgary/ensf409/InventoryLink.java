@@ -246,7 +246,7 @@ public class InventoryLink {
 			for (int i = 0; i < MIDPossible.size(); i++) {
 				myStmt.setString(1, MIDPossible.get(i));
 				myStmt.executeUpdate();
-				while (results.next()) {
+				if(results.next()) {
 					if (!results.next()) {
 						results.previous();
 						output += ("and" + results.toString());
@@ -254,6 +254,7 @@ public class InventoryLink {
 						results.previous();
 						output += (results.toString() + ", ");
 					}
+
 				}
 			}
 			myStmt.close();
