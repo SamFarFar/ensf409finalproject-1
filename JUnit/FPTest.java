@@ -1,6 +1,7 @@
 package JUnit;
 
 import edu.ucalgary.ensf409.InvalidRequestException;
+import edu.ucalgary.ensf409.InventoryLink;
 import edu.ucalgary.ensf409.OrderForm;
 import edu.ucalgary.ensf409.Request;
 
@@ -125,6 +126,78 @@ public class FPTest {
     // ================================= \\
     // InventoryLink.java
     // ================================= \\
+
+    // Tests the constructor in Inventory Link
+    @Test
+    public void testInventoryLinkConstructor() throws InvalidRequestException {
+        Request temp = new Request("Task","chair",1);
+        InventoryLink newLink = new InventoryLink("123","124","125", temp);
+        assertEquals(newLink.getDBURL(),"123");
+        assertEquals(newLink.getPASSWORD(),"125");
+        assertEquals(newLink.getUSERNAME(),"124");
+        System.out.println("Test: InventoryLink contructor was Succesful");
+    }
+
+    //(DATA BASE STUFF CANT DO RIGHT NOW)
+    // Tests Initialize Connection
+
+    // Tests Improper Initialize Connection
+
+    // Tests getPossibleItems with Request
+
+    // Tests getValidParts with ID
+
+    // Tests getValidParts with Invalid ID
+
+    // Tests getPrice with ID
+
+    // Tests getPrice with Invalid ID
+
+    // Tests getManuID with valid ID
+
+    // Tests getManuID with Invalid ID
+
+    // Tests creating a lamp in the database
+
+    // Tests creating a duplicate Lamp in database
+
+    // Tests deleting furniture in the database
+
+    // Tests deleting a furniture that does not exist in database
+
+    // Tests stripping duplicates with an ArrayList that has duplicates
+
+    // Tests stripping duplicates with an ArrayList that has no duplicates
+
+    // Tests an invalidRequest response
+
+    // Tests the filter with valid ArrayList
+
+    // Tests the sort algorithm with valid ArrayList
+
+    // ================================= \\
+    // InvalidRequestException.java
+    // ================================= \\
+
+    // Tests a scenario where Invalid Request Exception is to be thrown
+    @Test(expected = InvalidRequestException.class)
+    public void testInvalidRequestException() throws InvalidRequestException {
+        Request test = new Request("asdads","dsad",1);
+        System.out.println("Test: InvalidRequestException is Succesful");
+    }
+
+    // ================================= \\
+    // InvalidIDException.java
+    // ================================= \\
+
+    // (Isnt utilized yet)
+    //Tests a scenario where an InvalidIDException is thrown
+
+    // ================================= \\
+    // Input.java
+    // ================================= \\
+
+    // (Functions need to be changed)
 
 
 }

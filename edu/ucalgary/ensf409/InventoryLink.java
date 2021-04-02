@@ -31,6 +31,30 @@ public class InventoryLink {
 	}
 
 	/**
+	 * Returns the DBurl Value
+	 * @return DBurl
+	 */
+	public String getDBURL() {
+		return DBURL;
+	}
+
+	/**
+	 * Returns the Password Value
+	 * @return DBurl
+	 */
+	public String getPASSWORD() {
+		return PASSWORD;
+	}
+
+	/**
+	 * Returns the username Value
+	 * @return DBurl
+	 */
+	public String getUSERNAME() {
+		return USERNAME;
+	}
+
+	/**
 	 * Initializes the connection to the database from the database information provided.
 	 */
 	public void initializeConnection() {
