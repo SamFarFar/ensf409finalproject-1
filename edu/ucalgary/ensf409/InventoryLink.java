@@ -46,7 +46,7 @@ public class InventoryLink {
 	 */
 	public ArrayList<String> getPossibleItems(Request request) {
 		// sort by price
-		ArrayList<String> retVal = new ArrayList<>();
+		ArrayList<String> retVal = new ArrayList<String>();
 		try {                    
             Statement myStmt = dbConnect.createStatement();
             results = myStmt.executeQuery("SELECT * FROM " + request.getFurniture());
@@ -135,18 +135,20 @@ public class InventoryLink {
         return price;
 	}
 	
+	/*					NOT NECESSARY
 	public String[] arrListToArray(ArrayList<String> arrayList){
 		String[] array = new String[arrayList.size()];
 		for (int i = 0; i < arrayList.size(); i++) {
 			array[i] = arrayList.get(i);
 		}
 		return array;
-	}
+	}*/
 	
-	public String[] IDTOManuID(String[] ID){
-		String[] ManuID = new String[ID.length];
-		for (int i = 0; i < ID.length; i++) {
-			ManuID[i] = getManuID(ID[i]);
+	// changed to ArrayList for consistency
+	public ArrayList<String> IDToManuID(ArrayList<String> ID){
+		ArrayList<String> ManuID = new ArrayList<String>();
+		for (int i = 0; i < ID.size(); i++) {
+			ManuID.add(getManuID(ID.get(i)));
 		}
 		return ManuID;
 	}
@@ -239,13 +241,14 @@ public class InventoryLink {
         }
 	}
 
-	public void invalidRequest(String[] ID){
-		String[] MIDPossible = IDTOManuID(ID);
+	// updated to ArrayList for consistency
+	public void invalidRequest(ArrayList<String> ID){
+		ArrayList<String> MIDPossible = IDToManuID(ID);
 		try {
-			String query = "SELECT Name FROM MANUFACTURER" + " WHERE ManuID = ?";
+			String query = "SELECT Name FROM manufacturer WHERE ManuID = ?";
 			PreparedStatement myStmt = dbConnect.prepareStatement(query);
-			for (int i = 0; i < MIDPossible.length; i++) {
-				myStmt.setString(1, MIDPossible[i]);
+			for (int i = 0; i < MIDPossible.size(); i++) {
+				myStmt.setString(1, MIDPossible.get(i));
 				myStmt.executeUpdate();
 				while (results.next()) {
 					System.out.println(results.toString());

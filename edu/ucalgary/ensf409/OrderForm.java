@@ -2,12 +2,13 @@ package edu.ucalgary.ensf409;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class OrderForm {
 
     private String originalRequestName;
     private int originalRequestAmount;
-    private String[] itemsOrdered;
+    private ArrayList<String> itemsOrdered;
     private int totalPrice;
 
     /**
@@ -19,7 +20,7 @@ public class OrderForm {
      * @param totalPrice to be printed to the order form.
      */
     public OrderForm( String originalRequestName,
-    int originalRequestAmount, String[] itemsOrdered, int totalPrice) {
+    int originalRequestAmount, ArrayList<String> itemsOrdered, int totalPrice) {
         this.originalRequestName = originalRequestName;
         this.originalRequestAmount = originalRequestAmount;
         this.itemsOrdered = itemsOrdered;
@@ -48,8 +49,8 @@ public class OrderForm {
             myWriter.write("Date: \n\n");
             myWriter.write("Original Request: " + this.originalRequestName + ", " + this.originalRequestAmount + "\n\n");
             myWriter.write("Items Ordered\n");
-            for(int i = 0; i < this.itemsOrdered.length; i++) {
-                myWriter.write("ID: " + this.itemsOrdered[i] + "\n");
+            for(int i = 0; i < this.itemsOrdered.size(); i++) {
+                myWriter.write("ID: " + this.itemsOrdered.get(i) + "\n");
             }
             myWriter.write("\nTotal Price: $" + this.totalPrice);
             myWriter.close();

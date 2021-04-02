@@ -72,8 +72,8 @@ private static String originalRequest;
 						possibleItems.remove(i);
 					else if(four[0] != -1 && four[0] != i && four[1] != i && four[2] != i && four[3] != i)
 						possibleItems.remove(i);
-					else
-						inLink.invalidRequest(possibleItems.toArray(new String[filing.size()]));
+					//else
+					//	inLink.invalidRequest(possibleItems.toArray(new String[filing.size()]));
 				}
 
 				int totalPrice = 0;
@@ -82,7 +82,7 @@ private static String originalRequest;
 				}
 
 				OrderForm out = new OrderForm(userRequest.getType() + userRequest.getFurniture(),
-							userRequest.getQuantity(), inLink.arrListToArray(possibleItems),totalPrice);
+							userRequest.getQuantity(), possibleItems,totalPrice);
 				out.printOrderForm();
 				inLink.close();
 
