@@ -57,24 +57,21 @@ private static String originalRequest;
 				// sort by price first
 				possibleItems = inLink.sort(possibleItems);
 				
-				ArrayList<int[]> retVal = getTwo(possibleItems, inLink);
-				if(retVal.get(0)[0] == -1){
-					retVal = getThree(possibleItems, inLink);
-					if(retVal.get(0)[0] == -1){
-						retVal = getFour(possibleItems, inLink);
-						if(retVal.get(0)[0] == -1)
+				ArrayList<int[]> results = getTwo(possibleItems, inLink);
+				if(results.get(0)[0] == -1){
+					results = getThree(possibleItems, inLink);
+					if(results.get(0)[0] == -1){
+						results = getFour(possibleItems, inLink);
+						if(results.get(0)[0] == -1)
 							inLink.invalidRequest(possibleItems);
 					}
-				}/*
+				}
+				int[] temp = inLink.filter(results, possibleItems);
 				for(int i = 0; i < possibleItems.size(); i++){
-					if(two[0] != -1 && two[0] != i && two[1] != i)
-						possibleItems.remove(i);
-					else if(three[0] != -1 && three[0] != i && three[1] != i && three[2] != i)
-						possibleItems.remove(i);
-					else if(four[0] != -1 && four[0] != i && four[1] != i && four[2] != i && four[3] != i)
+					if(temp[0] != i && temp[0] != i)
 						possibleItems.remove(i);
 				}
-*/
+
 				int totalPrice = 0;
 				for (int j = 0; j < possibleItems.size(); j++) {
 					totalPrice = inLink.getPrice(possibleItems.get(j));

@@ -2,6 +2,7 @@ package edu.ucalgary.ensf409;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class InventoryLink {
 	
@@ -254,8 +255,27 @@ public class InventoryLink {
 			e.printStackTrace();
 		}
 		System.out.println(output + ".");
+		System.exit(1);
 	}
-
+	
+	
+	public int[] filter(ArrayList<int[]> results, ArrayList<String> pI){
+		int[] retVal = new int[results.get(0).length];
+		int bestPrice = 0;
+		int index = 0;
+		for(int i = 0; i < results.size(); i++){
+			int tempPrice = 0;
+			for(int t : results.get(i)){
+				tempPrice += getPrice(pI.get(t));
+			}
+			if(tempPrice < bestPrice || bestPrice == 0){
+				bestPrice = tempPrice;
+				retVal = results.get(i);
+			}
+		}
+		return retVal;
+	}
+	
 	/**
 	 * Implements bubble sort algorithm in order to sort the given 
 	 * arrayList of String ID's by their corresponding price, lowest to 
