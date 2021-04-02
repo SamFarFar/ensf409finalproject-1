@@ -63,6 +63,7 @@ public class OrderForm {
         }
         output += ("for " + this.totalPrice);
         System.out.println(output);
+
     }
 
 }

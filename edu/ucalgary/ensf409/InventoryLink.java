@@ -247,7 +247,13 @@ public class InventoryLink {
 				myStmt.setString(1, MIDPossible.get(i));
 				myStmt.executeUpdate();
 				while (results.next()) {
-					output += (results.toString()+", ");
+					if (!results.next()) {
+						results.previous();
+						output += ("and" + results.toString());
+					}else {
+						results.previous();
+						output += (results.toString() + ", ");
+					}
 				}
 			}
 			myStmt.close();

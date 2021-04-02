@@ -27,9 +27,9 @@ public class Request {
 
 	/**
 	 * Standard constructor for the Request class that sets the type, furniture and quantity
-	 * @param t
-	 * @param f
-	 * @param q
+	 * @param t type of furniture
+	 * @param f what kind of furniture
+	 * @param q how many furniture pieces are requested
 	 * @throws InvalidRequestException
 	 */
 	public Request(String t, String f, int q) throws InvalidRequestException {
