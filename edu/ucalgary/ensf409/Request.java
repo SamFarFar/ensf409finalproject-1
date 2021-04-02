@@ -39,7 +39,15 @@ public class Request {
 		quantity = q;
 
 	}
-	
+
+	/**
+	 * This method checks if the request received are for furniture pieces and types
+	 * that are valid and checks if there is a quantity less than 1.
+	 * @param t type of furniture from request
+	 * @param f what kind of furniture from request
+	 * @param q how many furniture pieces are requested from request
+	 * @throws InvalidRequestException
+	 */
 	private void checkValidity(String t, String f, int q) throws InvalidRequestException {
 		boolean valid = false;
 		switch(f){
@@ -72,7 +80,7 @@ public class Request {
 				partNum = 0;
 				break;
 		}
-		if(q < 0){
+		if(q <= 0){
 			valid = false;
 		}
 		if(!valid){
