@@ -235,11 +235,21 @@ public class InventoryLink {
             e.printStackTrace();
         }
 	}
+	
+	public ArrayList<String> stripDuplicates(ArrayList<String> str){
+		ArrayList<String> retVal = new ArrayList<String>();
+		for(String s : str){
+			if(!retVal.contains(s))
+				retVal.add(s);
+		}
+		return retVal;
+	}
 
 	// updated to ArrayList for consistency.  Not entirely sure why
 	// we're just printing them to the console...
 	public void invalidRequest(ArrayList<String> ID){
 		ArrayList<String> MIDPossible = IDToManuID(ID);
+		MIDPossible = stripDuplicates(MIDPossible);
 		String output = "Order cannot be fulfilled based on current "+
 								"inventory. Suggested manufacturers are ";
 		try {
@@ -256,7 +266,6 @@ public class InventoryLink {
 						results.previous();
 						output += (results.toString() + ", ");
 					}
-
 				}
 			}
 			myStmt.close();
