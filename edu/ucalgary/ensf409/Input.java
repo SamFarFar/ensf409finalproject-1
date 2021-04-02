@@ -62,8 +62,11 @@ private static String originalRequest;
 				int[] four = new int[4];
 				if(two[0] == -1){
 					three = getThree(possibleItems, inLink);
-					if(three[0] == -1)
+					if(three[0] == -1){
 						four = getFour(possibleItems, inLink);
+						if(four[0] == -1)
+							inLink.invalidRequest(possibleItems);
+					}
 				}
 				for(int i = 0; i < possibleItems.size(); i++){
 					if(two[0] != -1 && two[0] != i && two[1] != i)
@@ -73,6 +76,7 @@ private static String originalRequest;
 					else if(four[0] != -1 && four[0] != i && four[1] != i && four[2] != i && four[3] != i)
 						possibleItems.remove(i);
 					//else
+						/*	SAM this shit is wrong but what was the play here? */
 					//	inLink.invalidRequest(possibleItems.toArray(new String[filing.size()]));
 				}
 

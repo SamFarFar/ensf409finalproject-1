@@ -241,9 +241,12 @@ public class InventoryLink {
         }
 	}
 
-	// updated to ArrayList for consistency
+	// updated to ArrayList for consistency.  Not entirely sure why
+	// we're just printing them to the console...
 	public void invalidRequest(ArrayList<String> ID){
 		ArrayList<String> MIDPossible = IDToManuID(ID);
+		String output = "Order cannot be fulfilled based on current "+
+								"inventory. Suggested manufacturers are ";
 		try {
 			String query = "SELECT Name FROM manufacturer WHERE ManuID = ?";
 			PreparedStatement myStmt = dbConnect.prepareStatement(query);
@@ -251,13 +254,15 @@ public class InventoryLink {
 				myStmt.setString(1, MIDPossible.get(i));
 				myStmt.executeUpdate();
 				while (results.next()) {
-					System.out.println(results.toString());
+					output += (results.toString()+", ");
 				}
 			}
 			myStmt.close();
+			output.substring(0,output.length()-2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(output);
 	}
 
 	/**
