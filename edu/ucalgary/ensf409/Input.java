@@ -56,18 +56,16 @@ private static String originalRequest;
 
 				// sort by price first
 				possibleItems = inLink.sort(possibleItems);
-
-				int[] two = getTwo(possibleItems, inLink);
-				int[] three = new int[3];
-				int[] four = new int[4];
-				if(two[0] == -1){
-					three = getThree(possibleItems, inLink);
-					if(three[0] == -1){
-						four = getFour(possibleItems, inLink);
-						if(four[0] == -1)
+				
+				ArrayList<int[]> retVal = getTwo(possibleItems, inLink);
+				if(retVal.get(0)[0] == -1){
+					retVal = getThree(possibleItems, inLink);
+					if(retVal.get(0)[0] == -1){
+						retVal = getFour(possibleItems, inLink);
+						if(retVal.get(0)[0] == -1)
 							inLink.invalidRequest(possibleItems);
 					}
-				}
+				}/*
 				for(int i = 0; i < possibleItems.size(); i++){
 					if(two[0] != -1 && two[0] != i && two[1] != i)
 						possibleItems.remove(i);
@@ -75,11 +73,8 @@ private static String originalRequest;
 						possibleItems.remove(i);
 					else if(four[0] != -1 && four[0] != i && four[1] != i && four[2] != i && four[3] != i)
 						possibleItems.remove(i);
-					//else
-						/*	SAM this shit is wrong but what was the play here? */
-					//	inLink.invalidRequest(possibleItems.toArray(new String[filing.size()]));
 				}
-
+*/
 				int totalPrice = 0;
 				for (int j = 0; j < possibleItems.size(); j++) {
 					totalPrice = inLink.getPrice(possibleItems.get(j));
@@ -115,17 +110,23 @@ private static String originalRequest;
 	 * @param inLink
 	 * @return
 	 */
-	public static int[] getTwo(ArrayList<String> pI, InventoryLink inLink){
-		int[] results = {-1,-1};
+	public static ArrayList<int[]> getTwo(ArrayList<String> pI, InventoryLink inLink){
+		ArrayList<int[]> results = new ArrayList<int[]>();
 		for(int i = 0; i < pI.size(); i++){
 			for(int j = 0; j < pI.size(); j++){
 				boolean[] one = inLink.getValidParts(pI.get(i));
 				boolean[] two = inLink.getValidParts(pI.get(j));
 				if(combine(one,two)){
-					results[0] = i;
-					results[1] = j;
+					int[] temp = new int[2];
+					temp[0] = i;
+					temp[1] = j;
+					results.add(temp);
 				}
 			}
+		}
+		if(results.size() == 0){
+			int[] fail = {-1,-1};
+			results.add(fail);
 		}
 		return results;
 	}
@@ -136,8 +137,8 @@ private static String originalRequest;
 	 * @param inLink
 	 * @return
 	 */
-	public static int[] getThree(ArrayList<String> pI, InventoryLink inLink){
-		int[] results = {-1,-1,-1};
+	public static ArrayList<int[]> getThree(ArrayList<String> pI, InventoryLink inLink){
+		ArrayList<int[]> results = new ArrayList<int[]>();
 		for(int m = 0; m < pI.size(); m++){
 			for(int i = 0; i < pI.size(); i++){
 				for(int j = 0; j < pI.size(); j++){
@@ -145,18 +146,24 @@ private static String originalRequest;
 					boolean[] two = inLink.getValidParts(pI.get(i));
 					boolean[] three = inLink.getValidParts(pI.get(j));
 					if(combine(one,two,three)){
-						results[0] = m;
-						results[1] = i;
-						results[2] = j;
+						int[] temp = new int[3];
+						temp[0] = m;
+						temp[1] = i;
+						temp[2] = j;
+						results.add(temp);
 					}
 				}
 			}
 		}
+		if(results.size() == 0){
+			int[] fail = {-1,-1,-1};
+			results.add(fail);
+		}
 		return results;
 	}
 
-	public static int[] getFour(ArrayList<String> pI, InventoryLink inLink){
-		int[] results = {-1,-1,-1,-1};
+	public static ArrayList<int[]> getFour(ArrayList<String> pI, InventoryLink inLink){
+		ArrayList<int[]> results = new ArrayList<int[]>();
 		for(int n = 0; n < pI.size(); n++){
 			for(int m = 0; m < pI.size(); m++){
 				for(int i = 0; i < pI.size(); i++){
@@ -166,14 +173,20 @@ private static String originalRequest;
 						boolean[] three = inLink.getValidParts(pI.get(j));
 						boolean[] four = inLink.getValidParts(pI.get(n));
 						if(combine(one,two,three,four)){
-							results[0] = n;
-							results[1] = m;
-							results[2] = i;
-							results[3] = j;
+							int[] temp = new int[4];
+							temp[0] = n;
+							temp[1] = m;
+							temp[2] = i;
+							temp[3] = j;
+							results.add(temp);
 						}
 					}
 				}
 			}
+		}
+		if(results.size() == 0){
+			int[] fail = {-1,-1,-1,-1};
+			results.add(fail);
 		}
 		return results;
 	}

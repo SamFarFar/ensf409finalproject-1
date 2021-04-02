@@ -135,15 +135,6 @@ public class InventoryLink {
         return price;
 	}
 	
-	/*					NOT NECESSARY
-	public String[] arrListToArray(ArrayList<String> arrayList){
-		String[] array = new String[arrayList.size()];
-		for (int i = 0; i < arrayList.size(); i++) {
-			array[i] = arrayList.get(i);
-		}
-		return array;
-	}*/
-	
 	// changed to ArrayList for consistency
 	public ArrayList<String> IDToManuID(ArrayList<String> ID){
 		ArrayList<String> ManuID = new ArrayList<String>();
