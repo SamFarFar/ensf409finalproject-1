@@ -191,7 +191,7 @@ public class InventoryLink {
             myStmt.setString(6, ManuID);
 			myStmt.executeUpdate();
 			myStmt.close();
-		} catch (SQLException | InvalidIDException ex) {
+		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 	}
