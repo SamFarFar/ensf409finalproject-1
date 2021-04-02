@@ -3,7 +3,9 @@ package edu.ucalgary.ensf409;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/*
+We still need a way to create more than 1 piece of furniture at a time
+ */
 public class InventoryLink {
 	
 	public final String DBURL; //store the database url information
@@ -265,8 +267,14 @@ public class InventoryLink {
 		System.out.println(output + ".");
 		System.exit(1);
 	}
-	
-	
+
+	/**
+	 * by providing an Arraylist of integer arrays that contain indexs for potential builds
+	 * @param results ArrayList containing potential builds of a piece of furniture
+	 * @param pI Arraylist of potential IDs and the link to their prices
+	 * @return
+	 */
+//might need to return arraylist for multiple furniture pieces
 	public int[] filter(ArrayList<int[]> results, ArrayList<String> pI){
 		int[] retVal = new int[results.get(0).length];
 		int bestPrice = 0;

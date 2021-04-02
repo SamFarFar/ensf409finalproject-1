@@ -87,19 +87,27 @@ public class Request {
 			throw new InvalidRequestException();
 		}
 	}
-	
-	public int getPartNum(){
-		return partNum;
-	}
-	
+
+	/**
+	 * getter for the type String
+	 * @return type
+	 */
 	public String getType() {
 		return type;
 	}
-	
+
+	/**
+	 * getter fpr furniture String
+	 * @return furniture
+	 */
 	public String getFurniture() {
 		return furniture;
 	}
-	
+
+	/**
+	 * getter for the quantity
+	 * @return quantity
+	 */
 	public int getQuantity() {
 		return quantity;
 	}
