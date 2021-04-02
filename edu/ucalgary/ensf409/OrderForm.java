@@ -10,6 +10,7 @@ public class OrderForm {
     private int originalRequestAmount;
     private ArrayList<String> itemsOrdered;
     private int totalPrice;
+    private boolean isFormCreated = false;
 
     /**
      * Constructor for the OrderForm class that takes the request name and amount with a String
@@ -20,11 +21,46 @@ public class OrderForm {
      * @param totalPrice to be printed to the order form.
      */
     public OrderForm( String originalRequestName,
-    int originalRequestAmount, ArrayList<String> itemsOrdered, int totalPrice) {
+                      int originalRequestAmount, ArrayList<String> itemsOrdered, int totalPrice) {
         this.originalRequestName = originalRequestName;
         this.originalRequestAmount = originalRequestAmount;
         this.itemsOrdered = itemsOrdered;
         this.totalPrice = totalPrice;
+    }
+
+    /**
+     * @return originalRequestName
+     */
+    public String getOriginalRequestName() {
+        return this.originalRequestName;
+    }
+
+    /**
+     * @return originalRequestAmount
+     */
+    public int getOriginalRequestAmount() {
+        return this.originalRequestAmount;
+    }
+
+    /**
+     * @return ItemsOrdered
+     */
+    public ArrayList<String> getItemsOrdered() {
+        return itemsOrdered;
+    }
+
+    /**
+     * @return TotalPrice
+     */
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    /**
+     * @return IsFormCreated
+     */
+    public boolean getIsFormCreated() {
+        return isFormCreated;
     }
 
     /**
@@ -40,7 +76,7 @@ public class OrderForm {
             System.out.println("Error #1: Order Form Creation Error");
             e.printStackTrace();
         }
-		String output = "Purchase "; //String for orders
+        String output = "Purchase ";
         try {
             FileWriter myWriter = new FileWriter("OrderForm.txt");
             myWriter.write("Furniture Order Form\n\n");
@@ -53,9 +89,10 @@ public class OrderForm {
                 myWriter.write("ID: " + this.itemsOrdered.get(i) + "\n");
                 output += (this.itemsOrdered.get(i) + " ");
                 if(i < this.itemsOrdered.size()-1)
-					output += "and ";
+                    output += "and ";
             }
             myWriter.write("\nTotal Price: $" + this.totalPrice);
+            this.isFormCreated = true;
             myWriter.close();
         } catch (IOException e) {
             System.out.println("Error #2: Order Form Processing Could Not Be Completed");
@@ -63,7 +100,6 @@ public class OrderForm {
         }
         output += ("for " + this.totalPrice);
         System.out.println(output);
-
     }
 
 }

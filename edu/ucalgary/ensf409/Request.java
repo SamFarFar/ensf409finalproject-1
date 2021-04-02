@@ -112,4 +112,13 @@ public class Request {
 		return quantity;
 	}
 
+	/**
+	 * getter for the partNum
+	 * @return partNum
+	 */
+	public int getPartNum() {
+		return partNum;
+	}
+
+
 }
