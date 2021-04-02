@@ -258,17 +258,25 @@ public class InventoryLink {
 	}
 
 	/**
-	 * sorts the possible items by lowest to highest price
+	 * Implements bubble sort algorithm in order to sort the given 
+	 * arrayList of String ID's by their corresponding price, lowest to 
+	 * highest.
+	 * @param pI ArrayList<String> of possible ID's
+	 * @return the original ArrayList sorted by price from lowest to highest for 
+	 * each ID
 	 */
 	public ArrayList<String> sort(ArrayList<String> pI) {
-		
-		
-		
-		
-		
+		for(int i = pI.size()-1; i >= 0; i++){
+			for(int j = 0; j < i; j++){
+				if(getPrice(pI.get(j)) > getPrice(pI.get(j+1))){
+					String swap = pI.get(j);
+					pI.set(j, pI.get(j+1));
+					pI.set(j+1, swap);
+				}
+			}
+		}
+		return pI;
 	}
-	
-	
 	
 }
 
