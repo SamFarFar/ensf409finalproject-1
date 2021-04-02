@@ -179,15 +179,16 @@ public class InventoryLink {
 	/* Need a method that adds a piece of furniture back into database so that we
 	 * can start testing the program!
 	 */
-	public void addDesk(String ID){
+	public void addLamp(String ID, String Type, String Base, String Bulb, int Price, String ManuID){
 		try {
-			int firstLetter = ID.charAt(0); // cast first letter as its corresponding ASCII number
-			if(firstLetter == 68){
-				throw new InvalidIDException();
-			}
-			String query = "INSERT INTO  ? ()";
+			String query = "INSERT INTO lamp (ID, Type, Base, Bulb, Price, ManuID) VALUES (?,?,?,?,?,?)";
 			PreparedStatement myStmt = dbConnect.prepareStatement(query);
-			myStmt.setString(2, ID);
+			myStmt.setString(1, ID);
+            myStmt.setString(2, Type);
+            myStmt.setString(3, Base);
+            myStmt.setString(4, Bulb);
+            myStmt.setInt(5, Price);
+            myStmt.setString(6, ManuID);
 			myStmt.executeUpdate();
 			myStmt.close();
 		} catch (SQLException | InvalidIDException ex) {
