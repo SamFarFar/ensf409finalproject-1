@@ -62,14 +62,16 @@ private static String originalRequest;
 					results = getThree(possibleItems, inLink);
 					if(results.get(0)[0] == -1){
 						results = getFour(possibleItems, inLink);
-						if(results.get(0)[0] == -1)
+						if(results.get(0)[0] == -1){
 							inLink.invalidRequest(possibleItems);
+						}
 					}
 				}
 				int[] temp = inLink.filter(results, possibleItems);
 				for(int i = 0; i < possibleItems.size(); i++){
-					if(temp[0] != i && temp[0] != i)
+					if(temp[0] != i && temp[0] != i){
 						possibleItems.remove(i);
+					}
 				}
 
 				int totalPrice = 0;

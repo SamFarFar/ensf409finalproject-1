@@ -20,8 +20,8 @@ public class OrderForm {
      * @param itemsOrdered to be printed to the order form.
      * @param totalPrice to be printed to the order form.
      */
-    public OrderForm( String originalRequestName,
-                      int originalRequestAmount, ArrayList<String> itemsOrdered, int totalPrice) {
+    public OrderForm( String originalRequestName, int originalRequestAmount, 
+					ArrayList<String> itemsOrdered, int totalPrice) {
         this.originalRequestName = originalRequestName;
         this.originalRequestAmount = originalRequestAmount;
         this.itemsOrdered = itemsOrdered;
@@ -88,8 +88,9 @@ public class OrderForm {
             for(int i = 0; i < this.itemsOrdered.size(); i++) {
                 myWriter.write("ID: " + this.itemsOrdered.get(i) + "\n");
                 output += (this.itemsOrdered.get(i) + " ");
-                if(i < this.itemsOrdered.size()-1)
+                if(i < this.itemsOrdered.size()-1){
                     output += "and ";
+				}
             }
             myWriter.write("\nTotal Price: $" + this.totalPrice);
             this.isFormCreated = true;

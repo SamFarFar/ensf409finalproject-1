@@ -121,7 +121,9 @@ public class InventoryLink {
 				for(int i = 0; i < numberOfParts; i++){
 					if(results.getString(i).equals("Y")){
 						retVal[i] = true;
-					} else retVal[i] = false;
+					} else{
+						 retVal[i] = false;
+					 }
 				}
 			}
             myStmt.close();
@@ -263,8 +265,9 @@ public class InventoryLink {
 	public ArrayList<String> stripDuplicates(ArrayList<String> str){
 		ArrayList<String> retVal = new ArrayList<String>();
 		for(String s : str){
-			if(!retVal.contains(s))
+			if(!retVal.contains(s)){
 				retVal.add(s);
+			}
 		}
 		return retVal;
 	}
