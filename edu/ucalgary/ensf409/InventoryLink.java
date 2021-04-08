@@ -405,10 +405,14 @@ public class InventoryLink {
 	}
 	
 	/**
-	 * 
+	 * Takes a request object and uses its data in order to generate a complete 
+	 * list of all Manufacturer ID's, of manufacturers that are found to produce 
+	 * the desired product.
 	 * @param rq Request object filled with the desired furniture type, name, 
 	 * and quantity to be used.
-	 * @return 
+	 * @return String ArrayList of all possible ManuID's of manufacturers that 
+	 * can be found to produce the desired furniture name and type from the 
+	 * Request object, based on the current state of the database
 	 */
 	private ArrayList<String> getAllManuIDs(Request rq){
 		ArrayList<String> retVal = new ArrayList<>();
@@ -426,7 +430,21 @@ public class InventoryLink {
 		return retVal;
 	}
 	
-	
+	/**
+	 * Adds all furniture items that were previously deleted back to the database, 
+	 * once the request has failed.  An output message is then generated and 
+	 * printed containing all potential manufacturers of the specified item.
+	 * @param rq Request object filled with the desired furniture type, name, 
+	 * and quantity to be used.
+	 * @param chairs ArrayList of Chair objects that must be re-added to the 
+	 * database after previous deletions, once the request has failed.
+	 * @param lamps ArrayList of Lamp objects that must be re-added to the 
+	 * database after previous deletions, once the request has failed.
+	 * @param desks ArrayList of Desk objects that must be re-added to the 
+	 * database after previous deletions, once the request has failed.
+	 * @param filings ArrayList of Filing objects that must be re-added to the 
+	 * database after previous deletions, once the request has failed.
+	 */
 	public void invalidRequest(Request rq, ArrayList<Chair> chairs,
 				ArrayList<Lamp> lamps, ArrayList<Desk> desks, ArrayList<Filing> filings){
 		switch(rq.getFurniture()){
