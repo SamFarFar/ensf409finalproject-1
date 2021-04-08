@@ -53,7 +53,10 @@ private static String originalRequest;
 				InventoryLink inLink = new InventoryLink(url,user,pass);
 				inLink.initializeConnection();
 				
-				
+				ArrayList<Chair> chairs = new ArrayList<>();
+				ArrayList<Lamp> lamps = new ArrayList<>();
+				ArrayList<Desk> desks = new ArrayList<>();
+				ArrayList<Filing> filings = new ArrayList<>();
 				ArrayList<String> finalVals = new ArrayList<String>();
 				
 				for(int furnNum = 0; furnNum < Integer.parseInt(match.group(3)); furnNum++){
@@ -77,6 +80,22 @@ private static String originalRequest;
 					for(int i : results.get(0)){
 						finalVals.add(possibleItems.get(i));
 					}
+					
+					// 1. Store IDs from finalVals to Object ArrayLists
+					
+					// 2. Delete IDs from finalVals from DB
+					
+					// 3. Repeat Loop
+					
+					// 4. if(Everything works) act as normal
+					//		else InvalidRequest, and restore DB objects
+					
+					
+					// use values in finalVals, delete all items from database with these ID's
+					// then run through loop again, continue adding until loop ends or run out of possibilities
+					// ensure all items are saved to an array of objects before deletion,
+					// in the event of not meeting given number, add all objects back to DB
+					
 				}
 				
 				int totalPrice = 0;
