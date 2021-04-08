@@ -52,27 +52,33 @@ private static String originalRequest;
 
 				InventoryLink inLink = new InventoryLink(url,user,pass);
 				inLink.initializeConnection();
-				// Loop for multiple pieces of furniture starts here
-				ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
-				// sort by price first
-				possibleItems = inLink.sort(possibleItems);
 				
-				ArrayList<int[]> results = getTwo(possibleItems, inLink);
-				if(results.get(0)[0] == -1){
-					results = getThree(possibleItems, inLink);
+				
+				ArrayList<String> finalVals = new ArrayList<String>();
+				
+				for(int furnNum = 0; furnNum < Integer.parseInt(match.group(3)); i++){
+					// Loop for multiple pieces of furniture starts here
+					ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
+					
+					// sort by price first
+					possibleItems = inLink.sort(possibleItems);
+					
+					ArrayList<int[]> results = getTwo(possibleItems, inLink);
 					if(results.get(0)[0] == -1){
-						results = getFour(possibleItems, inLink);
+						results = getThree(possibleItems, inLink);
 						if(results.get(0)[0] == -1){
-							inLink.invalidRequest(possibleItems);
+							results = getFour(possibleItems, inLink);
+							if(results.get(0)[0] == -1){
+								inLink.invalidRequest(possibleItems);
+							}
 						}
+					}
+					
+					for(int i : results.get(0)){
+						finalVals.add(possibleItems.get(i));
 					}
 				}
 				
-				ArrayList<String> finalVals = new ArrayList<String>();
-				for(int i : results.get(0)){
-					finalVals.add(possibleItems.get(i));
-				}
-
 				int totalPrice = 0;
 				for (int j = 0; j < finalVals.size(); j++) {
 					//inLink.deleteFurniture(finalVals.get(i));
