@@ -133,9 +133,9 @@ public class InventoryLink {
         }
 		return null;
 	}
-
+// Broken dogshit code
 	public int getPrice(String ID) {
-		int price = -1;
+		int price = 0;
 		try {
             Statement myStmt = dbConnect.createStatement();
             switch(ID.charAt(0)){
@@ -156,7 +156,6 @@ public class InventoryLink {
 			}
             while(results.next()){
 				price = results.getInt(1);
-				System.out.println("our ID: " + ID);
 			}
             myStmt.close();
 		} catch(SQLException ex) {
@@ -397,25 +396,32 @@ public class InventoryLink {
 		MIDPossible = stripDuplicates(MIDPossible);
 		String output = "\nOrder cannot be fulfilled based on current "+
 								"inventory. Suggested manufacturers are ";
+
 		try {
 			Statement myStmt = dbConnect.createStatement();
+			int counter = 0;
 			for (int i = 0; i < MIDPossible.size(); i++) {
 				String query = "SELECT Name FROM manufacturer WHERE ManuID = '" + MIDPossible.get(i) +"'";
 				results = myStmt.executeQuery(query);
 				while(results.next()){
 					output += (results.getString(1) + ", ");
+					counter++;
 				}
 			}
 			output = output.substring(0,output.length()-2);
+			if(counter > 1){
 			int lastCom = output.lastIndexOf(",");
 			String firstHalf = output.substring(0, lastCom + 2);
-			String secondHalf = output.substring(lastCom + 1, output.length());
-			output = firstHalf + "and" + secondHalf + ".";
+			String secondHalf = output.substring(lastCom + 1);
+				output = firstHalf + "and" + secondHalf + ".";
+			}else{
+				output += ".";
+			}
 			myStmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(output);
+		System.out.println(output); // Keep this one for printing output
 		System.exit(1);
 	}
 

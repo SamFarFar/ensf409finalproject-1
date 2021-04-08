@@ -4,10 +4,14 @@ Faculty Name:
 Contact: 
 Date: 
 
-Original Request: Largefiling, 1
+Original Request: Desklamp, 3
 
 Items Ordered
-ID: F012
-ID: F010
+ID: L208
+ID: L013
+ID: L342
+ID: L112
+ID: L132
+ID: L564
 
-Total Price: $300
+Total Price: $78

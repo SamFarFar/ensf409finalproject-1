@@ -26,18 +26,13 @@ private static String originalRequest;
 		try{
 			scanner = new Scanner(System.in);
 			System.out.println(WELCOME);
-			// this will be edited out later when the SQL login is supplied
-			//System.out.println(DBURLINPUT);
-			String url = "jdbc:mysql://localhost/inventory";//scanner.nextLine();
-			//System.out.println(DBUSERINPUT);
-			String user = "matteo";//scanner.nextLine();
-			//System.out.println(DBPASSINPUT);
-			String pass = "pasquale";//scanner.nextLine();
+			String url = "jdbc:mysql://localhost/inventory"; //URL
+			String user = "root"; // given user
+			String pass = "turWhale929."; //given password
 			System.out.println(PROMPTINPUT);
 			String in = scanner.nextLine();
 			Pattern pattern = Pattern.compile(REGEX);
 			Matcher match = pattern.matcher(in);
-			//System.out.println(in);
 			if (match.find()) {
 				
 				String type = match.group(1).toLowerCase();
@@ -49,10 +44,7 @@ private static String originalRequest;
 				Request userRequest = new Request(type,
 								match.group(2).toLowerCase(),
 								Integer.parseInt(match.group(3)));
-								
-				System.out.println(userRequest.getQuantity());
-				//System.out.println(Integer.parseInt(match.group(3)));
-				
+
 				InventoryLink inLink = new InventoryLink(url,user,pass);
 				inLink.initializeConnection();
 				
@@ -69,9 +61,6 @@ private static String originalRequest;
 					
 					// sort by price first
 					possibleItems = inLink.sort(possibleItems);
-					System.out.println("break");
-					for(int i = 0; i < possibleItems.size(); i++)
-						System.out.println(possibleItems.get(i));
 					ArrayList<int[]> results = getTwo(possibleItems, inLink);
 					if(results.get(0)[0] == -1){
 						results = getThree(possibleItems, inLink);
