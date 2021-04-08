@@ -1,14 +1,11 @@
 package JUnit;
 
-import edu.ucalgary.ensf409.InvalidRequestException;
-import edu.ucalgary.ensf409.InventoryLink;
-import edu.ucalgary.ensf409.OrderForm;
-import edu.ucalgary.ensf409.Request;
+import edu.ucalgary.ensf409.*;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +13,29 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 
+
+/*
+Sam's rules for JUnits:
+
+1. only 1 assert per test
+
+2. when adding to a database must follow a delete immediately afterwards to not
+mess up database of usage. test using constructors of the objects.
+
+3. tests must chronologically make sense. meaning if u want to test something and it uses a
+testable function then u must have previously tested the function above.
+
+4. dont use any System.out.println() because JUnit 4 does it for us already
+
+5. comment above your test what you are testing
+
+6. Supporting methods need to go outside of FPTest and be set to public
+
+silly thing to consider
+                 Better ---|--- Worse
+ assert(randomTest)               assertEquals(randomTest, true);
+
+ */
 
 public class FPTest {
     // ================================= \\
@@ -27,7 +47,7 @@ public class FPTest {
     public void testOrderFormConstructor(){
         String testStringName = "chair";
         int testAmount = 1;
-        ArrayList<String> testList  = new ArrayList<String>();
+        ArrayList<String> testList  = new ArrayList<>();
         testList.add("C123");
         testList.add("C234");
         testList.add("C567");
@@ -45,7 +65,7 @@ public class FPTest {
     public void testOrderFormCreation() {
         String testStringName = "chair";
         int testAmount = 1;
-        ArrayList<String> testList  = new ArrayList<String>();
+        ArrayList<String> testList  = new ArrayList<>();
         testList.add("C123");
         testList.add("C234");
         testList.add("C567");
@@ -120,7 +140,7 @@ public class FPTest {
         assertEquals(testGetters.getType(), "Task");
         assertEquals(testGetters.getFurniture(), "chair");
         assertEquals(testGetters.getQuantity(), 1);
-        System.out.println("Test: Request Getters were Succesful");
+        //write ifs
     }
 
     // ================================= \\
@@ -131,7 +151,7 @@ public class FPTest {
     @Test
     public void testInventoryLinkConstructor() throws InvalidRequestException {
         Request temp = new Request("Task","chair",1);
-        InventoryLink newLink = new InventoryLink("123","124","125", temp);
+        InventoryLink newLink = new InventoryLink("123","124","125");
         assertEquals(newLink.getDBURL(),"123");
         assertEquals(newLink.getPASSWORD(),"125");
         assertEquals(newLink.getUSERNAME(),"124");
@@ -141,39 +161,30 @@ public class FPTest {
     //(DATA BASE STUFF CANT DO RIGHT NOW)
     // Tests Initialize Connection
 
-    // Tests Improper Initialize Connection
+    // Tests Improper Initialize Connection running
 
-    // Tests getPossibleItems with Request
+    // Tests getPossibleItems with Request  running
 
     // Tests getValidParts with ID
 
-    // Tests getValidParts with Invalid ID
-
     // Tests getPrice with ID
-
-    // Tests getPrice with Invalid ID
 
     // Tests getManuID with valid ID
 
-    // Tests getManuID with Invalid ID
+    // Tests creating any furniture in the database
 
-    // Tests creating a lamp in the database
+    // Tests deleting furniture in the database /
 
-    // Tests creating a duplicate Lamp in database
+    // Tests stripping duplicates with an ArrayList that has duplicates /
 
-    // Tests deleting furniture in the database
+    // Tests stripping duplicates with an ArrayList that has no duplicates /
 
-    // Tests deleting a furniture that does not exist in database
+    // Tests an invalidRequest response ////
+    // when there is 0,1,2,* manufacturers
 
-    // Tests stripping duplicates with an ArrayList that has duplicates
+    // Tests the filter with valid ArrayList /
 
-    // Tests stripping duplicates with an ArrayList that has no duplicates
-
-    // Tests an invalidRequest response
-
-    // Tests the filter with valid ArrayList
-
-    // Tests the sort algorithm with valid ArrayList
+    // Tests the sort algorithm with valid ArrayList /
 
     // ================================= \\
     // InvalidRequestException.java
