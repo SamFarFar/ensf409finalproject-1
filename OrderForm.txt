@@ -4,12 +4,10 @@ Faculty Name:
 Contact: 
 Date: 
 
-Original Request: Smallfiling, 2
+Original Request: desk lamp, 1
 
 Items Ordered
-ID: F001
-ID: F013
-ID: F006
-ID: F004
+ID: L208
+ID: L013
 
-Total Price: $225
+Total Price: $20

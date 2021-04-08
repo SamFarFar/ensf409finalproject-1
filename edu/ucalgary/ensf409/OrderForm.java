@@ -83,15 +83,21 @@ public class OrderForm {
             myWriter.write("Faculty Name: \n");
             myWriter.write("Contact: \n");
             myWriter.write("Date: \n\n");
-            myWriter.write("Original Request: " + this.originalRequestName + ", " + this.originalRequestAmount + "\n\n");
+            myWriter.write("Original Request: " + this.originalRequestName.toLowerCase() + ", " + this.originalRequestAmount + "\n\n");
             myWriter.write("Items Ordered\n");
-            for(int i = 0; i < this.itemsOrdered.size(); i++) {
+            int i;
+            for(i = 0; i < this.itemsOrdered.size(); i++) {
                 myWriter.write("ID: " + this.itemsOrdered.get(i) + "\n");
-                output += (this.itemsOrdered.get(i) + " ");
-                if(i < this.itemsOrdered.size()-1){
-                    output += "and ";
-				}
+                output += (this.itemsOrdered.get(i) + ", ");
             }
+            output = output.substring(0,output.length()-2);
+			if(i > 1){
+				int lastCom = output.lastIndexOf(",");
+				String firstHalf = output.substring(0, lastCom + 2);
+				String secondHalf = output.substring(lastCom + 1);
+				output = firstHalf + "and" + secondHalf;
+			}
+            output += " ";
             myWriter.write("\nTotal Price: $" + this.totalPrice);
             this.isFormCreated = true;
             myWriter.close();
@@ -99,7 +105,7 @@ public class OrderForm {
             System.out.println("Error #2: Order Form Processing Could Not Be Completed");
             e.printStackTrace();
         }
-        output += ("for " + this.totalPrice);
+        output += ("for $" + this.totalPrice + ".");
         System.out.println(output);
     }
 

@@ -35,14 +35,9 @@ private static String originalRequest;
 			Matcher match = pattern.matcher(in);
 			if (match.find()) {
 				
-				
 				String type = match.group(1).toLowerCase();
 				originalRequest = type + " " + match.group(2).toLowerCase();
 				type = type.substring(0,1).toUpperCase() + type.substring(1);
-				System.out.println(type);
-				//if(type.equals("Swing arm")) {
-					//type = "Swing Arm";
-				//}
 				Request userRequest = new Request(type,
 								match.group(2).toLowerCase(),
 								Integer.parseInt(match.group(3)));
@@ -115,7 +110,7 @@ private static String originalRequest;
 					}
 				}
 
-				OrderForm out = new OrderForm(userRequest.getType() + userRequest.getFurniture(),
+				OrderForm out = new OrderForm(userRequest.getType() + " " + userRequest.getFurniture(),
 							userRequest.getQuantity(), finalVals,totalPrice);
 				out.printOrderForm();
 				inLink.close();
