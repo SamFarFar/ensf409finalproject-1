@@ -13,7 +13,7 @@ public class Input {
 	private static final String PROMPTINPUT = "What would you like to make today?" +
 			"\nPlease specify below your request in the format of:\n"+
 			"<Type> <Furniture>, <Amount>\n" + "Example: mesh chair, 1";
-	private final static String REGEX = "([a-zA-z]{1,9})\\s([a-zA-z]{1,9}),\\s([0-9]{1,9})";
+	private final static String REGEX = "([a-zA-z]{1,99})\\s([a-zA-z]{1,99}),\\s([0-9]{1,9})";
 private static String originalRequest;
 
 	/**
@@ -27,20 +27,22 @@ private static String originalRequest;
 			scanner = new Scanner(System.in);
 			System.out.println(WELCOME);
 			String url = "jdbc:mysql://localhost/inventory"; //URL
-			String user = "root"; // given user
-			String pass = "turWhale929."; //given password
+			String user = "matteo"; // given user
+			String pass = "pasquale"; //given password
 			System.out.println(PROMPTINPUT);
 			String in = scanner.nextLine();
 			Pattern pattern = Pattern.compile(REGEX);
 			Matcher match = pattern.matcher(in);
 			if (match.find()) {
 				
+				
 				String type = match.group(1).toLowerCase();
 				originalRequest = type + " " + match.group(2).toLowerCase();
-						type = type.substring(0,1).toUpperCase() + type.substring(1);
-				if(type.equals("Swing arm")) {
-					type = "Swing Arm";
-				}
+				type = type.substring(0,1).toUpperCase() + type.substring(1);
+				System.out.println(type);
+				//if(type.equals("Swing arm")) {
+					//type = "Swing Arm";
+				//}
 				Request userRequest = new Request(type,
 								match.group(2).toLowerCase(),
 								Integer.parseInt(match.group(3)));
@@ -78,6 +80,7 @@ private static String originalRequest;
 					}
 					
 					// 1. Store IDs from finalVals to Object ArrayLists
+					System.out.println("FurnNum is: "+ furnNum);
 					for (int j = 0; j < finalVals.size(); j++) {
 
 						if(userRequest.getFurniture().equals("chair")){
@@ -105,8 +108,10 @@ private static String originalRequest;
 									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
 							filings.add(temp);
 						}
+						System.out.println("Actually summoning price :");
 						totalPrice += inLink.getPrice(finalVals.get(j));
 						inLink.deleteFurniture(finalVals.get(j));
+						System.out.println("not summoning price");
 					}
 				}
 

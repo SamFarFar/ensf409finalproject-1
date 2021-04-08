@@ -161,6 +161,7 @@ public class InventoryLink {
 		} catch(SQLException ex) {
             ex.printStackTrace();
         }
+        System.out.println("getPrice returning: "+price+" for: "+ID);
         return price;
 	}
 	
