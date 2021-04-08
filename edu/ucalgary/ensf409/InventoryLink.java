@@ -24,7 +24,7 @@ public class InventoryLink {
 	 * @param pass
 	 * @param userRequest
 	 */
-	public InventoryLink(String DBurl, String user, String pass, Request userRequest) {
+	public InventoryLink(String DBurl, String user, String pass) {
 		this.DBURL = DBurl;
 		this.USERNAME = user;
 		this.PASSWORD = pass;

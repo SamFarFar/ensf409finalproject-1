@@ -4,10 +4,10 @@ Faculty Name:
 Contact: 
 Date: 
 
-Original Request: Desklamp, 2
+Original Request: Meshchair, 1
 
 Items Ordered
-ID: L208
-ID: L013
+ID: C9890
+ID: C0942
 
-Total Price: $20
+Total Price: $150

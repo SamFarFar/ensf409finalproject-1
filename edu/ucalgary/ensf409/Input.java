@@ -50,7 +50,7 @@ private static String originalRequest;
 								match.group(2).toLowerCase(),
 								Integer.parseInt(match.group(3)));
 
-				InventoryLink inLink = new InventoryLink(url,user,pass,userRequest);
+				InventoryLink inLink = new InventoryLink(url,user,pass);
 				inLink.initializeConnection();
 
 				ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
