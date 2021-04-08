@@ -3,9 +3,8 @@ package edu.ucalgary.ensf409;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-/*
-We still need a way to create more than 1 piece of furniture at a time
- */
+
+
 public class InventoryLink {
 	
 	public final String DBURL; //store the database url information
@@ -91,6 +90,15 @@ public class InventoryLink {
         return retVal;
 	}
 	
+	/**
+	 * Takes a String ID of a desired furniture item in the database, and 
+	 * iterates through all parts of the entry, returning a boolean array 
+	 * corresponding to the availability of its parts.
+	 * @param ID String correlating to the desired ID field of an entry 
+	 * in the database
+	 * @return boolean array from the "Y" and "N" values in the entry's 
+	 * columns, wherein "Y" becomes true and "N" becomes no (in order)
+	 */
 	public boolean[] getValidParts(String ID) {
 		boolean[] retVal;
 		int numberOfParts = 0;
@@ -133,7 +141,14 @@ public class InventoryLink {
         }
 		return null;
 	}
-// Broken dogshit code
+	
+	/**
+	 * Takes a String ID of a desired furniture item in the database, and 
+	 * retrieves its price, in the form of an integer.
+	 * @param ID String correlating to the desired ID field of an entry 
+	 * in the database
+	 * @return Price of the desired item in the database as an integer
+	 */
 	public int getPrice(String ID) {
 		int price = 0;
 		try {
@@ -164,16 +179,13 @@ public class InventoryLink {
         return price;
 	}
 	
-	// changed to ArrayList for consistency
-	public ArrayList<String> IDToManuID(ArrayList<String> ID){
-		ArrayList<String> ManuID = new ArrayList<String>();
-		for (int i = 0; i < ID.size(); i++) {
-			ManuID.add(getManuID(ID.get(i)));
-		}
-		return ManuID;
-	}
-	
-	// function that takes an ID array and converts it to its corresponding manuID array
+	/**
+	 * Takes a String ID of a desired furniture item in the database, and 
+	 * retrieves its ManuID, in the form of a String.
+	 * @param ID String correlating to the desired ID field of an entry 
+	 * in the database
+	 * @return String value of ManuID field of given item in the database
+	 */
 	public String getManuID(String ID){
 		String ManuID= "";
 		try {
@@ -204,6 +216,13 @@ public class InventoryLink {
 		return ManuID;
 	}
 	
+	/**
+	 * Used to translate a boolean value of part availability (as is stored 
+	 * in the furniture's classes) and convert it into a String value usable 
+	 * within the database.
+	 * @param b Boolean value relating to the availability of a certain part
+	 * @return "Y" if b == true, "N" if b == false
+	 */
 	private String getLetter(boolean b){
 		if(b){
 			return "Y";
@@ -212,8 +231,10 @@ public class InventoryLink {
 		}
 	}
 	
-	/* Need a method that adds a piece of furniture back into database so that we
-	 * can start testing the program!
+	/**
+	 * Takes an object containing all necessary data to create a new database 
+	 * entry, and does so.
+	 * @param chair Chair object to be added to database
 	 */
 	public void addFurn(Chair chair){
 		try {
@@ -238,6 +259,12 @@ public class InventoryLink {
 			ex.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Takes an object containing all necessary data to create a new database 
+	 * entry, and does so.
+	 * @param desk Desk object to be added to database
+	 */
 	public void addFurn(Desk desk){
 		try {
 			String legs = getLetter(desk.isLegs());
@@ -259,6 +286,12 @@ public class InventoryLink {
 			ex.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Takes an object containing all necessary data to create a new database 
+	 * entry, and does so.
+	 * @param filing Filing object to be added to database
+	 */
 	public void addFurn(Filing filing){
 		try {
 			String rails = getLetter(filing.isRails());
@@ -280,6 +313,12 @@ public class InventoryLink {
 			ex.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Takes an object containing all necessary data to create a new database 
+	 * entry, and does so.
+	 * @param lamp Lamp object to be added to database
+	 */
 	public void addFurn(Lamp lamp){
 		try {
 			String base = getLetter(lamp.isBase());
@@ -407,12 +446,6 @@ public class InventoryLink {
 					output += (results.getString(1) + ", ");
 					counter++;
 				}
-			}
-
-			if(counter == 0){
-				output += "not able to be found because inventory is empty.";
-				System.out.println(output); // Keep this one for printing output
-				System.exit(1);
 			}
 			output = output.substring(0,output.length()-2);
 			if(counter > 1){
