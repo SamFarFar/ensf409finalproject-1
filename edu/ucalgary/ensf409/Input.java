@@ -56,7 +56,7 @@ private static String originalRequest;
 				
 				ArrayList<String> finalVals = new ArrayList<String>();
 				
-				for(int furnNum = 0; furnNum < Integer.parseInt(match.group(3)); i++){
+				for(int furnNum = 0; furnNum < Integer.parseInt(match.group(3)); furnNum++){
 					// Loop for multiple pieces of furniture starts here
 					ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
 					
