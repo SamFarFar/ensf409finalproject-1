@@ -109,9 +109,6 @@ private static String originalRequest;
 									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
 							filings.add(temp);
 						}
-
-
-
 					}
 					// 2. Delete IDs from finalVals from DB
 					
