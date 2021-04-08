@@ -75,6 +75,7 @@ private static String originalRequest;
 
 				int totalPrice = 0;
 				for (int j = 0; j < finalVals.size(); j++) {
+					//inLink.deleteFurniture(finalVals.get(i));
 					totalPrice += inLink.getPrice(finalVals.get(j));
 				}
 
