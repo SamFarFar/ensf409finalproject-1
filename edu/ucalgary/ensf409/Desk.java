@@ -5,9 +5,14 @@ public class Desk extends Furniture{
     private boolean Top;
     private boolean Drawer;
 
-    public Desk(String ID, String type, int price, String manuID){
-        super(ID,type,price,manuID);
-    }
+    /**
+     * Consturtor for
+     * @param ID
+     * @param type
+     * @param price
+     * @param manuID
+     */
+
     public Desk(String ID,String type, boolean legs,boolean top, boolean drawer,
                 int price,String manuID){
         super(ID,type,price,manuID);

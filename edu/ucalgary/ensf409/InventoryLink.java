@@ -408,6 +408,12 @@ public class InventoryLink {
 					counter++;
 				}
 			}
+
+			if(counter == 0){
+				output += "not able to be found because inventory is empty.";
+				System.out.println(output); // Keep this one for printing output
+				System.exit(1);
+			}
 			output = output.substring(0,output.length()-2);
 			if(counter > 1){
 			int lastCom = output.lastIndexOf(",");
