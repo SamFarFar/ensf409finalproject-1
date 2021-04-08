@@ -52,9 +52,8 @@ private static String originalRequest;
 
 				InventoryLink inLink = new InventoryLink(url,user,pass);
 				inLink.initializeConnection();
-
+				// Loop for multiple pieces of furniture starts here
 				ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
-
 				// sort by price first
 				possibleItems = inLink.sort(possibleItems);
 				
