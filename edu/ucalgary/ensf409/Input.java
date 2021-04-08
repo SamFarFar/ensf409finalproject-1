@@ -86,32 +86,33 @@ private static String originalRequest;
 
 						if(userRequest.getFurniture().equals("chair")){
 
-							Chair temp = new Chair(possibleItems.get(j),userRequest.getType(),
-									inLink.getValidParts(possibleItems.get(j))[0],inLink.getValidParts(possibleItems.get(j))[1],
-									inLink.getValidParts(possibleItems.get(j))[2],inLink.getValidParts(possibleItems.get(j))[3],
+							Chair temp = new Chair(finalVals.get(j),userRequest.getType(),
+									inLink.getValidParts(finalVals.get(j))[0],inLink.getValidParts(finalVals.get(j))[1],
+									inLink.getValidParts(finalVals.get(j))[2],inLink.getValidParts(finalVals.get(j))[3],
 									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
 							chairs.add(temp);
 						}
 						if(userRequest.getFurniture().equals("lamp")){
-							Lamp temp = new Lamp(possibleItems.get(j),userRequest.getType(),inLink.getValidParts(possibleItems.get(j))[0]
-									,inLink.getValidParts(possibleItems.get(j))[1],inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
+							Lamp temp = new Lamp(finalVals.get(j),userRequest.getType(),inLink.getValidParts(finalVals.get(j))[0]
+									,inLink.getValidParts(finalVals.get(j))[1],inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
 							lamps.add(temp);
 						}
 						if(userRequest.getFurniture().equals("desk")){
-							Desk temp = new Desk(possibleItems.get(j),userRequest.getType(),
-									inLink.getValidParts(possibleItems.get(j))[0],inLink.getValidParts(possibleItems.get(j))[1],inLink.getValidParts(possibleItems.get(j))[3],
+							Desk temp = new Desk(finalVals.get(j),userRequest.getType(),
+									inLink.getValidParts(finalVals.get(j))[0],inLink.getValidParts(finalVals.get(j))[1],inLink.getValidParts(finalVals.get(j))[3],
 									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
 							desks.add(temp);
 						}
 						if(userRequest.getFurniture().equals("filing")){
-							Filing temp = new Filing(possibleItems.get(j),userRequest.getType(),
-									inLink.getValidParts(possibleItems.get(j))[0],inLink.getValidParts(possibleItems.get(j))[1],inLink.getValidParts(possibleItems.get(j))[3],
+							Filing temp = new Filing(finalVals.get(j),userRequest.getType(),
+									inLink.getValidParts(finalVals.get(j))[0],inLink.getValidParts(finalVals.get(j))[1],inLink.getValidParts(finalVals.get(j))[3],
 									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
 							filings.add(temp);
 						}
+						inLink.deleteFurniture(finalVals.get(j));
 					}
 					// 2. Delete IDs from finalVals from DB
-					
+
 					// 3. Repeat Loop
 					
 					// 4. if(Everything works) act as normal
