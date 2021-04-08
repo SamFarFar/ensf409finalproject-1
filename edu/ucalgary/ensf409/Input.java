@@ -69,8 +69,8 @@ private static String originalRequest;
 				}
 				
 				ArrayList<String> finalVals = new ArrayList<String>();
-				for(int i = 0; i < results.get(0).length; i++){
-					finalVals.add(possibleItems.get(results.get(0)[i]));
+				for(int i : results.get(0)){
+					finalVals.add(possibleItems.get(i));
 				}
 
 				int totalPrice = 0;
