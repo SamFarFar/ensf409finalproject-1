@@ -13,7 +13,7 @@ public class Input {
 	private static final String PROMPTINPUT = "What would you like to make today?" +
 			"\nPlease specify below your request in the format of:\n"+
 			"<Type> <Furniture>, <Amount>\n" + "Example: mesh chair, 1";
-	private final static String REGEX = "([a-zA-z]{1,9})\\s([a-zA-z]{1,9})[,]\\s([0-9])";
+	private final static String REGEX = "([a-zA-z]{1,9})\\s([a-zA-z]{1,9}),\\s([0-9])";
 private static String originalRequest;
 
 	/**
@@ -34,9 +34,10 @@ private static String originalRequest;
 			System.out.println(DBPASSINPUT);
 			String pass = scanner.nextLine();
 			System.out.println(PROMPTINPUT);
-			Pattern pattern = Pattern.compile(scanner.nextLine());
-			Matcher match = pattern.matcher(REGEX);
-
+			String in = scanner.nextLine();
+			Pattern pattern = Pattern.compile(REGEX);
+			Matcher match = pattern.matcher(in);
+			System.out.println(in);
 			if (match.find()) {
 				
 				String type = match.group(1).toLowerCase();
