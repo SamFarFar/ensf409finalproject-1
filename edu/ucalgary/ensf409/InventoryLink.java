@@ -338,7 +338,13 @@ public class InventoryLink {
 			ex.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Takes a String ID of a desired furniture item in the database, and 
+	 * deletes its entry from said database.
+	 * @param ID String correlating to the desired ID field of an entry 
+	 * in the database
+	 */
 	public void deleteFurniture(String ID){
 		try {
 			String furniture = null;
@@ -367,7 +373,11 @@ public class InventoryLink {
             ex.printStackTrace();
         }
 	}
-
+	
+	/**
+	 * Releases all used resources for accessing the database, closes 
+	 * ResultSet and Connection objects
+	 */
 	public void close() {
 		try {
             results.close();
@@ -377,6 +387,13 @@ public class InventoryLink {
         }
 	}
 	
+	/**
+	 * Iterates through a given String ArrayList and eliminates all duplicate 
+	 * elements.
+	 * @param str String ArrayList to be stripped of duplicate entries
+	 * @return String ArrayList consisting of only the unique elements from 
+	 * str input.
+	 */
 	public ArrayList<String> stripDuplicates(ArrayList<String> str){
 		ArrayList<String> retVal = new ArrayList<>();
 		for(String s : str){
@@ -387,6 +404,12 @@ public class InventoryLink {
 		return retVal;
 	}
 	
+	/**
+	 * 
+	 * @param rq Request object filled with the desired furniture type, name, 
+	 * and quantity to be used.
+	 * @return 
+	 */
 	private ArrayList<String> getAllManuIDs(Request rq){
 		ArrayList<String> retVal = new ArrayList<>();
 		try{
@@ -403,8 +426,7 @@ public class InventoryLink {
 		return retVal;
 	}
 	
-	// updated to ArrayList for consistency.  Not entirely sure why
-	// we're just printing them to the console...
+	
 	public void invalidRequest(Request rq, ArrayList<Chair> chairs,
 				ArrayList<Lamp> lamps, ArrayList<Desk> desks, ArrayList<Filing> filings){
 		switch(rq.getFurniture()){
