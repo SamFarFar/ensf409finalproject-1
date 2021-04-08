@@ -27,17 +27,17 @@ private static String originalRequest;
 			scanner = new Scanner(System.in);
 			System.out.println(WELCOME);
 			// this will be edited out later when the SQL login is supplied
-			System.out.println(DBURLINPUT);
-			String url = scanner.nextLine();
-			System.out.println(DBUSERINPUT);
-			String user = scanner.nextLine();
-			System.out.println(DBPASSINPUT);
-			String pass = scanner.nextLine();
+			//System.out.println(DBURLINPUT);
+			String url = "jdbc:mysql://localhost/inventory";//scanner.nextLine();
+			//System.out.println(DBUSERINPUT);
+			String user = "matteo";//scanner.nextLine();
+			//System.out.println(DBPASSINPUT);
+			String pass = "pasquale";//scanner.nextLine();
 			System.out.println(PROMPTINPUT);
 			String in = scanner.nextLine();
 			Pattern pattern = Pattern.compile(REGEX);
 			Matcher match = pattern.matcher(in);
-			System.out.println(in);
+			//System.out.println(in);
 			if (match.find()) {
 				
 				String type = match.group(1).toLowerCase();
@@ -68,20 +68,19 @@ private static String originalRequest;
 						}
 					}
 				}
-				int[] temp = inLink.filter(results, possibleItems);
-				for(int i = 0; i < possibleItems.size(); i++){
-					if(temp[0] != i && temp[0] != i){
-						possibleItems.remove(i);
-					}
+				
+				ArrayList<String> finalVals = new ArrayList<String>();
+				for(int i = 0; i < results.get(0).length; i++){
+					finalVals.add(possibleItems.get(results.get(0)[i]));
 				}
 
 				int totalPrice = 0;
-				for (int j = 0; j < possibleItems.size(); j++) {
-					totalPrice = inLink.getPrice(possibleItems.get(j));
+				for (int j = 0; j < finalVals.size(); j++) {
+					totalPrice += inLink.getPrice(finalVals.get(j));
 				}
 
 				OrderForm out = new OrderForm(userRequest.getType() + userRequest.getFurniture(),
-							userRequest.getQuantity(), possibleItems,totalPrice);
+							userRequest.getQuantity(), finalVals,totalPrice);
 				out.printOrderForm();
 				inLink.close();
 

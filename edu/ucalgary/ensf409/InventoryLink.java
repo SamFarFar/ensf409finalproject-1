@@ -119,7 +119,7 @@ public class InventoryLink {
             retVal = new boolean[numberOfParts];
             while(results.next()){
 				for(int i = 0; i < numberOfParts; i++){
-					if(results.getString(i).equals("Y")){
+					if(results.getString(i+1).equals("Y")){
 						retVal[i] = true;
 					} else{
 						 retVal[i] = false;
@@ -155,7 +155,7 @@ public class InventoryLink {
 					return price;
 			}
             while(results.next()){
-				price = results.getInt(0);
+				price = results.getInt(1);
 			}
             myStmt.close();
 		} catch(SQLException ex) {
@@ -304,29 +304,7 @@ public class InventoryLink {
 		System.exit(1);
 	}
 
-	/**
-	 * by providing an Arraylist of integer arrays that contain indexs for potential builds
-	 * @param results ArrayList containing potential builds of a piece of furniture
-	 * @param pI Arraylist of potential IDs and the link to their prices
-	 * @return
-	 */
-//might need to return arraylist for multiple furniture pieces
-	public int[] filter(ArrayList<int[]> results, ArrayList<String> pI){
-		int[] retVal = new int[results.get(0).length];
-		int bestPrice = 0;
-		int index = 0;
-		for(int i = 0; i < results.size(); i++){
-			int tempPrice = 0;
-			for(int t : results.get(i)){
-				tempPrice += getPrice(pI.get(t));
-			}
-			if(tempPrice < bestPrice || bestPrice == 0){
-				bestPrice = tempPrice;
-				retVal = results.get(i);
-			}
-		}
-		return retVal;
-	}
+
 	
 	/**
 	 * Implements bubble sort algorithm in order to sort the given 
@@ -337,8 +315,8 @@ public class InventoryLink {
 	 * each ID
 	 */
 	public ArrayList<String> sort(ArrayList<String> pI) {
-		for(int i = pI.size()-1; i >= 0; i++){
-			for(int j = 0; j < i; j++){
+		for (int i = 0; i < pI.size()-1; i++){
+            for (int j = 0; j < pI.size()-i-1; j++){
 				if(getPrice(pI.get(j)) > getPrice(pI.get(j+1))){
 					String swap = pI.get(j);
 					pI.set(j, pI.get(j+1));
