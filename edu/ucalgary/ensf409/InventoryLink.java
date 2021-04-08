@@ -174,7 +174,7 @@ public class InventoryLink {
 	}
 	
 	// function that takes an ID array and converts it to its corresponding manuID array
-	private String getManuID(String ID){
+	public String getManuID(String ID){
 		String ManuID= "";
 		try {
 			Statement myStmt = dbConnect.createStatement();
@@ -203,20 +203,93 @@ public class InventoryLink {
 		}
 		return ManuID;
 	}
-
+	
+	private String getLetter(boolean b){
+		if(b){
+			return "Y";
+		} else {
+			return "N";
+		}
+	}
+	
 	/* Need a method that adds a piece of furniture back into database so that we
 	 * can start testing the program!
 	 */
-	public void addLamp(String ID, String Type, String Base, String Bulb, int Price, String ManuID){
+	public void addFurn(Chair chair){
 		try {
+			String legs = getLetter(chair.isLegs());
+			String arms = getLetter(chair.isArms());
+			String seat = getLetter(chair.isSeat());
+			String cushion = getLetter(chair.isCushion());
+			String query = "INSERT INTO chair (ID, Type, Legs, Arms, Seat," + 
+							" Cushion, Price, ManuID) VALUES (?,?,?,?,?,?,?,?)";
+			PreparedStatement myStmt = dbConnect.prepareStatement(query);
+			myStmt.setString(1, chair.getID());
+            myStmt.setString(2, chair.getType());
+            myStmt.setString(3, legs);
+            myStmt.setString(4, arms);
+            myStmt.setString(5, cushion);
+            myStmt.setString(6, arms);
+            myStmt.setInt(7, chair.getPrice());
+            myStmt.setString(8, chair.getManuID());
+			myStmt.executeUpdate();
+			myStmt.close();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+	public void addFurn(Desk desk){
+		try {
+			String legs = getLetter(desk.isLegs());
+			String top = getLetter(desk.isTop());
+			String drawer = getLetter(desk.isDrawer());
+			String query = "INSERT INTO desk (ID, Type, Legs, Top, Drawer, Price, ManuID) VALUES (?,?,?,?,?,?,?)";
+			PreparedStatement myStmt = dbConnect.prepareStatement(query);
+			myStmt.setString(1, desk.getID());
+            myStmt.setString(2, desk.getType());
+            myStmt.setString(3, legs);
+            myStmt.setString(4, top);
+            myStmt.setString(5, drawer);
+            myStmt.setInt(6, desk.getPrice());
+            myStmt.setString(7, desk.getManuID());
+			myStmt.executeUpdate();
+			myStmt.close();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+	public void addFurn(Filing filing){
+		try {
+			String rails = getLetter(filing.isRails());
+			String drawers = getLetter(filing.isDrawers());
+			String cabinet = getLetter(filing.isCabinet());
+			String query = "INSERT INTO lamp (ID, Type, Rails, Drawers, Cabinet, Price, ManuID) VALUES (?,?,?,?,?,?,?)";
+			PreparedStatement myStmt = dbConnect.prepareStatement(query);
+			myStmt.setString(1, filing.getID());
+            myStmt.setString(2, filing.getType());
+            myStmt.setString(3, rails);
+            myStmt.setString(4, drawers);
+            myStmt.setString(5, cabinet);
+            myStmt.setInt(6, filing.getPrice());
+            myStmt.setString(7, filing.getManuID());
+			myStmt.executeUpdate();
+			myStmt.close();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+	public void addFurn(Lamp lamp){
+		try {
+			String base = getLetter(lamp.isBase());
+			String bulb = getLetter(lamp.isBulb());
 			String query = "INSERT INTO lamp (ID, Type, Base, Bulb, Price, ManuID) VALUES (?,?,?,?,?,?)";
 			PreparedStatement myStmt = dbConnect.prepareStatement(query);
-			myStmt.setString(1, ID);
-            myStmt.setString(2, Type);
-            myStmt.setString(3, Base);
-            myStmt.setString(4, Bulb);
-            myStmt.setInt(5, Price);
-            myStmt.setString(6, ManuID);
+			myStmt.setString(1, lamp.getID());
+            myStmt.setString(2, lamp.getType());
+            myStmt.setString(3, base);
+            myStmt.setString(4, bulb);
+            myStmt.setInt(6, lamp.getPrice());
+            myStmt.setString(7, lamp.getManuID());
 			myStmt.executeUpdate();
 			myStmt.close();
 		} catch (SQLException ex) {
