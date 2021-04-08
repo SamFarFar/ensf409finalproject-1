@@ -243,7 +243,8 @@ public class InventoryLink {
 			String legs = getLetter(desk.isLegs());
 			String top = getLetter(desk.isTop());
 			String drawer = getLetter(desk.isDrawer());
-			String query = "INSERT INTO desk (ID, Type, Legs, Top, Drawer, Price, ManuID) VALUES (?,?,?,?,?,?,?)";
+			String query = "INSERT INTO desk (ID, Type, Legs, Top, Drawer,"+
+							" Price, ManuID) VALUES (?,?,?,?,?,?,?)";
 			PreparedStatement myStmt = dbConnect.prepareStatement(query);
 			myStmt.setString(1, desk.getID());
             myStmt.setString(2, desk.getType());
@@ -263,7 +264,8 @@ public class InventoryLink {
 			String rails = getLetter(filing.isRails());
 			String drawers = getLetter(filing.isDrawers());
 			String cabinet = getLetter(filing.isCabinet());
-			String query = "INSERT INTO lamp (ID, Type, Rails, Drawers, Cabinet, Price, ManuID) VALUES (?,?,?,?,?,?,?)";
+			String query = "INSERT INTO filing (ID, Type, Rails, Drawers,"+
+							" Cabinet, Price, ManuID) VALUES (?,?,?,?,?,?,?)";
 			PreparedStatement myStmt = dbConnect.prepareStatement(query);
 			myStmt.setString(1, filing.getID());
             myStmt.setString(2, filing.getType());
@@ -282,7 +284,8 @@ public class InventoryLink {
 		try {
 			String base = getLetter(lamp.isBase());
 			String bulb = getLetter(lamp.isBulb());
-			String query = "INSERT INTO lamp (ID, Type, Base, Bulb, Price, ManuID) VALUES (?,?,?,?,?,?)";
+			String query = "INSERT INTO lamp (ID, Type, Base, Bulb, Price,"+
+							" ManuID) VALUES (?,?,?,?,?,?)";
 			PreparedStatement myStmt = dbConnect.prepareStatement(query);
 			myStmt.setString(1, lamp.getID());
             myStmt.setString(2, lamp.getType());
