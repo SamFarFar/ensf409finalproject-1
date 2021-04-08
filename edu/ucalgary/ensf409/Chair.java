@@ -14,19 +14,7 @@ public class Chair extends Furniture {
       setLegs(legs);
       setSeat(seat);
   }
-	public Chair(String ID,String type, boolean legs, boolean arms, boolean seat,
-               boolean cushion, int price){
-      super(ID,type,price);
-      setArms(arms);
-      setCushion(cushion);
-      setLegs(legs);
-      setSeat(seat);
-	}
-	
-    public Chair(String ID, String type, int price, String manuID){
-        super(ID,type,price,manuID);
-    }
-
+  //setters
     public void setArms(boolean arms) {
         Arms = arms;
     }
@@ -43,8 +31,7 @@ public class Chair extends Furniture {
         Seat = seat;
     }
 
-
-
+    //getters
     public boolean isArms() {
         return Arms;
     }

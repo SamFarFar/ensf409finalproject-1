@@ -13,13 +13,6 @@ private boolean Cabinet;
         setDrawers(drawers);
         setRails(rails);
     }
-    public Filing(String ID, String type, boolean rails, boolean drawers, 
-					boolean cabinet, int price){
-        super(ID,type,price);
-        setCabinet(cabinet);
-        setDrawers(drawers);
-        setRails(rails);
-    }
 
     public boolean isCabinet() {
         return Cabinet;

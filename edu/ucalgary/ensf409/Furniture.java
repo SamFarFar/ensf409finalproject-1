@@ -12,12 +12,6 @@ public abstract class Furniture {
         setPrice(price);
         setManuID(manuID);
     }
-    public Furniture(String ID,String type,int price){
-        setID(ID);
-        setType(type);
-        setPrice(price);
-    }
-
         public void setManuID(String manuID) {
             this.manuID = manuID;
         }

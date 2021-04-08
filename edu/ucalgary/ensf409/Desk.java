@@ -20,12 +20,7 @@ public class Desk extends Furniture{
         setTop(top);
         setLegs(legs);
     }
-    public Desk(String ID,String type, boolean legs,boolean top, boolean drawer, int price){
-        super(ID,type,price);
-        setDrawer(drawer);
-        setTop(top);
-        setLegs(legs);
-    }
+    //setters and getters
     public void setLegs(boolean legs) {
         Legs = legs;
     }
