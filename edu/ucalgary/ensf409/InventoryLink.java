@@ -156,6 +156,7 @@ public class InventoryLink {
 			}
             while(results.next()){
 				price = results.getInt(1);
+				System.out.println("our ID: " + ID);
 			}
             myStmt.close();
 		} catch(SQLException ex) {
@@ -339,7 +340,7 @@ public class InventoryLink {
 	}
 	
 	public ArrayList<String> stripDuplicates(ArrayList<String> str){
-		ArrayList<String> retVal = new ArrayList<String>();
+		ArrayList<String> retVal = new ArrayList<>();
 		for(String s : str){
 			if(!retVal.contains(s)){
 				retVal.add(s);
@@ -347,37 +348,74 @@ public class InventoryLink {
 		}
 		return retVal;
 	}
-
-	// updated to ArrayList for consistency.  Not entirely sure why
-	// we're just printing them to the console...
-	public void invalidRequest(ArrayList<String> ID, ArrayList<Chair> chairs,
-				ArrayList<Lamp> lamps, ArrayList<Desk> desks, ArrayList<Filing> filings){
-		ArrayList<String> MIDPossible = IDToManuID(ID);
-		MIDPossible = stripDuplicates(MIDPossible);
-		String output = "Order cannot be fulfilled based on current "+
-								"inventory. Suggested manufacturers are ";
-		try {
-			String query = "SELECT Name FROM manufacturer WHERE ManuID = ?";
-			PreparedStatement myStmt = dbConnect.prepareStatement(query);
-			for (int i = 0; i < MIDPossible.size(); i++) {
-				myStmt.setString(1, MIDPossible.get(i));
-				myStmt.executeUpdate();
-				/*if(results.next()) {
-					if (!results.next()) {
-						results.previous();
-						output += ("and" + results.toString());
-					}else {
-						results.previous();
-						output += (results.toString() + ", ");
-					}
-				}*/
+	
+	private ArrayList<String> getAllManuIDs(Request rq){
+		ArrayList<String> retVal = new ArrayList<>();
+		try{
+			Statement myStmt = dbConnect.createStatement();
+			String query = "SELECT ManuID FROM " + rq.getFurniture() + " WHERE Type = '" + rq.getType() + "'";
+			results = myStmt.executeQuery(query);
+			while(results.next()){
+				retVal.add(results.getString(1));
 			}
 			myStmt.close();
-			//output.substring(0,output.length()-2);
+		} catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+		return retVal;
+	}
+	
+	// updated to ArrayList for consistency.  Not entirely sure why
+	// we're just printing them to the console...
+	public void invalidRequest(Request rq, ArrayList<Chair> chairs,
+				ArrayList<Lamp> lamps, ArrayList<Desk> desks, ArrayList<Filing> filings){
+		switch(rq.getFurniture()){
+			case "chair":
+				for(int i = 0; i < chairs.size(); i++){
+					addFurn(chairs.get(i));
+				}
+				break;
+			case "desk":
+				for(int i = 0; i < desks.size(); i++){
+					addFurn(desks.get(i));
+				}
+				break;
+			case "filing":
+				for(int i = 0; i < filings.size(); i++){
+					addFurn(filings.get(i));
+				}
+				break;
+			case "lamp":
+				for(int i = 0; i < lamps.size(); i++){
+					addFurn(lamps.get(i));
+				}
+				break;
+			default:
+				return;
+		}
+		ArrayList<String> MIDPossible = getAllManuIDs(rq);
+		MIDPossible = stripDuplicates(MIDPossible);
+		String output = "\nOrder cannot be fulfilled based on current "+
+								"inventory. Suggested manufacturers are ";
+		try {
+			Statement myStmt = dbConnect.createStatement();
+			for (int i = 0; i < MIDPossible.size(); i++) {
+				String query = "SELECT Name FROM manufacturer WHERE ManuID = '" + MIDPossible.get(i) +"'";
+				results = myStmt.executeQuery(query);
+				while(results.next()){
+					output += (results.getString(1) + ", ");
+				}
+			}
+			output = output.substring(0,output.length()-2);
+			int lastCom = output.lastIndexOf(",");
+			String firstHalf = output.substring(0, lastCom + 2);
+			String secondHalf = output.substring(lastCom + 1, output.length());
+			output = firstHalf + "and" + secondHalf + ".";
+			myStmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(output + ".");
+		System.out.println(output);
 		System.exit(1);
 	}
 

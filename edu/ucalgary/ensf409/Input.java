@@ -13,7 +13,7 @@ public class Input {
 	private static final String PROMPTINPUT = "What would you like to make today?" +
 			"\nPlease specify below your request in the format of:\n"+
 			"<Type> <Furniture>, <Amount>\n" + "Example: mesh chair, 1";
-	private final static String REGEX = "([a-zA-z]{1,9})\\s([a-zA-z]{1,9}),\\s([0-9])";
+	private final static String REGEX = "([a-zA-z]{1,9})\\s([a-zA-z]{1,9}),\\s([0-9]{1,9})";
 private static String originalRequest;
 
 	/**
@@ -49,7 +49,10 @@ private static String originalRequest;
 				Request userRequest = new Request(type,
 								match.group(2).toLowerCase(),
 								Integer.parseInt(match.group(3)));
-
+								
+				System.out.println(userRequest.getQuantity());
+				//System.out.println(Integer.parseInt(match.group(3)));
+				
 				InventoryLink inLink = new InventoryLink(url,user,pass);
 				inLink.initializeConnection();
 				
@@ -60,20 +63,22 @@ private static String originalRequest;
 				ArrayList<String> finalVals = new ArrayList<String>();
 				
 				int totalPrice = 0;
-				for(int furnNum = 0; furnNum < Integer.parseInt(match.group(3)); furnNum++){
+				for(int furnNum = 0; furnNum < userRequest.getQuantity(); furnNum++){
 					// Loop for multiple pieces of furniture starts here
 					ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
 					
 					// sort by price first
 					possibleItems = inLink.sort(possibleItems);
-					
+					System.out.println("break");
+					for(int i = 0; i < possibleItems.size(); i++)
+						System.out.println(possibleItems.get(i));
 					ArrayList<int[]> results = getTwo(possibleItems, inLink);
 					if(results.get(0)[0] == -1){
 						results = getThree(possibleItems, inLink);
 						if(results.get(0)[0] == -1){
 							results = getFour(possibleItems, inLink);
 							if(results.get(0)[0] == -1){
-								inLink.invalidRequest(possibleItems, chairs, 
+								inLink.invalidRequest(userRequest, chairs, 
 										lamps, desks, filings);
 							}
 						}
@@ -101,17 +106,17 @@ private static String originalRequest;
 						}
 						if(userRequest.getFurniture().equals("desk")){
 							Desk temp = new Desk(finalVals.get(j),userRequest.getType(),
-									inLink.getValidParts(finalVals.get(j))[0],inLink.getValidParts(finalVals.get(j))[1],inLink.getValidParts(finalVals.get(j))[3],
+									inLink.getValidParts(finalVals.get(j))[0],inLink.getValidParts(finalVals.get(j))[1],inLink.getValidParts(finalVals.get(j))[2],
 									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
 							desks.add(temp);
 						}
 						if(userRequest.getFurniture().equals("filing")){
 							Filing temp = new Filing(finalVals.get(j),userRequest.getType(),
-									inLink.getValidParts(finalVals.get(j))[0],inLink.getValidParts(finalVals.get(j))[1],inLink.getValidParts(finalVals.get(j))[3],
+									inLink.getValidParts(finalVals.get(j))[0],inLink.getValidParts(finalVals.get(j))[1],inLink.getValidParts(finalVals.get(j))[2],
 									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
 							filings.add(temp);
 						}
-						totalPrice += inLink.getPrice(finalVals.get(j))
+						totalPrice += inLink.getPrice(finalVals.get(j));
 						inLink.deleteFurniture(finalVals.get(j));
 					}
 				}

@@ -4,10 +4,10 @@ Faculty Name:
 Contact: 
 Date: 
 
-Original Request: Meshchair, 1
+Original Request: Largefiling, 1
 
 Items Ordered
-ID: C9890
-ID: C0942
+ID: F012
+ID: F010
 
-Total Price: $150
+Total Price: $300
