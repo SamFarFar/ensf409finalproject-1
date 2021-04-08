@@ -34,8 +34,11 @@ private static String originalRequest;
 			Pattern pattern = Pattern.compile(REGEX);
 			Matcher match = pattern.matcher(in);
 			if (match.find()) {
-				
+				String swingArm = in.substring(0,9).toLowerCase();
 				String type = match.group(1).toLowerCase();
+				if(swingArm.equals("swing arm")){
+					type = "Swing Arm";
+				}
 				originalRequest = type + " " + match.group(2).toLowerCase();
 				type = type.substring(0,1).toUpperCase() + type.substring(1);
 				Request userRequest = new Request(type,

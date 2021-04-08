@@ -4,10 +4,10 @@ Faculty Name:
 Contact: 
 Date: 
 
-Original Request: desk lamp, 1
+Original Request: swing arm lamp, 1
 
 Items Ordered
-ID: L208
-ID: L013
+ID: L096
+ID: L053
 
-Total Price: $20
+Total Price: $30
