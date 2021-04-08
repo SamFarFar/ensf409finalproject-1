@@ -82,7 +82,37 @@ private static String originalRequest;
 					}
 					
 					// 1. Store IDs from finalVals to Object ArrayLists
-					
+					for (int j = 0; j < finalVals.size(); j++) {
+
+						if(userRequest.getFurniture().equals("chair")){
+
+							Chair temp = new Chair(possibleItems.get(j),userRequest.getType(),
+									inLink.getValidParts(possibleItems.get(j))[0],inLink.getValidParts(possibleItems.get(j))[1],
+									inLink.getValidParts(possibleItems.get(j))[2],inLink.getValidParts(possibleItems.get(j))[3],
+									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
+							chairs.add(temp);
+						}
+						if(userRequest.getFurniture().equals("lamp")){
+							Lamp temp = new Lamp(possibleItems.get(j),userRequest.getType(),inLink.getValidParts(possibleItems.get(j))[0]
+									,inLink.getValidParts(possibleItems.get(j))[1],inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
+							lamps.add(temp);
+						}
+						if(userRequest.getFurniture().equals("desk")){
+							Desk temp = new Desk(possibleItems.get(j),userRequest.getType(),
+									inLink.getValidParts(possibleItems.get(j))[0],inLink.getValidParts(possibleItems.get(j))[1],inLink.getValidParts(possibleItems.get(j))[3],
+									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
+							desks.add(temp);
+						}
+						if(userRequest.getFurniture().equals("filing")){
+							Filing temp = new Filing(possibleItems.get(j),userRequest.getType(),
+									inLink.getValidParts(possibleItems.get(j))[0],inLink.getValidParts(possibleItems.get(j))[1],inLink.getValidParts(possibleItems.get(j))[3],
+									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
+							filings.add(temp);
+						}
+
+
+
+					}
 					// 2. Delete IDs from finalVals from DB
 					
 					// 3. Repeat Loop
@@ -162,7 +192,7 @@ private static String originalRequest;
 	 * @return
 	 */
 	public static ArrayList<int[]> getThree(ArrayList<String> pI, InventoryLink inLink){
-		ArrayList<int[]> results = new ArrayList<int[]>();
+		ArrayList<int[]> results = new ArrayList<>();
 		for(int m = 0; m < pI.size(); m++){
 			for(int i = 0; i < pI.size(); i++){
 				for(int j = 0; j < pI.size(); j++){
