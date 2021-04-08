@@ -350,7 +350,8 @@ public class InventoryLink {
 
 	// updated to ArrayList for consistency.  Not entirely sure why
 	// we're just printing them to the console...
-	public void invalidRequest(ArrayList<String> ID){
+	public void invalidRequest(ArrayList<String> ID, ArrayList<Chair> chairs,
+				ArrayList<Lamp> lamps, ArrayList<Desk> desks, ArrayList<Filing> filings){
 		ArrayList<String> MIDPossible = IDToManuID(ID);
 		MIDPossible = stripDuplicates(MIDPossible);
 		String output = "Order cannot be fulfilled based on current "+
@@ -361,7 +362,7 @@ public class InventoryLink {
 			for (int i = 0; i < MIDPossible.size(); i++) {
 				myStmt.setString(1, MIDPossible.get(i));
 				myStmt.executeUpdate();
-				if(results.next()) {
+				/*if(results.next()) {
 					if (!results.next()) {
 						results.previous();
 						output += ("and" + results.toString());
@@ -369,10 +370,10 @@ public class InventoryLink {
 						results.previous();
 						output += (results.toString() + ", ");
 					}
-				}
+				}*/
 			}
 			myStmt.close();
-			output.substring(0,output.length()-2);
+			//output.substring(0,output.length()-2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -59,6 +59,7 @@ private static String originalRequest;
 				ArrayList<Filing> filings = new ArrayList<>();
 				ArrayList<String> finalVals = new ArrayList<String>();
 				
+				int totalPrice = 0;
 				for(int furnNum = 0; furnNum < Integer.parseInt(match.group(3)); furnNum++){
 					// Loop for multiple pieces of furniture starts here
 					ArrayList<String> possibleItems = inLink.getPossibleItems(userRequest);
@@ -72,7 +73,8 @@ private static String originalRequest;
 						if(results.get(0)[0] == -1){
 							results = getFour(possibleItems, inLink);
 							if(results.get(0)[0] == -1){
-								inLink.invalidRequest(possibleItems);
+								inLink.invalidRequest(possibleItems, chairs, 
+										lamps, desks, filings);
 							}
 						}
 					}
@@ -109,27 +111,9 @@ private static String originalRequest;
 									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
 							filings.add(temp);
 						}
+						totalPrice += inLink.getPrice(finalVals.get(j))
 						inLink.deleteFurniture(finalVals.get(j));
 					}
-					// 2. Delete IDs from finalVals from DB
-
-					// 3. Repeat Loop
-					
-					// 4. if(Everything works) act as normal
-					//		else InvalidRequest, and restore DB objects
-					
-					
-					// use values in finalVals, delete all items from database with these ID's
-					// then run through loop again, continue adding until loop ends or run out of possibilities
-					// ensure all items are saved to an array of objects before deletion,
-					// in the event of not meeting given number, add all objects back to DB
-					
-				}
-				
-				int totalPrice = 0;
-				for (int j = 0; j < finalVals.size(); j++) {
-					//inLink.deleteFurniture(finalVals.get(i));
-					totalPrice += inLink.getPrice(finalVals.get(j));
 				}
 
 				OrderForm out = new OrderForm(userRequest.getType() + userRequest.getFurniture(),
