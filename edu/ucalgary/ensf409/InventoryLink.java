@@ -228,8 +228,8 @@ public class InventoryLink {
             myStmt.setString(2, chair.getType());
             myStmt.setString(3, legs);
             myStmt.setString(4, arms);
-            myStmt.setString(5, cushion);
-            myStmt.setString(6, arms);
+            myStmt.setString(5, seat);
+            myStmt.setString(6, cushion);
             myStmt.setInt(7, chair.getPrice());
             myStmt.setString(8, chair.getManuID());
 			myStmt.executeUpdate();
@@ -291,8 +291,8 @@ public class InventoryLink {
             myStmt.setString(2, lamp.getType());
             myStmt.setString(3, base);
             myStmt.setString(4, bulb);
-            myStmt.setInt(6, lamp.getPrice());
-            myStmt.setString(7, lamp.getManuID());
+            myStmt.setInt(5, lamp.getPrice());
+            myStmt.setString(6, lamp.getManuID());
 			myStmt.executeUpdate();
 			myStmt.close();
 		} catch (SQLException ex) {

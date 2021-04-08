@@ -27,8 +27,10 @@ private static String originalRequest;
 			scanner = new Scanner(System.in);
 			System.out.println(WELCOME);
 			String url = "jdbc:mysql://localhost/inventory"; //URL
-			String user = "matteo"; // given user
-			String pass = "pasquale"; //given password
+			System.out.println(DBUSERINPUT);
+			String user = scanner.nextLine(); // user username
+			System.out.println(DBPASSINPUT);
+			String pass = scanner.nextLine(); // user password
 			System.out.println(PROMPTINPUT);
 			String in = scanner.nextLine();
 			Pattern pattern = Pattern.compile(REGEX);
@@ -77,8 +79,6 @@ private static String originalRequest;
 						finalVals.add(possibleItems.get(i));
 					}
 					
-					// 1. Store IDs from finalVals to Object ArrayLists
-					System.out.println("FurnNum is: "+ furnNum);
 					for (int j = 0; j < finalVals.size(); j++) {
 
 						if(userRequest.getFurniture().equals("chair")){
@@ -106,10 +106,8 @@ private static String originalRequest;
 									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
 							filings.add(temp);
 						}
-						System.out.println("Actually summoning price :");
 						totalPrice += inLink.getPrice(finalVals.get(j));
 						inLink.deleteFurniture(finalVals.get(j));
-						System.out.println("not summoning price");
 					}
 				}
 

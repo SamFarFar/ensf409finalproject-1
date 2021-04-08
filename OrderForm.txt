@@ -4,10 +4,12 @@ Faculty Name:
 Contact: 
 Date: 
 
-Original Request: swing arm lamp, 1
+Original Request: traditional desk, 2
 
 Items Ordered
-ID: L096
-ID: L053
+ID: D0890
+ID: D8675
+ID: D4231
+ID: D9352
 
-Total Price: $30
+Total Price: $225
