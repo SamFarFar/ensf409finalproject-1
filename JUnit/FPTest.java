@@ -53,11 +53,15 @@ public class FPTest {
         testList.add("C567");
         int testTotalPrice = 100;
         OrderForm testForm = new OrderForm(testStringName, testAmount, testList, testTotalPrice);
-        assertEquals(testStringName, testForm.getOriginalRequestName());
-        assertEquals(testAmount,testForm.getOriginalRequestAmount());
-        assertEquals(testList, testForm.getItemsOrdered());
-        assertEquals(testTotalPrice, testForm.getTotalPrice());
-        System.out.println("Test: Order Form Constructor Test Success");
+        boolean isWorking = false;
+        if(testStringName == testForm.getOriginalRequestName()
+                && testAmount == testForm.getOriginalRequestAmount()
+                && testList == testForm.getItemsOrdered()
+                && testTotalPrice == testForm.getTotalPrice()
+        ){
+            isWorking = true;
+        }
+        assert(isWorking);
     }
 
     // tests the creation of the OrderForm.txt file

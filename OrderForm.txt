@@ -4,12 +4,11 @@ Faculty Name:
 Contact: 
 Date: 
 
-Original Request: traditional desk, 2
+Original Request: chair, 1
 
 Items Ordered
-ID: D0890
-ID: D8675
-ID: D4231
-ID: D9352
+ID: C123
+ID: C234
+ID: C567
 
-Total Price: $225
+Total Price: $100
