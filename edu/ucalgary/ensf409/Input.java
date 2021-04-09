@@ -14,7 +14,7 @@ public class Input {
 			"\nPlease specify below your request in the format of:\n"+
 			"<Type> <Furniture>, <Amount>\n" + "Example: mesh chair, 1";
 	private final static String REGEX = "([a-zA-z]{1,99})\\s([a-zA-z]{1,99}),\\s([0-9]{1,9})";
-private static String originalRequest;
+	private static String originalRequest;
 
 	/**
 	 * Basic main function that runs through the program.

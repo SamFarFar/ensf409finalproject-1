@@ -18,10 +18,9 @@ public class InventoryLink {
 	 * request information. It also creates an ArrayList that is stored internally and contains
 	 * possible items that match the request based on what is still left in the Inventory
 	 * database.
-	 * @param DBurl
-	 * @param user
-	 * @param pass
-	 * @param userRequest
+	 * @param DBurl URL path of database
+	 * @param user Username to be used in database
+	 * @param pass Password to access database
 	 */
 	public InventoryLink(String DBurl, String user, String pass) {
 		this.DBURL = DBurl;
@@ -515,7 +514,7 @@ public class InventoryLink {
 	 * Implements bubble sort algorithm in order to sort the given 
 	 * arrayList of String ID's by their corresponding price, lowest to 
 	 * highest.
-	 * @param pI ArrayList<String> of possible ID's
+	 * @param pI String ArrayList of possible ID's
 	 * @return the original ArrayList sorted by price from lowest to highest for 
 	 * each ID
 	 */
