@@ -21,34 +21,66 @@ public abstract class Furniture {
         setManuID(manuID);
     }
     
+    /**
+     * Sets given parameter to manuID data member
+     * @param manuID String for manufacturer ID
+     */
     public void setManuID(String manuID) {
         this.manuID = manuID;
     }
-
+	
+	/**
+	 * Getter for manuID
+	 * @return String manuID data member
+	 */
     public String getManuID() {
         return manuID;
     }
-
+		
+		 /**
+		* Sets given parameter to ID data member
+		* @param ID String for ID
+		*/
         public void setID(String ID) {
             this.ID = ID;
         }
-
+		
+		 /**
+		 * Sets given parameter to price data member
+		 * @param price int for cost of item
+		 */
         public void setPrice(int price) {
             this.price = price;
         }
-
+		
+		 /**
+		 * Sets given parameter to Type data member
+		 * @param type String for item's type
+		 */
         public void setType(String type) {
             this.type = type;
         }
-
+		
+		/**
+		 * Getter for price
+		 * @return String price data member
+		 */
         public int getPrice() {
             return price;
         }
-
+		
+		/**
+		 * Getter for type
+		 * @return String type data member
+		 */
         public String getType() {
             return type;
         }
-
+		
+		/**
+		 * Getter for ID
+		 * @return String ID data member
+		 */
         public String getID() {
             return ID;
         }

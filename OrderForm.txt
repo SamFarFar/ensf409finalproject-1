@@ -4,21 +4,10 @@ Faculty Name:
 Contact: 
 Date: 
 
-<<<<<<< HEAD
-Original Request: chair, 1
-
-Items Ordered
-ID: C123
-ID: C234
-ID: C567
-
-Total Price: $100
-=======
 Original Request: desk lamp, 1
 
 Items Ordered
-ID: L342
-ID: L112
+ID: L208
+ID: L013
 
 Total Price: $20
->>>>>>> 509b88baf030efaddc89d89cef70d0157e18c1c1
