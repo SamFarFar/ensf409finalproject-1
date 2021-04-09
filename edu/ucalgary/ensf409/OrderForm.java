@@ -76,7 +76,7 @@ public class OrderForm {
             System.out.println("Error #1: Order Form Creation Error");
             e.printStackTrace();
         }
-        String output = "Purchase ";
+        String output = "\nPurchase ";
         try {
             FileWriter myWriter = new FileWriter("OrderForm.txt");
             myWriter.write("Furniture Order Form\n\n");

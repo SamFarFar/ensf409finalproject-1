@@ -488,10 +488,15 @@ public class InventoryLink {
 				}
 			}
 			output = output.substring(0,output.length()-2);
+			if(counter == 0){
+				output += "e not able to be found because inventory is empty.";
+				System.out.println(output); // Keep this one for printing output
+				System.exit(1);
+			}
 			if(counter > 1){
-			int lastCom = output.lastIndexOf(",");
-			String firstHalf = output.substring(0, lastCom + 2);
-			String secondHalf = output.substring(lastCom + 1);
+				int lastCom = output.lastIndexOf(",");
+				String firstHalf = output.substring(0, lastCom + 2);
+				String secondHalf = output.substring(lastCom + 1);
 				output = firstHalf + "and" + secondHalf + ".";
 			}else{
 				output += ".";

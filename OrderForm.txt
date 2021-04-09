@@ -4,12 +4,10 @@ Faculty Name:
 Contact: 
 Date: 
 
-Original Request: traditional desk, 2
+Original Request: desk lamp, 1
 
 Items Ordered
-ID: D0890
-ID: D8675
-ID: D4231
-ID: D9352
+ID: L342
+ID: L112
 
-Total Price: $225
+Total Price: $20
