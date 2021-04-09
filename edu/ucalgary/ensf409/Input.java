@@ -17,7 +17,19 @@ public class Input {
 	private static String originalRequest;
 
 	/**
-	 * Basic main function that runs through the program.
+	 * Basic main function that runs through the program. Creates instances of all 
+	 * outside classes when necessary, and controls the entirety of the application. 
+	 * In order to successfully run this program, simply ensure that you have a copy 
+	 * of the inventory database (see the URL string below), and a username and password 
+	 * ready for MySQL.  Also ensure that you have the proper MySQL connector installed 
+	 * on your computer, and compile it using some variation of this style of commands: 
+	 * "javac -cp .;lib/mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/*.java"
+	 * followed by "java -cp .;lib/mysql-connector-java-8.0.23.jar edu/ucalgary/ensf409/Input" 
+	 * to actually run the compiled code.  PLEASE NOTE that your SQL connector may have a 
+	 * different name and/or may not be stored in a "lib" folder depending on the structure 
+	 * of your personal machine.  From this point simply follow the prompts for a username, 
+	 * password, and requested items, and you will see a console output, as well as the creation 
+	 * of an order form text file, when applicable.
 	 * @param args unused arguments that need to be supplied
 	 */
 	public static void main(String[] args) {
@@ -138,8 +150,13 @@ public class Input {
 
 	/**
 	 * By providing an ArrayList of potential IDs and a link to the database, 
-	 * we are able to 
-	 * @param pI String ArrayList of all possible ID's
+	 * we are able to iterate through each possibility and come up with a combination 
+	 * of two items that could complete the given furniture item requested, via the 
+	 * availability of their parts.  If no possibilities are found, an array of 
+	 * {-1,-1} is returned as the only element of the ArrayList. If only one ID number is 
+	 * required (AKA all parts are available) then the array will simply have duplicate 
+	 * elements, which is accounted for in main
+	 * @param pI String ArrayList of all possible ID's (pre-sorted by price)
 	 * @param inLink InventoryLink object, containing access to the database 
 	 * to be used
 	 * @return an ArrayList of integer arrays, wherein the integer arrays contain 
@@ -171,10 +188,16 @@ public class Input {
 	}
 
 	/**
-	 *
-	 * @param pI
-	 * @param inLink
-	 * @return
+	 * By providing an ArrayList of potential IDs and a link to the database, 
+	 * we are able to iterate through each possibility and come up with a combination 
+	 * of three items that could complete the given furniture item requested, via the 
+	 * availability of their parts.  If no possibilities are found, an array of 
+	 * {-1,-1,-1} is returned as the only element of the ArrayList
+	 * @param pI String ArrayList of all possible ID's (pre-sorted by price)
+	 * @param inLink InventoryLink object, containing access to the database 
+	 * to be used
+	 * @return an ArrayList of integer arrays, wherein the integer arrays contain 
+	 * numbers corresponding to specific indexs of the pI parameter to be used
 	 */
 	public static ArrayList<int[]> getThree(ArrayList<String> pI, InventoryLink inLink){
 		ArrayList<int[]> results = new ArrayList<>();
@@ -200,7 +223,19 @@ public class Input {
 		}
 		return results;
 	}
-
+	
+	/**
+	 * By providing an ArrayList of potential IDs and a link to the database, 
+	 * we are able to iterate through each possibility and come up with a combination 
+	 * of four items that could complete the given furniture item requested, via the 
+	 * availability of their parts.  If no possibilities are found, an array of 
+	 * {-1,-1,-1,-1} is returned as the only element of the ArrayList
+	 * @param pI String ArrayList of all possible ID's (pre-sorted by price)
+	 * @param inLink InventoryLink object, containing access to the database 
+	 * to be used
+	 * @return an ArrayList of integer arrays, wherein the integer arrays contain 
+	 * numbers corresponding to specific indexs of the pI parameter to be used
+	 */
 	public static ArrayList<int[]> getFour(ArrayList<String> pI, InventoryLink inLink){
 		ArrayList<int[]> results = new ArrayList<int[]>();
 		for(int n = 0; n < pI.size(); n++){
@@ -229,7 +264,19 @@ public class Input {
 		}
 		return results;
 	}
-
+	
+	/**
+	 * Iterates through each element of the two boolean arrays, if there is 
+	 * any index wherein neither of the arrays contain true, then false is 
+	 * returned, meaning that these two arrays alone cannot be combined to create 
+	 * a complete furniture item.  True otherwise
+	 * @param one boolean array corresponding to part availability of 
+	 * a given item in the database
+	 * @param two boolean array corresponding to part availability of 
+	 * a given item in the database
+	 * @return true if the given boolean arrays can be combined to have 
+	 * all elements == true, false otherwise
+	 */
 	private static boolean combine(boolean[] one, boolean[] two){
 		boolean retVal = true;
 		for(int i = 0; i < one.length; i++){
@@ -239,7 +286,21 @@ public class Input {
 		}
 		return retVal;
 	}
-
+	
+	/**
+	 * Iterates through each element of the three boolean arrays, if there is 
+	 * any index wherein none of the arrays contain true, then false is 
+	 * returned, meaning that these arrays alone cannot be combined to create 
+	 * a complete furniture item.  True otherwise
+	 * @param one boolean array corresponding to part availability of 
+	 * a given item in the database
+	 * @param two boolean array corresponding to part availability of 
+	 * a given item in the database
+	 * @param three boolean array corresponding to part availability of 
+	 * a given item in the database
+	 * @return true if the given boolean arrays can be combined to have 
+	 * all elements == true, false otherwise
+	 */
 	private static boolean combine(boolean[] one, boolean[] two, boolean[] three){
 		boolean retVal = true;
 		for(int i = 0; i < one.length; i++){
@@ -250,6 +311,22 @@ public class Input {
 		return retVal;
 	}
 	
+	/**
+	 * Iterates through each element of the four boolean arrays, if there is 
+	 * any index wherein none of the arrays contain true, then false is 
+	 * returned, meaning that these arrays alone cannot be combined to create 
+	 * a complete furniture item.  True otherwise
+	 * @param one boolean array corresponding to part availability of 
+	 * a given item in the database
+	 * @param two boolean array corresponding to part availability of 
+	 * a given item in the database
+	 * @param three boolean array corresponding to part availability of 
+	 * a given item in the database
+	 * @param four boolean array corresponding to part availability of 
+	 * a given item in the database
+	 * @return true if the given boolean arrays can be combined to have 
+	 * all elements == true, false otherwise
+	 */
 	private static boolean combine(boolean[] one, boolean[] two, boolean[] three, boolean[] four){
 		boolean retVal = true;
 		for(int i = 0; i < one.length; i++){
