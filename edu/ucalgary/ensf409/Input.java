@@ -78,6 +78,9 @@ private static String originalRequest;
 					for(int i : results.get(0)){
 						finalVals.add(possibleItems.get(i));
 					}
+					if(finalVals.get(0).equals(finalVals.get(1))){
+						finalVals.remove(1);
+					}
 					
 					for (int j = 0; j < finalVals.size(); j++) {
 
@@ -151,7 +154,11 @@ private static String originalRequest;
 					int[] temp = new int[2];
 					temp[0] = i;
 					temp[1] = j;
-					results.add(temp);
+					if(i == j){
+						results.set(0, temp);
+					} else {
+						results.add(temp);
+					}
 				}
 			}
 		}
