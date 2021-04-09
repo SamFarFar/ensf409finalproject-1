@@ -6,13 +6,14 @@ public class Lamp extends Furniture {
     private boolean Bulb;
 	
 	/**
-	 * 
-	 * @param ID
-	 * @param type
-	 * @param base
-	 * @param bulb
-	 * @param price
-	 * @param manuID
+	 * Basic constructor to create an instance of Lamp object, 
+	 * calls on constructor of Furniture parent class.
+	 * @param ID String ID used to identify the item
+	 * @param type String type used to classify the item
+	 * @param base boolean value indicating availability of base
+	 * @param bulb boolean value indicating availability of bulb
+	 * @param price integer representation of the cost of the item
+	 * @param manuID String ManuID used to identify the item's manufacturer
 	 */
     public Lamp(String ID, String type, boolean base, boolean bulb, 
 					int price, String manuID) {

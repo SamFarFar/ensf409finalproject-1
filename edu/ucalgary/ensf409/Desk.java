@@ -1,18 +1,22 @@
 package edu.ucalgary.ensf409;
 
 public class Desk extends Furniture{
+	
     private boolean Legs;
     private boolean Top;
     private boolean Drawer;
 
     /**
-     * Consturtor for
-     * @param ID
-     * @param type
-     * @param price
-     * @param manuID
-     */
-
+	 * Basic constructor to create an instance of Desk object, 
+	 * calls on constructor of Furniture parent class.
+	 * @param ID String ID used to identify the item
+	 * @param type String type used to classify the item
+	 * @param legs boolean value indicating availability of legs
+	 * @param top boolean value indicating availability of top
+	 * @param drawer boolean value indicating availability of drawer
+	 * @param price integer representation of the cost of the item
+	 * @param manuID String ManuID used to identify the item's manufacturer
+	 */
     public Desk(String ID,String type, boolean legs,boolean top, boolean drawer,
                 int price,String manuID){
         super(ID,type,price,manuID);
