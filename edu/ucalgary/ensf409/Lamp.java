@@ -21,19 +21,35 @@ public class Lamp extends Furniture {
         setBase(base);
         setBulb(bulb);
     }
-
+	
+	/**
+	* Getter for Base
+	* @return boolean Base data member
+	*/
     public boolean isBase() {
         return Base;
     }
-
+	
+	/**
+	* Getter for Bulb
+	* @return boolean Bulb data member
+	*/
     public boolean isBulb() {
         return Bulb;
     }
-
+	
+	/**
+     * Sets given parameter to Base data member
+     * @param base boolean for Base data member
+     */
     public void setBase(boolean base) {
         Base = base;
     }
 
+	/**
+     * Sets given parameter to Bulb data member
+     * @param bulb boolean for Bulb data member
+     */
     public void setBulb(boolean bulb) {
         Bulb = bulb;
     }

@@ -63,7 +63,7 @@ public abstract class Furniture {
 		
 		/**
 		 * Getter for price
-		 * @return String price data member
+		 * @return int price data member
 		 */
         public int getPrice() {
             return price;

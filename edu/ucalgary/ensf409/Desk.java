@@ -24,27 +24,51 @@ public class Desk extends Furniture{
         setTop(top);
         setLegs(legs);
     }
-    //setters and getters
+    
+    /**
+     * Sets given parameter to Legs data member
+     * @param legs boolean for Legs data member
+     */
     public void setLegs(boolean legs) {
         Legs = legs;
     }
-
+	
+	/**
+	* Getter for Legs
+	* @return boolean Legs data member
+	*/
     public boolean isLegs() {
         return Legs;
     }
-
+	
+	/**
+	* Getter for Drawer
+	* @return boolean Drawer data member
+	*/
     public boolean isDrawer() {
         return Drawer;
     }
-
+	
+	/**
+	* Getter for Top
+	* @return boolean Top data member
+	*/
     public boolean isTop() {
         return Top;
     }
-
+	
+	/**
+     * Sets given parameter to Drawer data member
+     * @param drawer boolean for Drawer data member
+     */
     public void setDrawer(boolean drawer) {
         Drawer = drawer;
     }
-
+	
+	/**
+     * Sets given parameter to Top data member
+     * @param top boolean for Top data member
+     */
     public void setTop(boolean top) {
         Top = top;
     }

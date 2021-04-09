@@ -24,27 +24,51 @@ public class Filing extends Furniture{
         setDrawers(drawers);
         setRails(rails);
     }
-
+	
+	/**
+	* Getter for Cabinet
+	* @return boolean Cabinet data member
+	*/
     public boolean isCabinet() {
         return Cabinet;
     }
-
+	
+	/**
+	* Getter for Drawers
+	* @return boolean Drawers data member
+	*/
     public boolean isDrawers() {
         return Drawers;
     }
-
+	
+	/**
+	* Getter for Rails
+	* @return boolean Rails data member
+	*/
     public boolean isRails() {
         return Rails;
     }
-
+	
+	/**
+     * Sets given parameter to Cabinet data member
+     * @param cabinet boolean for Cabinet data member
+     */
     public void setCabinet(boolean cabinet) {
         Cabinet = cabinet;
     }
-
+	
+	/**
+     * Sets given parameter to Drawers data member
+     * @param drawers boolean for Drawers data member
+     */
     public void setDrawers(boolean drawers) {
         Drawers = drawers;
     }
-
+	
+	/**
+     * Sets given parameter to Rails data member
+     * @param rails boolean for Rails data member
+     */
     public void setRails(boolean rails) {
         Rails = rails;
     }

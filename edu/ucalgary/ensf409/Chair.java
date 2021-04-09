@@ -27,36 +27,67 @@ public class Chair extends Furniture {
 		setLegs(legs);
 		setSeat(seat);
 	}
-  //setters
+  
+	/**
+     * Sets given parameter to Arms data member
+     * @param arms boolean for Arms data member
+     */
     public void setArms(boolean arms) {
         Arms = arms;
     }
-
+	
+	/**
+     * Sets given parameter to Cushion data member
+     * @param cushion boolean for Cushion data member
+     */
     public void setCushion(boolean cushion) {
         Cushion = cushion;
     }
-
+	
+	/**
+     * Sets given parameter to Legs data member
+     * @param legs boolean for Legs data member
+     */
     public void setLegs(boolean legs) {
         Legs = legs;
     }
-
+	
+	/**
+     * Sets given parameter to Seat data member
+     * @param seat boolean for Seat data member
+     */
     public void setSeat(boolean seat) {
         Seat = seat;
     }
 
-    //getters
+    /**
+	* Getter for Arms
+	* @return boolean Arms data member
+	*/
     public boolean isArms() {
         return Arms;
     }
 
+    /**
+	* Getter for Cushion
+	* @return boolean Cushion data member
+	*/
     public boolean isCushion() {
         return Cushion;
     }
 
+    /**
+	* Getter for Legs
+	* @return boolean Legs data member
+	*/
     public boolean isLegs() {
         return Legs;
     }
 
+    /**
+	* Getter for Seat
+	* @return boolean Seat data member
+	*/
     public boolean isSeat() {
         return Seat;
     }
