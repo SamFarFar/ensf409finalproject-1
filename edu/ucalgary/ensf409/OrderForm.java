@@ -29,6 +29,7 @@ public class OrderForm {
     }
 
     /**
+     * Getter for originalRequestName data member
      * @return originalRequestName
      */
     public String getOriginalRequestName() {
@@ -36,6 +37,7 @@ public class OrderForm {
     }
 
     /**
+     * Getter for originalRequestAmount data member
      * @return originalRequestAmount
      */
     public int getOriginalRequestAmount() {
@@ -43,6 +45,7 @@ public class OrderForm {
     }
 
     /**
+     * Getter for itemsOrdered data member
      * @return ItemsOrdered
      */
     public ArrayList<String> getItemsOrdered() {
@@ -50,6 +53,7 @@ public class OrderForm {
     }
 
     /**
+     * Getter for totalPrice data member
      * @return TotalPrice
      */
     public int getTotalPrice() {
@@ -57,6 +61,7 @@ public class OrderForm {
     }
 
     /**
+     * Getter for isFormCreated data member
      * @return IsFormCreated
      */
     public boolean getIsFormCreated() {
@@ -64,7 +69,9 @@ public class OrderForm {
     }
 
     /**
-     * printOrderForm method creates the "OrderForm.txt" file that can be used for printing
+     * printOrderForm method creates the "OrderForm.txt" file that can be used for printing,
+     * also generates an output message to the console consisting of parts to be pruchased, and 
+     * their total price
      */
     public void printOrderForm(){
         try {

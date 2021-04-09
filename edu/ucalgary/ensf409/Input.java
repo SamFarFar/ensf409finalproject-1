@@ -126,8 +126,6 @@ public class Input {
 			System.out.println("Error occurred");
 			e.printStackTrace();
 		}
-
-
 	}
 
 	/**
@@ -139,10 +137,13 @@ public class Input {
 	}
 
 	/**
-	 * By providing an arraylist of potential IDs and a link to the database
-	 * @param pI
-	 * @param inLink
-	 * @return
+	 * By providing an ArrayList of potential IDs and a link to the database, 
+	 * we are able to 
+	 * @param pI String ArrayList of all possible ID's
+	 * @param inLink InventoryLink object, containing access to the database 
+	 * to be used
+	 * @return an ArrayList of integer arrays, wherein the integer arrays contain 
+	 * numbers corresponding to specific indexs of the pI parameter to be used
 	 */
 	public static ArrayList<int[]> getTwo(ArrayList<String> pI, InventoryLink inLink){
 		ArrayList<int[]> results = new ArrayList<int[]>();
