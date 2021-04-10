@@ -385,49 +385,6 @@ public class InventoryLink {
 	}
 	
 	/**
-	 * Iterates through a given String ArrayList and eliminates all duplicate 
-	 * elements.
-	 * @param str String ArrayList to be stripped of duplicate entries
-	 * @return String ArrayList consisting of only the unique elements from 
-	 * str input.
-	 */
-	public ArrayList<String> stripDuplicates(ArrayList<String> str){
-		ArrayList<String> retVal = new ArrayList<>();
-		for(String s : str){
-			if(!retVal.contains(s)){
-				retVal.add(s);
-			}
-		}
-		return retVal;
-	}
-	
-	/**
-	 * Takes a request object and uses its data in order to generate a complete 
-	 * list of all Manufacturer ID's, of manufacturers that are found to produce 
-	 * the desired product.
-	 * @param rq Request object filled with the desired furniture type, name, 
-	 * and quantity to be used.
-	 * @return String ArrayList of all possible ManuID's of manufacturers that 
-	 * can be found to produce the desired furniture name and type from the 
-	 * Request object, based on the current state of the database
-	 */
-	private ArrayList<String> getAllManuIDs(Request rq){
-		ArrayList<String> retVal = new ArrayList<>();
-		try{
-			Statement myStmt = dbConnect.createStatement();
-			String query = "SELECT ManuID FROM " + rq.getFurniture() + " WHERE Type = '" + rq.getType() + "'";
-			results = myStmt.executeQuery(query);
-			while(results.next()){
-				retVal.add(results.getString(1));
-			}
-			myStmt.close();
-		} catch(SQLException ex) {
-            ex.printStackTrace();
-        }
-		return retVal;
-	}
-	
-	/**
 	 * Adds all furniture items that were previously deleted back to the database, 
 	 * once the request has failed.  An output message is then generated and 
 	 * printed containing all potential manufacturers of the specified item.
@@ -443,36 +400,47 @@ public class InventoryLink {
 	 * database after previous deletions, once the request has failed.
 	 */
 
-	// need to implement the storage of manufacturers
-	//possibly could use enum lets discuss writing here so i dont forget
 	public void invalidRequest(Request rq, ArrayList<Chair> chairs,
 				ArrayList<Lamp> lamps, ArrayList<Desk> desks, ArrayList<Filing> filings){
+		ArrayList<String> MIDPossible = new ArrayList<>();
 		switch(rq.getFurniture()){
 			case "chair":
 				for(int i = 0; i < chairs.size(); i++){
 					addFurn(chairs.get(i));
 				}
+				MIDPossible.add("002");
+				MIDPossible.add("003");
+				MIDPossible.add("004");
+				MIDPossible.add("005");
 				break;
 			case "desk":
 				for(int i = 0; i < desks.size(); i++){
 					addFurn(desks.get(i));
 				}
+				MIDPossible.add("002");
+				MIDPossible.add("001");
+				MIDPossible.add("004");
+				MIDPossible.add("005");
 				break;
 			case "filing":
 				for(int i = 0; i < filings.size(); i++){
 					addFurn(filings.get(i));
 				}
+				MIDPossible.add("002");
+				MIDPossible.add("004");
+				MIDPossible.add("005");
 				break;
 			case "lamp":
 				for(int i = 0; i < lamps.size(); i++){
 					addFurn(lamps.get(i));
 				}
+				MIDPossible.add("002");
+				MIDPossible.add("004");
+				MIDPossible.add("005");
 				break;
 			default:
 				return;
 		}
-		ArrayList<String> MIDPossible = getAllManuIDs(rq);
-		MIDPossible = stripDuplicates(MIDPossible);
 		String output = "\nOrder cannot be fulfilled based on current "+
 								"inventory. Suggested manufacturers are ";
 
