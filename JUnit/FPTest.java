@@ -87,11 +87,11 @@ public class FPTest {
         File OrderFile = new File("./JUnit/Sample.txt");
         boolean isEqual = isEqual(SampleFile.toPath(), OrderFile.toPath());
         assertTrue(isEqual);
-        System.out.println("Test: Order Form Content Test Successful");
     }
 
     // supporting function with
     private static boolean isEqual(Path firstFile, Path secondFile) {
+
         try {
             if (Files.size(firstFile) != Files.size(secondFile)) {
                 return false;
@@ -112,29 +112,24 @@ public class FPTest {
 
 
     // tests Request Constructor & checkValidity with invalid case
-    @Test (expected=InvalidRequestException.class)
+    @Test(expected = InvalidRequestException.class)
     public void testInvalidRequestConstructor() throws InvalidRequestException {
-        boolean tester = false;
         String t = "Task";
         String f = "fff";
         int q = 1;
         Request testReq = new Request(t,f,q);
-        if(testReq.getFurniture().equals(f) && testReq.getFurniture().equals("chair") &&
-                testReq.getQuantity() == 1){
-            tester = true;
-        }
-        assertTrue(tester);
+
     }
 
     // tests Request Constructor & checkValidity with valid case
     @Test
     public void testRequestConstructor() throws InvalidRequestException {
        boolean tester = false;
-        String t = "mesh";
+        String t = "Mesh";
         String f = "chair";
         int q = 1;
         Request testReq = new Request(t,f,q);
-        if(testReq.getFurniture().equals(f) && testReq.getFurniture().equals("chair") &&
+        if(testReq.getType().equals(t) && testReq.getFurniture().equals("chair") &&
         testReq.getQuantity() == 1){
             tester = true;
         }
@@ -149,11 +144,6 @@ public class FPTest {
 
 
     //(DATA BASE STUFF CANT DO RIGHT NOW)
-    // Tests Initialize Connection
-
-    // Tests Improper Initialize Connection running
-
-    // Tests getPossibleItems with Request  running
 
     // Tests getValidParts with ID
 

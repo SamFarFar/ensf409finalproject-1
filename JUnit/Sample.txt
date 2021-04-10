@@ -4,7 +4,7 @@ Faculty Name:
 Contact: 
 Date: 
 
-Original Request: chair, 1
+Original Request: mesh chair, 1
 
 Items Ordered
 ID: C123

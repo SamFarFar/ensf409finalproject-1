@@ -7,7 +7,8 @@ Date:
 Original Request: mesh chair, 1
 
 Items Ordered
-ID: C9890
-ID: C0942
+ID: C123
+ID: C234
+ID: C567
 
-Total Price: $225
+Total Price: $100
