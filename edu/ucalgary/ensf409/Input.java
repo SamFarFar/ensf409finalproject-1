@@ -14,7 +14,6 @@ public class Input {
 			"\nPlease specify below your request in the format of:\n"+
 			"<Type> <Furniture>, <Amount>\n" + "Example: mesh chair, 1";
 	private final static String REGEX = "([a-zA-z]{1,99})\\s([a-zA-z]{1,99}),\\s([0-9]{1,9})";
-	private static String originalRequest;
 
 	/**
 	 * Basic main function that runs through the program. Creates instances of all 
@@ -33,7 +32,7 @@ public class Input {
 	 * @param args unused arguments that need to be supplied
 	 */
 	public static void main(String[] args) {
-		Scanner scanner = null;
+		Scanner scanner;
 		
 		try{
 			scanner = new Scanner(System.in);
@@ -53,7 +52,6 @@ public class Input {
 				if(swingArm.equals("swing arm")){
 					type = "Swing Arm";
 				}
-				originalRequest = type + " " + match.group(2).toLowerCase();
 				type = type.substring(0,1).toUpperCase() + type.substring(1);
 				Request userRequest = new Request(type,
 								match.group(2).toLowerCase(),
@@ -66,7 +64,7 @@ public class Input {
 				ArrayList<Lamp> lamps = new ArrayList<>();
 				ArrayList<Desk> desks = new ArrayList<>();
 				ArrayList<Filing> filings = new ArrayList<>();
-				ArrayList<String> finalVals = new ArrayList<String>();
+				ArrayList<String> finalVals = new ArrayList<>();
 				
 				int totalPrice = 0;
 				for(int furnNum = 0; furnNum < userRequest.getQuantity(); furnNum++){

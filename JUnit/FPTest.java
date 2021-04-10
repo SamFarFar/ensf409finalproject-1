@@ -33,7 +33,7 @@ testable function then u must have previously tested the function above.
 
 silly thing to consider
                  Better ---|--- Worse
- assert(randomTest)               assertEquals(randomTest, true);
+ assertTrue(randomTest)               assertEquals(randomTest, true);
 
  */
 
@@ -54,14 +54,14 @@ public class FPTest {
         int testTotalPrice = 100;
         OrderForm testForm = new OrderForm(testStringName, testAmount, testList, testTotalPrice);
         boolean isWorking = false;
-        if(testStringName == testForm.getOriginalRequestName()
+        if(testStringName.equals(testForm.getOriginalRequestName())
                 && testAmount == testForm.getOriginalRequestAmount()
                 && testList == testForm.getItemsOrdered()
                 && testTotalPrice == testForm.getTotalPrice()
         ){
             isWorking = true;
         }
-        assert(isWorking);
+        assertTrue(isWorking);
     }
 
     // tests the creation of the OrderForm.txt file
@@ -77,7 +77,7 @@ public class FPTest {
         OrderForm testForm = new OrderForm(testStringName, testAmount, testList, testTotalPrice);
         testForm.printOrderForm();
         boolean test = testForm.getIsFormCreated();
-        assertEquals(test,true);
+        assertTrue(test);
         System.out.println(".Test: Order Form Creation Test Success");
     }
 
@@ -87,7 +87,7 @@ public class FPTest {
         File SampleFile = new File("OrderForm.txt");
         File OrderFile = new File("./JUnit/Sample.txt");
         boolean isEqual = isEqual(SampleFile.toPath(), OrderFile.toPath());
-        assertEquals(isEqual,true);
+        assertTrue(isEqual);
         System.out.println("Test: Order Form Content Test Successful");
     }
 
@@ -115,37 +115,33 @@ public class FPTest {
     // tests Request Constructor & checkValidity with invalid case
     @Test (expected=InvalidRequestException.class)
     public void testInvalidRequestConstructor() throws InvalidRequestException {
+        boolean tester = false;
         String t = "Task";
         String f = "fff";
         int q = 1;
-        System.out.println("Test: Invalid Request Creation Succesful");
         Request testReq = new Request(t,f,q);
+        if(testReq.getFurniture().equals(f) && testReq.getFurniture().equals("chair") &&
+                testReq.getQuantity() == 1){
+            tester = true;
+        }
+        assertTrue(tester);
     }
 
     // tests Request Constructor & checkValidity with valid case
     @Test
     public void testRequestConstructor() throws InvalidRequestException {
-        String t = "Task";
+       boolean tester = false;
+        String t = "mesh";
         String f = "chair";
         int q = 1;
         Request testReq = new Request(t,f,q);
-        System.out.println("Test: Request Creation Succesful");
+        if(testReq.getFurniture().equals(f) && testReq.getFurniture().equals("chair") &&
+        testReq.getQuantity() == 1){
+            tester = true;
+        }
+        assertTrue(tester);
     }
 
-    // tests 4 getter functions in Request
-    @Test
-    public void testRequestGetters() throws InvalidRequestException {
-        String t = "Task";
-        String f = "chair";
-        int q = 1;
-        int partNum = 4;
-        Request testGetters = new Request(t,f,q);
-        assertEquals(testGetters.getPartNum(),partNum);
-        assertEquals(testGetters.getType(), "Task");
-        assertEquals(testGetters.getFurniture(), "chair");
-        assertEquals(testGetters.getQuantity(), 1);
-        //write ifs
-    }
 
     // ================================= \\
     // InventoryLink.java

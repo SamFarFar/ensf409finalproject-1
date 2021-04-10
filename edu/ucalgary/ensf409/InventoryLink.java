@@ -2,7 +2,6 @@ package edu.ucalgary.ensf409;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class InventoryLink {
@@ -70,8 +69,7 @@ public class InventoryLink {
 	 * @return an ArrayList with potential Furniture
 	 */
 	public ArrayList<String> getPossibleItems(Request request) {
-		// sort by price
-		ArrayList<String> retVal = new ArrayList<String>();
+		ArrayList<String> retVal = new ArrayList<>();
 		try {                    
             Statement myStmt = dbConnect.createStatement();
             results = myStmt.executeQuery("SELECT * FROM " + request.getFurniture());
@@ -346,7 +344,7 @@ public class InventoryLink {
 	 */
 	public void deleteFurniture(String ID){
 		try {
-			String furniture = null;
+			String furniture;
 			switch(ID.charAt(0)){
 				case 'C':
 					furniture = "chair";
@@ -444,6 +442,9 @@ public class InventoryLink {
 	 * @param filings ArrayList of Filing objects that must be re-added to the 
 	 * database after previous deletions, once the request has failed.
 	 */
+
+	// need to implement the storage of manufacturers
+	//possibly could use enum lets discuss writing here so i dont forget
 	public void invalidRequest(Request rq, ArrayList<Chair> chairs,
 				ArrayList<Lamp> lamps, ArrayList<Desk> desks, ArrayList<Filing> filings){
 		switch(rq.getFurniture()){
