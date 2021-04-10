@@ -45,7 +45,7 @@ public class FPTest {
     // tests the constructor setting up OrderForm
     @Test
     public void testOrderFormConstructor(){
-        String testStringName = "chair";
+        String testStringName = "mesh chair";
         int testAmount = 1;
         ArrayList<String> testList  = new ArrayList<>();
         testList.add("C123");
@@ -67,7 +67,7 @@ public class FPTest {
     // tests the creation of the OrderForm.txt file
     @Test
     public void testOrderFormCreation() {
-        String testStringName = "chair";
+        String testStringName = "mesh chair";
         int testAmount = 1;
         ArrayList<String> testList  = new ArrayList<>();
         testList.add("C123");
@@ -78,7 +78,6 @@ public class FPTest {
         testForm.printOrderForm();
         boolean test = testForm.getIsFormCreated();
         assertTrue(test);
-        System.out.println(".Test: Order Form Creation Test Success");
     }
 
     // tests content of OrderForm.txt file with a Sample Correct File
@@ -147,16 +146,7 @@ public class FPTest {
     // InventoryLink.java
     // ================================= \\
 
-    // Tests the constructor in Inventory Link
-    @Test
-    public void testInventoryLinkConstructor() throws InvalidRequestException {
-        Request temp = new Request("Task","chair",1);
-        InventoryLink newLink = new InventoryLink("123","124","125");
-        assertEquals(newLink.getDBURL(),"123");
-        assertEquals(newLink.getPASSWORD(),"125");
-        assertEquals(newLink.getUSERNAME(),"124");
-        System.out.println("Test: InventoryLink contructor was Succesful");
-    }
+
 
     //(DATA BASE STUFF CANT DO RIGHT NOW)
     // Tests Initialize Connection
@@ -186,16 +176,7 @@ public class FPTest {
 
     // Tests the sort algorithm with valid ArrayList /
 
-    // ================================= \\
-    // InvalidRequestException.java
-    // ================================= \\
 
-    // Tests a scenario where Invalid Request Exception is to be thrown
-    @Test(expected = InvalidRequestException.class)
-    public void testInvalidRequestException() throws InvalidRequestException {
-        Request test = new Request("asdads","dsad",1);
-        System.out.println("Test: InvalidRequestException is Succesful");
-    }
 
     // ================================= \\
     // InvalidIDException.java
