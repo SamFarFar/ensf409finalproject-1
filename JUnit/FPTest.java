@@ -1,5 +1,4 @@
 package JUnit;
-
 import edu.ucalgary.ensf409.*;
 
 import org.junit.Test;
@@ -129,7 +128,7 @@ public class FPTest {
         String f = "chair";
         int q = 1;
         Request testReq = new Request(t,f,q);
-        if(testReq.getType().equals(t) && testReq.getFurniture().equals("chair") &&
+        if(testReq.getType().equals(t) && testReq.getFurniture().equals(f) &&
         testReq.getQuantity() == 1){
             tester = true;
         }
@@ -141,26 +140,73 @@ public class FPTest {
     // InventoryLink.java
     // ================================= \\
 
-
+    // ff tt
 
     //(DATA BASE STUFF CANT DO RIGHT NOW)
 
     // Tests getValidParts with ID
-
+    @Test
+    public void validPartsTest(){
+    String ID = "C0914";
+    InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","turWhale929.");
+    boolean[] tester = IL.getValidParts(ID);
+    boolean[] actual = {false,false,true,true};
+    assertArrayEquals(tester,actual);
+    }
     // Tests getPrice with ID
-
+    @Test
+    public void validPriceTest(){
+        String ID = "C0914";
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","turWhale929.");
+        int tester = IL.getPrice(ID);
+        int actual = 50;
+        assertEquals(tester,actual);
+    }
     // Tests getManuID with valid ID
-
+    @Test
+    public void validManuIDTest(){
+        String ID = "C0914";
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","turWhale929.");
+        String tester = IL.getManuID(ID);
+        String actual = "002";
+        assertEquals(tester,actual);
+    }
     // Tests creating any furniture in the database
-
+    @Test
+    public void addFurnitureTest() throws InvalidRequestException {
+        Lamp actual = new Lamp("L023","Desk",false,true,
+                1,"001");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory",
+                "root","turWhale929.");
+       Request request = new Request("Desk","lamp",1);
+        IL.addFurn(actual);
+        ArrayList<String> tester = IL.getPossibleItems(request);
+        IL.sort(tester);
+        IL.deleteFurniture("L023");
+        Lamp test = new Lamp(tester.get(0),request.getType(),
+                IL.getValidParts(tester.get(0))[0],
+                IL.getValidParts(tester.get(0))[1],
+                IL.getPrice(tester.get(0)),IL.getManuID(tester.get(0)));
+        assertEquals(test,actual);
+    }
     // Tests deleting furniture in the database /
-
-    // Tests stripping duplicates with an ArrayList that has duplicates /
-
-    // Tests stripping duplicates with an ArrayList that has no duplicates /
-
-    // Tests an invalidRequest response ////
-    // when there is 0,1,2,* manufacturers
+    @Test
+    public void deleteFurnitureTest() throws InvalidRequestException {
+        boolean test = false;
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory",
+                "root","turWhale929.");
+        Request request = new Request("Desk","lamp",1);
+        ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
+        IL.deleteFurniture("L132");
+        ArrayList<String> afterDelete = IL.sort(IL.getPossibleItems(request));
+        if(tester.size() > afterDelete.size())
+            test = true;
+        assertTrue(test);
+        Lamp toBeDeleted = new Lamp("L132","Desk",true,false,
+                18,"005");
+        IL.addFurn(toBeDeleted);
+    }
+        // Tests an invalidRequest response ////
 
     // Tests the filter with valid ArrayList /
 
