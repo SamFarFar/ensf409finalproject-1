@@ -148,7 +148,7 @@ public class FPTest {
     @Test
     public void validPartsTest(){
     String ID = "C0914";
-    InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","turWhale929.");
+    InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
     boolean[] tester = IL.getValidParts(ID);
     boolean[] actual = {false,false,true,true};
     assertArrayEquals(tester,actual);
@@ -157,7 +157,7 @@ public class FPTest {
     @Test
     public void validPriceTest(){
         String ID = "C0914";
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","turWhale929.");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
         int tester = IL.getPrice(ID);
         int actual = 50;
         assertEquals(tester,actual);
@@ -166,7 +166,7 @@ public class FPTest {
     @Test
     public void validManuIDTest(){
         String ID = "C0914";
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","turWhale929.");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
         String tester = IL.getManuID(ID);
         String actual = "002";
         assertEquals(tester,actual);
