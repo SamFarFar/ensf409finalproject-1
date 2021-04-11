@@ -90,9 +90,10 @@ public class FPTest {
 
     // supporting function with
     private static boolean isEqual(Path firstFile, Path secondFile) {
-
         try {
             if (Files.size(firstFile) != Files.size(secondFile)) {
+				System.out.println("File 1: " + Files.size(firstFile));
+				System.out.println("File 2: " + Files.size(secondFile));
                 return false;
             }
             byte[] first = Files.readAllBytes(firstFile);
@@ -149,6 +150,7 @@ public class FPTest {
     public void validPartsTest(){
     String ID = "C0914";
     InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+    IL.initializeConnection();
     boolean[] tester = IL.getValidParts(ID);
     boolean[] actual = {false,false,true,true};
     assertArrayEquals(tester,actual);
@@ -158,6 +160,7 @@ public class FPTest {
     public void validPriceTest(){
         String ID = "C0914";
         InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+        IL.initializeConnection();
         int tester = IL.getPrice(ID);
         int actual = 50;
         assertEquals(tester,actual);
@@ -167,6 +170,7 @@ public class FPTest {
     public void validManuIDTest(){
         String ID = "C0914";
         InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+        IL.initializeConnection();
         String tester = IL.getManuID(ID);
         String actual = "002";
         assertEquals(tester,actual);
@@ -174,27 +178,35 @@ public class FPTest {
     // Tests creating any furniture in the database
     @Test
     public void addFurnitureTest() throws InvalidRequestException {
+		boolean bool = false;
         Lamp actual = new Lamp("L023","Desk",false,true,
                 1,"001");
         InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory",
-                "root","turWhale929.");
-       Request request = new Request("Desk","lamp",1);
+                "matteo","pasquale");
+        IL.initializeConnection();
+        Request request = new Request("Desk","lamp",1);
         IL.addFurn(actual);
         ArrayList<String> tester = IL.getPossibleItems(request);
         IL.sort(tester);
-        IL.deleteFurniture("L023");
         Lamp test = new Lamp(tester.get(0),request.getType(),
                 IL.getValidParts(tester.get(0))[0],
                 IL.getValidParts(tester.get(0))[1],
                 IL.getPrice(tester.get(0)),IL.getManuID(tester.get(0)));
-        assertEquals(test,actual);
+        if(test.getID().equals(actual.getID()) && test.getType().equals(actual.getType()) && 
+			test.isBase() == actual.isBase() && test.isBulb() == actual.isBulb() && 
+			test.getPrice() == actual.getPrice() && test.getManuID().equals(actual.getManuID())){
+			bool = true;
+		}
+        assertTrue(bool);
+        IL.deleteFurniture("L023");
     }
     // Tests deleting furniture in the database /
     @Test
     public void deleteFurnitureTest() throws InvalidRequestException {
         boolean test = false;
         InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory",
-                "root","turWhale929.");
+                "matteo","pasquale");
+        IL.initializeConnection();
         Request request = new Request("Desk","lamp",1);
         ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
         IL.deleteFurniture("L132");
