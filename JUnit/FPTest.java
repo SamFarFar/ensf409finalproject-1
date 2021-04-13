@@ -315,7 +315,7 @@ public class FPTest {
         Lamp two = new Lamp("L070","Desk",true,true, 1,"001");
         Lamp three = new Lamp("L071","Desk",true,true, 1,"001");
         Lamp four = new Lamp("L072","Desk",true,true, 1,"001");
-        Request userRequest = new Request("Desk","lamp",3);
+        Request userRequest = new Request("Desk","lamp",4);
         ArrayList<String> possibleItems = IL.getPossibleItems(userRequest);
         possibleItems = IL.sort(possibleItems);
         ArrayList<int[]> results = Input.getTwo(possibleItems, IL);
