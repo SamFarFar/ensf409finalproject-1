@@ -144,7 +144,7 @@ public class FPTest {
     @Test
     public void connectionTest() throws InvalidRequestException {
     boolean bool =false;
-    InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+    InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
     IL.initializeConnection();
     Request request = new Request("Desk","lamp",1);
     ArrayList<String> tester = IL.getPossibleItems(request);
@@ -156,8 +156,8 @@ public class FPTest {
     @Test
     public void validPartsTest(){
     String ID = "C0914";
-    InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
-    IL.initializeConnection();
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+        IL.initializeConnection();
     boolean[] tester = IL.getValidParts(ID);
     boolean[] actual = {false,false,true,true};
     assertArrayEquals(tester,actual);
@@ -166,7 +166,7 @@ public class FPTest {
     @Test
     public void validPriceTest(){
         String ID = "C0914";
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
         IL.initializeConnection();
         int tester = IL.getPrice(ID);
         int actual = 50;
@@ -176,7 +176,7 @@ public class FPTest {
     @Test
     public void validManuIDTest(){
         String ID = "C0914";
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
         IL.initializeConnection();
         String tester = IL.getManuID(ID);
         String actual = "002";
@@ -188,8 +188,7 @@ public class FPTest {
 		boolean bool = false;
         Lamp actual = new Lamp("L023","Desk",false,true,
                 1,"001");
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory",
-                "matteo","pasquale");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
         IL.initializeConnection();
         Request request = new Request("Desk","lamp",1);
         IL.addFurn(actual);
@@ -199,8 +198,8 @@ public class FPTest {
                 IL.getValidParts(tester.get(0))[0],
                 IL.getValidParts(tester.get(0))[1],
                 IL.getPrice(tester.get(0)),IL.getManuID(tester.get(0)));
-        if(test.getID().equals(actual.getID()) && test.getType().equals(actual.getType()) && 
-			test.isBase() == actual.isBase() && test.isBulb() == actual.isBulb() && 
+        if(test.getID().equals(actual.getID()) && test.getType().equals(actual.getType()) &&
+			test.isBase() == actual.isBase() && test.isBulb() == actual.isBulb() &&
 			test.getPrice() == actual.getPrice() && test.getManuID().equals(actual.getManuID())){
 			bool = true;
 		}
@@ -211,8 +210,7 @@ public class FPTest {
     @Test
     public void deleteFurnitureTest() throws InvalidRequestException {
         boolean test = false;
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory",
-                "matteo","pasquale");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
         IL.initializeConnection();
         Request request = new Request("Desk","lamp",1);
         ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
@@ -227,16 +225,17 @@ public class FPTest {
     }
         // Tests an invalidRequest response ////
     // Not done dont know how to test if program does System.exit(1);
-    @Test
-    public void invalidRequestTest() throws InvalidRequestException {
-    InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory",
-            "matteo","pasquale");
-    IL.initializeConnection();
-    Request request = new Request("Desk","lamp",1);
-    ArrayList<String> tester = IL.getPossibleItems(request);
-    IL.invalidRequest(request, new ArrayList<>(), new ArrayList<>(),
-            new ArrayList<>(), new ArrayList<>());
-}
+
+//    @Test
+//    public void invalidRequestTest() throws InvalidRequestException {
+//        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+//    IL.initializeConnection();
+//    Request request = new Request("Desk","lamp",1);
+//    ArrayList<String> tester = IL.getPossibleItems(request);
+//    IL.invalidRequest(request, new ArrayList<>(), new ArrayList<>(),
+//            new ArrayList<>(), new ArrayList<>());
+//}
+
     // Tests the filter with valid ArrayList /
 
     // Tests the sort algorithm with valid ArrayList /
@@ -247,18 +246,176 @@ public class FPTest {
     // InvalidIDException.java
     // ================================= \\
 
-    // (Isnt utilized yet)
+    // (Isn't utilized yet)
     //Tests a scenario where an InvalidIDException is thrown
 
     // ================================= \\
     // Input.java
     // ================================= \\
 
-    // (Functions need to be changed)
+    // get2
 
+    @Test
+    public void testGet2() throws InvalidRequestException {
+        boolean test = false;
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+        IL.initializeConnection();
+        Lamp one = new Lamp("L069","Desk",true,true, 1,"001");
+        Lamp two = new Lamp("L070","Desk",true,true, 1,"001");
+        Request userRequest = new Request("Desk","lamp",2);
+        ArrayList<String> possibleItems = IL.getPossibleItems(userRequest);
+        possibleItems = IL.sort(possibleItems);
+        ArrayList<int[]> results = Input.getTwo(possibleItems, IL);
+        ArrayList<int[]> expected = new ArrayList<int[]>();
+        int[] res = {0,1};
+        expected.add(res);
+        expected.add(res);
+        if(results == expected) {
+            test = true;
+        }
+        assert(test);
+        IL.deleteFurniture("L069");
+        IL.deleteFurniture("L070");
+    }
 
+    // get3
+    @Test
+    public void testGet3() throws InvalidRequestException {
+        boolean test = false;
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+        IL.initializeConnection();
+        Lamp one = new Lamp("L069","Desk",true,true, 1,"001");
+        Lamp two = new Lamp("L070","Desk",true,true, 1,"001");
+        Lamp three = new Lamp("L071","Desk",true,true, 1,"001");
+        Request userRequest = new Request("Desk","lamp",3);
+        ArrayList<String> possibleItems = IL.getPossibleItems(userRequest);
+        possibleItems = IL.sort(possibleItems);
+        ArrayList<int[]> results = Input.getTwo(possibleItems, IL);
+        ArrayList<int[]> expected = new ArrayList<int[]>();
+        int[] res = {0,1};
+        expected.add(res);
+        expected.add(res);
+        expected.add(res);
+        if(results == expected) {
+            test = true;
+        }
+        assert(test);
+        IL.deleteFurniture("L069");
+        IL.deleteFurniture("L070");
+        IL.deleteFurniture("L071");
+    }
+
+    // get4
+    @Test
+    public void testGet4() throws InvalidRequestException {
+        boolean test = false;
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+        IL.initializeConnection();
+        Lamp one = new Lamp("L069","Desk",true,true, 1,"001");
+        Lamp two = new Lamp("L070","Desk",true,true, 1,"001");
+        Lamp three = new Lamp("L071","Desk",true,true, 1,"001");
+        Lamp four = new Lamp("L072","Desk",true,true, 1,"001");
+        Request userRequest = new Request("Desk","lamp",3);
+        ArrayList<String> possibleItems = IL.getPossibleItems(userRequest);
+        possibleItems = IL.sort(possibleItems);
+        ArrayList<int[]> results = Input.getTwo(possibleItems, IL);
+        ArrayList<int[]> expected = new ArrayList<int[]>();
+        int[] res = {0,1};
+        expected.add(res);
+        expected.add(res);
+        expected.add(res);
+        expected.add(res);
+        if(results == expected) {
+            test = true;
+        }
+        assert(test);
+        IL.deleteFurniture("L069");
+        IL.deleteFurniture("L070");
+        IL.deleteFurniture("L071");
+        IL.deleteFurniture("L072");
+    }
+
+    // combine 2
+    @Test
+    public void testCombine2() {
+        boolean returnTest = false;
+        boolean one[] = {true, false, true};
+        boolean two[] = {false, true, false};
+        boolean isTrue = Input.combine(one,two);
+        if(isTrue == true) {
+            returnTest = true;
+        }
+        assert(returnTest);
+    }
+
+    @Test
+    public void testCombine2Failure() {
+        boolean returnTest = false;
+        boolean one[] = {false, false, true};
+        boolean two[] = {false, true, false};
+        boolean isTrue = Input.combine(one,two);
+        if(isTrue == true) {
+            returnTest = false;
+        }
+        assert(returnTest);
+    }
+
+    // combine 3
+    @Test
+    public void testCombine3() {
+        boolean returnTest = false;
+        boolean one[] = {true, false, false};
+        boolean two[] = {false, false, true};
+        boolean three[] = {false, true, false};
+        boolean isTrue = Input.combine(one,two,three);
+        if(isTrue == true) {
+            returnTest = true;
+        }
+        assert(returnTest);
+    }
+
+    @Test
+    public void testCombine3Failure() {
+        boolean returnTest = false;
+        boolean one[] = {false, false, true};
+        boolean two[] = {false, true, false};
+        boolean three[] = {false, true, false};
+        boolean isTrue = Input.combine(one,two,three);
+        if(isTrue == true) {
+            returnTest = false;
+        }
+        assert(returnTest);
+    }
+    // combine 4
+
+    @Test
+    public void testCombine4() {
+        boolean returnTest = false;
+        boolean one[] = {true, false, false, false};
+        boolean two[] = {false, false, true, false};
+        boolean three[] = {false, true, false, false};
+        boolean four[] = {false, true, false, true};
+        boolean isTrue = Input.combine(one,two,three,four);
+        if(isTrue == true) {
+            returnTest = true;
+        }
+        assert(returnTest);
+    }
+
+    @Test
+    public void testCombine4Failure() {
+        boolean returnTest = false;
+        boolean one[] = {true, false, false, false};
+        boolean two[] = {false, false, true, false};
+        boolean three[] = {false, true, false, false};
+        boolean four[] = {false, true, false, false};
+        boolean isTrue = Input.combine(one,two,three,four);
+        if(isTrue == true) {
+            returnTest = false;
+        }
+        assert(returnTest);
+    }
 }
-
 // copy this as a blank test
   /*  @Test
     public void Test(){

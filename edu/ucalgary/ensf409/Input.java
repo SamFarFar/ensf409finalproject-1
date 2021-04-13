@@ -301,7 +301,7 @@ public class Input {
 	 * @return true if the given boolean arrays can be combined to have 
 	 * all elements == true, false otherwise
 	 */
-	private static boolean combine(boolean[] one, boolean[] two){
+	public static boolean combine(boolean[] one, boolean[] two){
 		boolean retVal = true;
 		for(int i = 0; i < one.length; i++){
 			if(!(one[i] || two[i])){
@@ -325,7 +325,7 @@ public class Input {
 	 * @return true if the given boolean arrays can be combined to have 
 	 * all elements == true, false otherwise
 	 */
-	private static boolean combine(boolean[] one, boolean[] two, boolean[] three){
+	public static boolean combine(boolean[] one, boolean[] two, boolean[] three){
 		boolean retVal = true;
 		for(int i = 0; i < one.length; i++){
 			if(!(one[i] || two[i] || three[i])){
@@ -351,7 +351,7 @@ public class Input {
 	 * @return true if the given boolean arrays can be combined to have 
 	 * all elements == true, false otherwise
 	 */
-	private static boolean combine(boolean[] one, boolean[] two, boolean[] three, boolean[] four){
+	public static boolean combine(boolean[] one, boolean[] two, boolean[] three, boolean[] four){
 		boolean retVal = true;
 		for(int i = 0; i < one.length; i++){
 			if(!(one[i] || two[i] || three[i] || four[i])){
