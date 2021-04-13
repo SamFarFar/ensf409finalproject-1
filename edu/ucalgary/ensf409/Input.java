@@ -1,3 +1,14 @@
+/**
+@author Matteo Morrone <a href = "mailto:matteo.morrone@ucalgary.ca">
+	matteo.morrone@ucalgary.ca</a>
+@author Sam FarzamFar <a href = "mailto:sam.farzamfar@ucalgary.ca">
+	sam.farzamfar@ucalgary.ca</a>
+@author Sandip Mishra <a href = "mailto:matteo.morrone@ucalgary.ca">
+	matteo.morrone@ucalgary.ca</a>
+@version 9.8
+@since 1.0
+*/
+
 package edu.ucalgary.ensf409;
 
 import java.util.ArrayList;
@@ -97,26 +108,40 @@ public class Input {
 						if(userRequest.getFurniture().equals("chair")){
 
 							Chair temp = new Chair(finalVals.get(j),userRequest.getType(),
-									inLink.getValidParts(finalVals.get(j))[0],inLink.getValidParts(finalVals.get(j))[1],
-									inLink.getValidParts(finalVals.get(j))[2],inLink.getValidParts(finalVals.get(j))[3],
-									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
+									inLink.getValidParts(finalVals.get(j))[0],
+									inLink.getValidParts(finalVals.get(j))[1],
+									inLink.getValidParts(finalVals.get(j))[2],
+									inLink.getValidParts(finalVals.get(j))[3],
+									inLink.getPrice(finalVals.get(j)),
+									inLink.getManuID(finalVals.get(j)));
 							chairs.add(temp);
 						}
 						if(userRequest.getFurniture().equals("lamp")){
-							Lamp temp = new Lamp(finalVals.get(j),userRequest.getType(),inLink.getValidParts(finalVals.get(j))[0]
-									,inLink.getValidParts(finalVals.get(j))[1],inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
+							Lamp temp = new Lamp(finalVals.get(j),
+									userRequest.getType(),
+									inLink.getValidParts(finalVals.get(j))[0],
+									inLink.getValidParts(finalVals.get(j))[1],
+									inLink.getPrice(finalVals.get(j)),
+									inLink.getManuID(finalVals.get(j)));
 							lamps.add(temp);
 						}
 						if(userRequest.getFurniture().equals("desk")){
 							Desk temp = new Desk(finalVals.get(j),userRequest.getType(),
-									inLink.getValidParts(finalVals.get(j))[0],inLink.getValidParts(finalVals.get(j))[1],inLink.getValidParts(finalVals.get(j))[2],
-									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
+									inLink.getValidParts(finalVals.get(j))[0],
+									inLink.getValidParts(finalVals.get(j))[1],
+									inLink.getValidParts(finalVals.get(j))[2],
+									inLink.getPrice(finalVals.get(j)),
+									inLink.getManuID(finalVals.get(j)));
 							desks.add(temp);
 						}
 						if(userRequest.getFurniture().equals("filing")){
-							Filing temp = new Filing(finalVals.get(j),userRequest.getType(),
-									inLink.getValidParts(finalVals.get(j))[0],inLink.getValidParts(finalVals.get(j))[1],inLink.getValidParts(finalVals.get(j))[2],
-									inLink.getPrice(finalVals.get(j)),inLink.getManuID(finalVals.get(j)));
+							Filing temp = new Filing(finalVals.get(j),
+									userRequest.getType(),
+									inLink.getValidParts(finalVals.get(j))[0],
+									inLink.getValidParts(finalVals.get(j))[1],
+									inLink.getValidParts(finalVals.get(j))[2],
+									inLink.getPrice(finalVals.get(j)),
+									inLink.getManuID(finalVals.get(j)));
 							filings.add(temp);
 						}
 						totalPrice += inLink.getPrice(finalVals.get(j));
@@ -124,7 +149,8 @@ public class Input {
 					}
 				}
 
-				OrderForm out = new OrderForm(userRequest.getType() + " " + userRequest.getFurniture(),
+				OrderForm out = new OrderForm(userRequest.getType() + " " + 
+									userRequest.getFurniture(),
 							userRequest.getQuantity(), finalVals,totalPrice);
 				out.printOrderForm();
 				inLink.close();
