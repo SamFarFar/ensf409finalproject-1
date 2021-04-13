@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
@@ -140,11 +141,17 @@ public class FPTest {
     // ================================= \\
     // InventoryLink.java
     // ================================= \\
-
-    // ff tt
-
-    //(DATA BASE STUFF CANT DO RIGHT NOW)
-
+    @Test
+    public void connectionTest() throws InvalidRequestException {
+    boolean bool =false;
+    InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+    IL.initializeConnection();
+    Request request = new Request("Desk","lamp",1);
+    ArrayList<String> tester = IL.getPossibleItems(request);
+    if(tester.size() != 0)
+        bool = true;
+    assertTrue(bool);
+}
     // Tests getValidParts with ID
     @Test
     public void validPartsTest(){
@@ -219,7 +226,17 @@ public class FPTest {
         IL.addFurn(toBeDeleted);
     }
         // Tests an invalidRequest response ////
-
+    // Not done dont know how to test if program does System.exit(1);
+    @Test
+    public void invalidRequestTest() throws InvalidRequestException {
+    InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory",
+            "matteo","pasquale");
+    IL.initializeConnection();
+    Request request = new Request("Desk","lamp",1);
+    ArrayList<String> tester = IL.getPossibleItems(request);
+    IL.invalidRequest(request, new ArrayList<>(), new ArrayList<>(),
+            new ArrayList<>(), new ArrayList<>());
+}
     // Tests the filter with valid ArrayList /
 
     // Tests the sort algorithm with valid ArrayList /
