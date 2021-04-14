@@ -146,7 +146,7 @@ public class FPTest {
     @Test
     public void connectionTest() throws InvalidRequestException {
     boolean bool =false;
-    InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+    InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
     IL.initializeConnection();
     Request request = new Request("Desk","lamp",1);
     ArrayList<String> tester = IL.getPossibleItems(request);
@@ -158,7 +158,7 @@ public class FPTest {
     @Test
     public void validPartsTest(){
     String ID = "C0914";
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
         IL.initializeConnection();
     boolean[] tester = IL.getValidParts(ID);
     boolean[] actual = {false,false,true,true};
@@ -168,7 +168,7 @@ public class FPTest {
     @Test
     public void validPriceTest(){
         String ID = "C0914";
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
         IL.initializeConnection();
         int tester = IL.getPrice(ID);
         int actual = 50;
@@ -178,7 +178,7 @@ public class FPTest {
     @Test
     public void validManuIDTest(){
         String ID = "C0914";
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
         IL.initializeConnection();
         String tester = IL.getManuID(ID);
         String actual = "002";
@@ -190,7 +190,7 @@ public class FPTest {
 		boolean bool = false;
         Lamp actual = new Lamp("L023","Desk",false,true,
                 1,"001");
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
         IL.initializeConnection();
         Request request = new Request("Desk","lamp",1);
         IL.addFurn(actual);
@@ -212,7 +212,7 @@ public class FPTest {
     @Test
     public void deleteFurnitureTest() throws InvalidRequestException {
         boolean test = false;
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
         IL.initializeConnection();
         Request request = new Request("Desk","lamp",1);
         ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
@@ -228,15 +228,16 @@ public class FPTest {
         // Tests an invalidRequest response ////
     // Not done dont know how to test if program does System.exit(1);
 
-//    @Test
-//    public void invalidRequestTest() throws InvalidRequestException {
-//        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
-//    IL.initializeConnection();
-//    Request request = new Request("Desk","lamp",1);
-//    ArrayList<String> tester = IL.getPossibleItems(request);
-//    IL.invalidRequest(request, new ArrayList<>(), new ArrayList<>(),
-//            new ArrayList<>(), new ArrayList<>());
-//}
+    @Test(expected = TerminatorT1000Exception.class)
+    public void invalidRequestTest() throws InvalidRequestException, TerminatorT1000Exception {
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+		IL.initializeConnection();
+		Request request = new Request("Desk","lamp",1);
+		ArrayList<String> tester = IL.getPossibleItems(request);
+		IL.invalidRequest(request, new ArrayList<>(), new ArrayList<>(),
+        new ArrayList<>(), new ArrayList<>());
+	}
+	
 
     // Tests the filter with valid ArrayList /
 
@@ -259,119 +260,54 @@ public class FPTest {
 
     @Test
     public void testGet2() throws InvalidRequestException {
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
         IL.initializeConnection();
-        IL.deleteFurniture("L223");
-        IL.deleteFurniture("L928");
         Request request = new Request("Study","lamp",1);
         ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
         ArrayList<int[]> tester2 = Input.getTwo(tester,IL);
-        ArrayList<int[]> compare = new ArrayList<int[]>();
-        compare.add(new int[]{1,0});
-        compare.add(new int[]{0,1});
-        ArrayList<String> one = convertToStringList2(tester2);
-        ArrayList<String> two = convertToStringList2(compare);
-        Collections.sort(one);
-        Collections.sort(two);
-        Lamp deleted1 = new Lamp("L223","Study",false,true, 2,"005");
-        Lamp deleted2 = new Lamp("L928","Study",true,true, 10,"002");
-        IL.addFurn(deleted1);
-        IL.addFurn(deleted2);
-        assertTrue(one.equals(two));
-    }
-
-    public ArrayList<String> convertToStringList2(ArrayList<int[]> sample) {
-        ArrayList<String> returning = new ArrayList<String>();
-        for(int i = 0; i<sample.size();i++) {
-            int[] tempArr = sample.get(i);
-            String a = Integer.toString(tempArr[0]) + Integer.toString(tempArr[1]);
-            returning.add(a);
-        }
-        return returning;
+        int[] comp = new int[]{3,3};
+        boolean res = true;
+        for(int j = 0; j < 2; j++){
+			if(tester2.get(0)[j] != comp[j]){
+				res = false;
+			}
+		}
+        assertTrue(res);
     }
 
     @Test
     public void testGet3() throws InvalidRequestException {
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
         IL.initializeConnection();
-        IL.deleteFurniture("F002");
-        IL.deleteFurniture("F009");
-        IL.deleteFurniture("F014");
         Request request = new Request("Medium","filing",1);
         ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
         ArrayList<int[]> tester2 = Input.getThree(tester,IL);
-        ArrayList<int[]> compare = new ArrayList<int[]>();
-        compare.add(new int[]{0,0,1});
-        compare.add(new int[]{0,1,0});
-        compare.add(new int[]{0,1,1});
-        compare.add(new int[]{1,0,0});
-        compare.add(new int[]{1,0,1});
-        compare.add(new int[]{1,1,0});
-        ArrayList<String> one = convertToStringList3(tester2);
-        ArrayList<String> two = convertToStringList3(compare);
-        Collections.sort(one);
-        Collections.sort(two);
-        Filing deleted1 = new Filing("F002","Medium",false,false,true,100,"004");
-        Filing deleted2 = new Filing("F009","Medium",true,true,false,150,"004");
-        Filing deleted3 = new Filing("F014","Medium",true,true,true,200,"002");
-        IL.addFurn(deleted1);
-        IL.addFurn(deleted2);
-        IL.addFurn(deleted3);
-        assertTrue(one.equals(two));
-    }
-
-    public ArrayList<String> convertToStringList3(ArrayList<int[]> sample) {
-        ArrayList<String> returning = new ArrayList<String>();
-        for(int i = 0; i<sample.size();i++) {
-            int[] tempArr = sample.get(i);
-            String a = Integer.toString(tempArr[0]) + Integer.toString(tempArr[1]) +  Integer.toString(tempArr[2]);
-            returning.add(a);
-        }
-        return returning;
+        int[] comp = new int[]{0,0,2};
+        boolean res = true;
+        for(int j = 0; j < 3; j++){
+			if(tester2.get(0)[j] != comp[j]){
+				res = false;
+			}
+		}
+        assertTrue(res);
     }
 
     @Test
     public void testGet4() throws InvalidRequestException {
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
         IL.initializeConnection();
-        IL.deleteFurniture("C1148");
         Request request = new Request("Task","chair",1);
         ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
         ArrayList<int[]> tester2 = Input.getFour(tester,IL);
-        ArrayList<int[]> compare = new ArrayList<int[]>();
-        compare.add(new int[]{0,0,0,1});
-        compare.add(new int[]{0,0,1,0});
-        compare.add(new int[]{0,0,1,1});
-        compare.add(new int[]{0,1,0,0});
-        compare.add(new int[]{0,1,0,1});
-        compare.add(new int[]{0,1,1,0});
-        compare.add(new int[]{0,1,1,1});
-        compare.add(new int[]{1,0,0,0});
-        compare.add(new int[]{1,0,0,1});
-        compare.add(new int[]{1,0,1,0});
-        compare.add(new int[]{1,0,1,1});
-        compare.add(new int[]{1,1,0,0});
-        compare.add(new int[]{1,1,0,1});
-        compare.add(new int[]{1,1,1,1});
-        ArrayList<String> one = convertToStringList3(tester2);
-        ArrayList<String> two = convertToStringList3(compare);
-        Collections.sort(one);
-        Collections.sort(two);
-        Chair deleted1 = new Chair("C1148","Task",true,false,true,true,125,"003");
-        IL.addFurn(deleted1);
-        assertTrue(one.equals(two));
+		int[] comp = new int[]{0,0,0,1};
+        boolean res = true;
+        for(int j = 0; j < 4; j++){
+			if(tester2.get(0)[j] != comp[j]){
+				res = false;
+			}
+		}
+        assertTrue(res);
     }
-
-    public ArrayList<String> convertToStringList4(ArrayList<int[]> sample) {
-        ArrayList<String> returning = new ArrayList<String>();
-        for(int i = 0; i<sample.size();i++) {
-            int[] tempArr = sample.get(i);
-            String a = Integer.toString(tempArr[0]) + Integer.toString(tempArr[1]) +  Integer.toString(tempArr[2]) +  Integer.toString(tempArr[3]);
-            returning.add(a);
-        }
-        return returning;
-    }
-
 
     @Test
     public void testCombine2() {

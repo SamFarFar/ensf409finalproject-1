@@ -412,7 +412,8 @@ public class InventoryLink {
 	 */
 
 	public void invalidRequest(Request rq, ArrayList<Chair> chairs,
-				ArrayList<Lamp> lamps, ArrayList<Desk> desks, ArrayList<Filing> filings){
+				ArrayList<Lamp> lamps, ArrayList<Desk> desks, ArrayList<Filing> filings)
+				throws TerminatorT1000Exception{
 		ArrayList<String> MIDPossible = new ArrayList<>();
 		switch(rq.getFurniture()){
 			case "chair":
@@ -493,7 +494,7 @@ public class InventoryLink {
 			e.printStackTrace();
 		}
 		System.out.println(output); // Keep this one for printing output
-		System.exit(1);
+		throw new TerminatorT1000Exception();
 	}
 
 

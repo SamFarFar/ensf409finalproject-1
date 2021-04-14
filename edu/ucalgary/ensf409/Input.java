@@ -157,9 +157,11 @@ public class Input {
 			} else {
 				throw new InvalidRequestException();
 			}
-		}catch(Exception e){
+		}catch(TerminatorT1000Exception e){
+			System.exit(1);
+		}catch(Exception e1){
 			System.out.println("Error occurred");
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 	}
 
