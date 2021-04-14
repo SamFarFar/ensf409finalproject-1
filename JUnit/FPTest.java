@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.io.File;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Collections;
 
 
 /*
@@ -257,166 +259,171 @@ public class FPTest {
 
     @Test
     public void testGet2() throws InvalidRequestException {
-        boolean test = false;
         InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
         IL.initializeConnection();
-        Lamp one = new Lamp("L069","Desk",true,true, 1,"001");
-        Lamp two = new Lamp("L070","Desk",true,true, 1,"001");
-        Request userRequest = new Request("Desk","lamp",2);
-        ArrayList<String> possibleItems = IL.getPossibleItems(userRequest);
-        possibleItems = IL.sort(possibleItems);
-        ArrayList<int[]> results = Input.getTwo(possibleItems, IL);
-        ArrayList<int[]> expected = new ArrayList<int[]>();
-        int[] res = {0,1};
-        expected.add(res);
-        expected.add(res);
-        if(results == expected) {
-            test = true;
-        }
-        assert(test);
-        IL.deleteFurniture("L069");
-        IL.deleteFurniture("L070");
+        IL.deleteFurniture("L223");
+        IL.deleteFurniture("L928");
+        Request request = new Request("Study","lamp",1);
+        ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
+        ArrayList<int[]> tester2 = Input.getTwo(tester,IL);
+        ArrayList<int[]> compare = new ArrayList<int[]>();
+        compare.add(new int[]{1,0});
+        compare.add(new int[]{0,1});
+        ArrayList<String> one = convertToStringList2(tester2);
+        ArrayList<String> two = convertToStringList2(compare);
+        Collections.sort(one);
+        Collections.sort(two);
+        Lamp deleted1 = new Lamp("L223","Study",false,true, 2,"005");
+        Lamp deleted2 = new Lamp("L928","Study",true,true, 10,"002");
+        IL.addFurn(deleted1);
+        IL.addFurn(deleted2);
+        assertTrue(one.equals(two));
     }
 
-    // get3
+    public ArrayList<String> convertToStringList2(ArrayList<int[]> sample) {
+        ArrayList<String> returning = new ArrayList<String>();
+        for(int i = 0; i<sample.size();i++) {
+            int[] tempArr = sample.get(i);
+            String a = Integer.toString(tempArr[0]) + Integer.toString(tempArr[1]);
+            returning.add(a);
+        }
+        return returning;
+    }
+
     @Test
     public void testGet3() throws InvalidRequestException {
-        boolean test = false;
         InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
         IL.initializeConnection();
-        Lamp one = new Lamp("L069","Desk",true,true, 1,"001");
-        Lamp two = new Lamp("L070","Desk",true,true, 1,"001");
-        Lamp three = new Lamp("L071","Desk",true,true, 1,"001");
-        Request userRequest = new Request("Desk","lamp",3);
-        ArrayList<String> possibleItems = IL.getPossibleItems(userRequest);
-        possibleItems = IL.sort(possibleItems);
-        ArrayList<int[]> results = Input.getTwo(possibleItems, IL);
-        ArrayList<int[]> expected = new ArrayList<int[]>();
-        int[] res = {0,1};
-        expected.add(res);
-        expected.add(res);
-        expected.add(res);
-        if(results == expected) {
-            test = true;
-        }
-        assert(test);
-        IL.deleteFurniture("L069");
-        IL.deleteFurniture("L070");
-        IL.deleteFurniture("L071");
+        IL.deleteFurniture("F002");
+        IL.deleteFurniture("F009");
+        IL.deleteFurniture("F014");
+        Request request = new Request("Medium","filing",1);
+        ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
+        ArrayList<int[]> tester2 = Input.getThree(tester,IL);
+        ArrayList<int[]> compare = new ArrayList<int[]>();
+        compare.add(new int[]{0,0,1});
+        compare.add(new int[]{0,1,0});
+        compare.add(new int[]{0,1,1});
+        compare.add(new int[]{1,0,0});
+        compare.add(new int[]{1,0,1});
+        compare.add(new int[]{1,1,0});
+        ArrayList<String> one = convertToStringList3(tester2);
+        ArrayList<String> two = convertToStringList3(compare);
+        Collections.sort(one);
+        Collections.sort(two);
+        Filing deleted1 = new Filing("F002","Medium",false,false,true,100,"004");
+        Filing deleted2 = new Filing("F009","Medium",true,true,false,150,"004");
+        Filing deleted3 = new Filing("F014","Medium",true,true,true,200,"002");
+        IL.addFurn(deleted1);
+        IL.addFurn(deleted2);
+        IL.addFurn(deleted3);
+        assertTrue(one.equals(two));
     }
 
-    // get4
+    public ArrayList<String> convertToStringList3(ArrayList<int[]> sample) {
+        ArrayList<String> returning = new ArrayList<String>();
+        for(int i = 0; i<sample.size();i++) {
+            int[] tempArr = sample.get(i);
+            String a = Integer.toString(tempArr[0]) + Integer.toString(tempArr[1]) +  Integer.toString(tempArr[2]);
+            returning.add(a);
+        }
+        return returning;
+    }
+
     @Test
     public void testGet4() throws InvalidRequestException {
-        boolean test = false;
         InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","root","Kathmandu1");
         IL.initializeConnection();
-        Lamp one = new Lamp("L069","Desk",true,true, 1,"001");
-        Lamp two = new Lamp("L070","Desk",true,true, 1,"001");
-        Lamp three = new Lamp("L071","Desk",true,true, 1,"001");
-        Lamp four = new Lamp("L072","Desk",true,true, 1,"001");
-        Request userRequest = new Request("Desk","lamp",4);
-        ArrayList<String> possibleItems = IL.getPossibleItems(userRequest);
-        possibleItems = IL.sort(possibleItems);
-        ArrayList<int[]> results = Input.getTwo(possibleItems, IL);
-        ArrayList<int[]> expected = new ArrayList<int[]>();
-        int[] res = {0,1};
-        expected.add(res);
-        expected.add(res);
-        expected.add(res);
-        expected.add(res);
-        if(results == expected) {
-            test = true;
-        }
-        assert(test);
-        IL.deleteFurniture("L069");
-        IL.deleteFurniture("L070");
-        IL.deleteFurniture("L071");
-        IL.deleteFurniture("L072");
+        IL.deleteFurniture("C1148");
+        Request request = new Request("Task","chair",1);
+        ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
+        ArrayList<int[]> tester2 = Input.getFour(tester,IL);
+        ArrayList<int[]> compare = new ArrayList<int[]>();
+        compare.add(new int[]{0,0,0,1});
+        compare.add(new int[]{0,0,1,0});
+        compare.add(new int[]{0,0,1,1});
+        compare.add(new int[]{0,1,0,0});
+        compare.add(new int[]{0,1,0,1});
+        compare.add(new int[]{0,1,1,0});
+        compare.add(new int[]{0,1,1,1});
+        compare.add(new int[]{1,0,0,0});
+        compare.add(new int[]{1,0,0,1});
+        compare.add(new int[]{1,0,1,0});
+        compare.add(new int[]{1,0,1,1});
+        compare.add(new int[]{1,1,0,0});
+        compare.add(new int[]{1,1,0,1});
+        compare.add(new int[]{1,1,1,1});
+        ArrayList<String> one = convertToStringList3(tester2);
+        ArrayList<String> two = convertToStringList3(compare);
+        Collections.sort(one);
+        Collections.sort(two);
+        Chair deleted1 = new Chair("C1148","Task",true,false,true,true,125,"003");
+        IL.addFurn(deleted1);
+        assertTrue(one.equals(two));
     }
 
-    // combine 2
+    public ArrayList<String> convertToStringList4(ArrayList<int[]> sample) {
+        ArrayList<String> returning = new ArrayList<String>();
+        for(int i = 0; i<sample.size();i++) {
+            int[] tempArr = sample.get(i);
+            String a = Integer.toString(tempArr[0]) + Integer.toString(tempArr[1]) +  Integer.toString(tempArr[2]) +  Integer.toString(tempArr[3]);
+            returning.add(a);
+        }
+        return returning;
+    }
+
+
     @Test
     public void testCombine2() {
-        boolean returnTest = false;
         boolean one[] = {true, false, true};
         boolean two[] = {false, true, false};
-        boolean isTrue = Input.combine(one,two);
-        if(isTrue == true) {
-            returnTest = true;
-        }
-        assert(returnTest);
+        assertTrue(Input.combine(one,two));
     }
 
     @Test
-    public void testCombine2Failure() {
-        boolean returnTest = false;
-        boolean one[] = {false, false, true};
-        boolean two[] = {false, true, false};
-        boolean isTrue = Input.combine(one,two);
-        if(isTrue == true) {
-            returnTest = false;
-        }
-        assert(returnTest);
+    public void testCombine2Fail() {
+        boolean one[] = {true, false, true};
+        boolean two[] = {false, false, false};
+        assertFalse(Input.combine(one,two));
     }
 
-    // combine 3
     @Test
     public void testCombine3() {
-        boolean returnTest = false;
         boolean one[] = {true, false, false};
-        boolean two[] = {false, false, true};
-        boolean three[] = {false, true, false};
-        boolean isTrue = Input.combine(one,two,three);
-        if(isTrue == true) {
-            returnTest = true;
-        }
-        assert(returnTest);
+        boolean two[] = {false, true, false};
+        boolean three[] = {false, true, true};
+        assertTrue(Input.combine(one,two,three));
     }
 
     @Test
-    public void testCombine3Failure() {
-        boolean returnTest = false;
-        boolean one[] = {false, false, true};
+    public void testCombine3Fail() {
+        boolean one[] = {true, false, false};
         boolean two[] = {false, true, false};
         boolean three[] = {false, true, false};
-        boolean isTrue = Input.combine(one,two,three);
-        if(isTrue == true) {
-            returnTest = false;
-        }
-        assert(returnTest);
+        assertFalse(Input.combine(one,two,three));
     }
-    // combine 4
 
     @Test
     public void testCombine4() {
-        boolean returnTest = false;
-        boolean one[] = {true, false, false, false};
-        boolean two[] = {false, false, true, false};
-        boolean three[] = {false, true, false, false};
-        boolean four[] = {false, true, false, true};
-        boolean isTrue = Input.combine(one,two,three,four);
-        if(isTrue == true) {
-            returnTest = true;
-        }
-        assert(returnTest);
+        boolean one[] = {true, false, false,false};
+        boolean two[] = {true, false, true,false};
+        boolean three[] = {true, false, false,false};
+        boolean four[] = {true, true, false,true};
+        assertTrue(Input.combine(one,two,three,four));
     }
 
     @Test
-    public void testCombine4Failure() {
-        boolean returnTest = false;
-        boolean one[] = {true, false, false, false};
-        boolean two[] = {false, false, true, false};
-        boolean three[] = {false, true, false, false};
-        boolean four[] = {false, true, false, false};
-        boolean isTrue = Input.combine(one,two,three,four);
-        if(isTrue == true) {
-            returnTest = false;
-        }
-        assert(returnTest);
+    public void testCombine4Fail() {
+        boolean one[] = {true, false, false,false};
+        boolean two[] = {true, false, false,false};
+        boolean three[] = {true, false, false,false};
+        boolean four[] = {true, false, false,false};
+        assertFalse(Input.combine(one,two,three,four));
     }
+
+
     // ================================= \\
-    // Furniture.java
+    // Furniture Constructors
     // ================================= \\
 
     @Test
@@ -427,7 +434,7 @@ public class FPTest {
         && test.getManuID().equals("123") && test.getID().equals("test") && test.getManuID().equals("123")) {
             isTrue = true;
         }
-        assert(isTrue);
+        assertTrue(isTrue);
     }
 
     @Test
@@ -438,7 +445,7 @@ public class FPTest {
             && test.getID().equals("test") && test.getType().equals("desk")) {
             isTrue = true;
          }
-        assert(isTrue);
+        assertTrue(isTrue);
     }
 
     @Test
@@ -449,7 +456,7 @@ public class FPTest {
         && test.getID().equals("test") && test.getType().equals("filing")) {
             isTrue = true;
         }
-        assert(isTrue);
+        assertTrue(isTrue);
     }
 
     @Test
@@ -460,7 +467,7 @@ public class FPTest {
         && test.getManuID().equals("123") && test.getType().equals("lamp")) {
             isTrue = true;
         }
-        assert(isTrue);
+        assertTrue(isTrue);
     }
 
 
