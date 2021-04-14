@@ -3,8 +3,8 @@
 	matteo.morrone@ucalgary.ca</a>
 @author Sam FarzamFar <a href = "mailto:sam.farzamfar@ucalgary.ca">
 	sam.farzamfar@ucalgary.ca</a>
-@author Sandip Mishra <a href = "mailto:matteo.morrone@ucalgary.ca">
-	matteo.morrone@ucalgary.ca</a>
+@author Sandip Mishra <a href = "mailto:sandip.mishra@ucalgary.ca">
+	sandip.mishra@ucalgary.ca</a>
 @version 9.8
 @since 1.0
 */
