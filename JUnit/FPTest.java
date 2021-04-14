@@ -415,6 +415,56 @@ public class FPTest {
         }
         assert(returnTest);
     }
+    // ================================= \\
+    // Furniture.java
+    // ================================= \\
+
+    @Test
+    public void testChairConstructor() {
+        boolean isTrue = false;
+        Chair test = new Chair("test","chair",true,true,true,true,1,"123");
+        if(test.isArms() == true && test.isCushion() == true && test.isLegs() == true && test.isSeat() == true
+        && test.getManuID().equals("123") && test.getID().equals("test") && test.getManuID().equals("123")) {
+            isTrue = true;
+        }
+        assert(isTrue);
+    }
+
+    @Test
+    public void testDeskConstructor() {
+        boolean isTrue = false;
+        Desk test = new Desk("test","desk",true,true,true,1,"123");
+        if(test.isDrawer() == true && test.isLegs() == true && test.isTop() == true && test.getManuID().equals("123")
+            && test.getID().equals("test") && test.getType().equals("desk")) {
+            isTrue = true;
+         }
+        assert(isTrue);
+    }
+
+    @Test
+    public void testFilingConstructor() {
+        boolean isTrue = false;
+        Filing test = new Filing("test","filing",true,true,true,1,"123");
+        if(test.isCabinet() == true && test.isDrawers() == true && test.isRails() == true && test.getManuID().equals("123")
+        && test.getID().equals("test") && test.getType().equals("filing")) {
+            isTrue = true;
+        }
+        assert(isTrue);
+    }
+
+    @Test
+    public void testLampConstructor() {
+        boolean isTrue = false;
+        Lamp test = new Lamp("test", "lamp",true,true,1,"123");
+        if(test.isBase() == true && test.isBulb() == true && test.getID().equals("test") && test.getPrice() == 1
+        && test.getManuID().equals("123") && test.getType().equals("lamp")) {
+            isTrue = true;
+        }
+        assert(isTrue);
+    }
+
+
+
 }
 // copy this as a blank test
   /*  @Test
