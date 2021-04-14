@@ -18,7 +18,6 @@ import java.util.regex.Pattern;
 
 public class Input {
 	private static final String WELCOME = "~~~~~~~~ Welcome ~~~~~~~~~";
-	private static final String DBURLINPUT = "Please enter a database URL to access:";
 	private static final String DBUSERINPUT = " Please enter a database username to access database:";
 	private static final String DBPASSINPUT ="Please enter a password to the account:";
 	private static final String PROMPTINPUT = "What would you like to make today?" +
@@ -44,7 +43,6 @@ public class Input {
 	 */
 	public static void main(String[] args) {
 		Scanner scanner;
-		
 		try{
 			scanner = new Scanner(System.in);
 			System.out.println(WELCOME);
@@ -104,7 +102,8 @@ public class Input {
 					}
 					
 					for (int j = 0; j < finalVals.size(); j++) {
-
+						// loop for adding the previously deleted pieces of furniture incase
+						// unused.
 						if(userRequest.getFurniture().equals("chair")){
 
 							Chair temp = new Chair(finalVals.get(j),userRequest.getType(),
@@ -152,7 +151,7 @@ public class Input {
 				OrderForm out = new OrderForm(userRequest.getType() + " " + 
 									userRequest.getFurniture(),
 							userRequest.getQuantity(), finalVals,totalPrice);
-				out.printOrderForm();
+				out.printOrderForm(); // order form creation and printing
 				inLink.close();
 
 			} else {
@@ -187,7 +186,7 @@ public class Input {
 	 * numbers corresponding to specific indexs of the pI parameter to be used
 	 */
 	public static ArrayList<int[]> getTwo(ArrayList<String> pI, InventoryLink inLink){
-		ArrayList<int[]> results = new ArrayList<int[]>();
+		ArrayList<int[]> results = new ArrayList<>();
 		for(int i = 0; i < pI.size(); i++){
 			for(int j = 0; j < pI.size(); j++){
 				boolean[] one = inLink.getValidParts(pI.get(i));
@@ -261,7 +260,7 @@ public class Input {
 	 * numbers corresponding to specific indexs of the pI parameter to be used
 	 */
 	public static ArrayList<int[]> getFour(ArrayList<String> pI, InventoryLink inLink){
-		ArrayList<int[]> results = new ArrayList<int[]>();
+		ArrayList<int[]> results = new ArrayList<>();
 		for(int n = 0; n < pI.size(); n++){
 			for(int m = 0; m < pI.size(); m++){
 				for(int i = 0; i < pI.size(); i++){

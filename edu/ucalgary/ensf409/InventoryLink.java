@@ -418,6 +418,8 @@ public class InventoryLink {
 			case "chair":
 				for(int i = 0; i < chairs.size(); i++){
 					addFurn(chairs.get(i));
+					/* adds back Chairs if order for multiple items
+					 cannot be processed */
 				}
 				MIDPossible.add("002");
 				MIDPossible.add("003");
@@ -427,6 +429,8 @@ public class InventoryLink {
 			case "desk":
 				for(int i = 0; i < desks.size(); i++){
 					addFurn(desks.get(i));
+					/* adds back Desks if order for multiple items
+					 cannot be processed */
 				}
 				MIDPossible.add("002");
 				MIDPossible.add("001");
@@ -436,6 +440,8 @@ public class InventoryLink {
 			case "filing":
 				for(int i = 0; i < filings.size(); i++){
 					addFurn(filings.get(i));
+					/* adds back Filings if order for multiple items
+					 cannot be processed */
 				}
 				MIDPossible.add("002");
 				MIDPossible.add("004");
@@ -444,6 +450,8 @@ public class InventoryLink {
 			case "lamp":
 				for(int i = 0; i < lamps.size(); i++){
 					addFurn(lamps.get(i));
+					/* adds back Lamps if order for multiple items
+					 cannot be processed */
 				}
 				MIDPossible.add("002");
 				MIDPossible.add("004");
