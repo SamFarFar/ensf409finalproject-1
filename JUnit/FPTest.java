@@ -5,15 +5,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
-import java.sql.Array;
-import java.sql.SQLException;
+import java.io.*;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Collections;
 
 
 /*
@@ -82,32 +78,34 @@ public class FPTest {
         assertTrue(test);
     }
 
-    // tests content of OrderForm.txt file with a Sample Correct File
     @Test
-    public void testOrderFormContent() {
-        File SampleFile = new File("OrderForm.txt");
-        File OrderFile = new File("./JUnit/Sample.txt");
-        boolean isEqual = isEqual(SampleFile.toPath(), OrderFile.toPath());
-        assertTrue(isEqual);
+    public void testOrderForm() throws IOException {
+        assertTrue(compare());
     }
 
-    // supporting function with
-    private static boolean isEqual(Path firstFile, Path secondFile) {
-        try {
-            if (Files.size(firstFile) != Files.size(secondFile)) {
-				System.out.println("File 1: " + Files.size(firstFile));
-				System.out.println("File 2: " + Files.size(secondFile));
+    public boolean compare() throws IOException {
+        String testStringName = "mesh chair";
+        int testAmount = 1;
+        ArrayList<String> testList  = new ArrayList<>();
+        testList.add("C123");
+        testList.add("C234");
+        testList.add("C567");
+        int testTotalPrice = 100;
+        OrderForm testForm = new OrderForm(testStringName, testAmount, testList, testTotalPrice);
+        testForm.printOrderForm();
+        BufferedReader order = new BufferedReader(new FileReader("OrderForm.txt"));
+        BufferedReader sample = new BufferedReader(new FileReader("./JUnit/Sample.txt"));
+        int a=0, b=0;
+        while(true){
+            a = order.read();
+            b = sample.read();
+            if(a==-1 && b==-1)
+                return true;
+            else if(a==-1 || b==-1 || a!=b){
                 return false;
             }
-            byte[] first = Files.readAllBytes(firstFile);
-            byte[] second = Files.readAllBytes(secondFile);
-            return Arrays.equals(first, second);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return false;
     }
-
 
     // ================================= \\
     // Request.java
