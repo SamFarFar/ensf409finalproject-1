@@ -87,15 +87,7 @@ public class OrderForm {
     public void printOrderForm(){
         try {
             File myObj = new File("OrderForm.txt");
-            if (myObj.createNewFile()) {
-                System.out.println("Order Form Created Successfully");
-            }
-        } catch (IOException e) {
-            System.out.println("Error #1: Order Form Creation Error");
-            e.printStackTrace();
-        }
-        String output = "\nPurchase ";
-        try {
+			String output = "\nPurchase ";
             FileWriter myWriter = new FileWriter("OrderForm.txt");
             myWriter.write("Furniture Order Form\n\n");
             myWriter.write("Faculty Name: \n");
@@ -120,7 +112,6 @@ public class OrderForm {
             this.isFormCreated = true;
             myWriter.close();
         } catch (IOException e) {
-            System.out.println("Error #2: Order Form Processing Could Not Be Completed");
             e.printStackTrace();
         }
         output += ("for $" + this.totalPrice + ".");
