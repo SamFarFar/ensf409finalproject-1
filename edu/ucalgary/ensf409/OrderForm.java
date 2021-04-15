@@ -111,11 +111,11 @@ public class OrderForm {
             myWriter.write("\nTotal Price: $" + this.totalPrice);
             this.isFormCreated = true;
             myWriter.close();
+            output += ("for $" + this.totalPrice + ".");
+            System.out.println(output);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        output += ("for $" + this.totalPrice + ".");
-        System.out.println(output);
     }
 
 }

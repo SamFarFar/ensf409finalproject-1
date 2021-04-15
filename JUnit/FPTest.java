@@ -101,7 +101,7 @@ public class FPTest {
             b = sample.read();
             if(a==-1 && b==-1)
                 return true;
-            else if(a==-1 || b==-1 || a!=b){
+            else if(a!=b){
                 return false;
             }
         }
