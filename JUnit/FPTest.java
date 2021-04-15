@@ -239,7 +239,6 @@ public class FPTest {
         InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","scm","ensf409");
 		IL.initializeConnection();
 		Request request = new Request("Desk","lamp",1);
-		ArrayList<String> tester = IL.getPossibleItems(request);
 		IL.invalidRequest(request, new ArrayList<>(), new ArrayList<>(),
         new ArrayList<>(), new ArrayList<>());
 	}

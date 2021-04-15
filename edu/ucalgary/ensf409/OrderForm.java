@@ -86,7 +86,6 @@ public class OrderForm {
      */
     public void printOrderForm(){
         try {
-            File myObj = new File("OrderForm.txt");
 			String output = "\nPurchase ";
             FileWriter myWriter = new FileWriter("OrderForm.txt");
             myWriter.write("Furniture Order Form\n\n");
