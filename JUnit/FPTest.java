@@ -83,30 +83,6 @@ public class FPTest {
         assertTrue(compare());
     }
 
-    public boolean compare() throws IOException {
-        String testStringName = "mesh chair";
-        int testAmount = 1;
-        ArrayList<String> testList  = new ArrayList<>();
-        testList.add("C123");
-        testList.add("C234");
-        testList.add("C567");
-        int testTotalPrice = 100;
-        OrderForm testForm = new OrderForm(testStringName, testAmount, testList, testTotalPrice);
-        testForm.printOrderForm();
-        BufferedReader order = new BufferedReader(new FileReader("OrderForm.txt"));
-        BufferedReader sample = new BufferedReader(new FileReader("./JUnit/Sample.txt"));
-        int a=0, b=0;
-        while(true){
-            a = order.read();
-            b = sample.read();
-            if(a==-1 && b==-1)
-                return true;
-            else if(a!=b){
-                return false;
-            }
-        }
-    }
-
     // ================================= \\
     // Request.java
     // ================================= \\
@@ -151,7 +127,7 @@ public class FPTest {
     if(tester.size() != 0)
         bool = true;
     assertTrue(bool);
-}
+	}
     // Tests getValidParts with ID
     @Test
     public void validPartsTest(){
@@ -404,7 +380,29 @@ public class FPTest {
         assertTrue(isTrue);
     }
 
-
+	public boolean compare() throws IOException {
+        String testStringName = "mesh chair";
+        int testAmount = 1;
+        ArrayList<String> testList  = new ArrayList<>();
+        testList.add("C123");
+        testList.add("C234");
+        testList.add("C567");
+        int testTotalPrice = 100;
+        OrderForm testForm = new OrderForm(testStringName, testAmount, testList, testTotalPrice);
+        testForm.printOrderForm();
+        BufferedReader order = new BufferedReader(new FileReader("OrderForm.txt"));
+        BufferedReader sample = new BufferedReader(new FileReader("./JUnit/Sample.txt"));
+        int a=0, b=0;
+        while(true){
+            a = order.read();
+            b = sample.read();
+            if(a==-1 && b==-1)
+                return true;
+            else if(a!=b){
+                return false;
+            }
+        }
+    }
 
 }
 // copy this as a blank test
