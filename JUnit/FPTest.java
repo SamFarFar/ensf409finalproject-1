@@ -18,33 +18,8 @@ import static org.junit.Assert.*;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
 
 
-/*
-Sam's rules for JUnits:
-
-1. only 1 assert per test
-
-2. when adding to a database must follow a delete immediately afterwards to not
-mess up database of usage. test using constructors of the objects.
-
-3. tests must chronologically make sense. meaning if u want to test something and it uses a
-testable function then u must have previously tested the function above.
-
-4. dont use any System.out.println() because JUnit 4 does it for us already
-
-5. comment above your test what you are testing
-
-6. Supporting methods need to go outside of FPTest and be set to public
-
-silly thing to consider
-                 Better ---|--- Worse
- assertTrue(randomTest)               assertEquals(randomTest, true);
-
- */
 
 public class FPTest {
     // ================================= \\
@@ -78,7 +53,7 @@ public class FPTest {
 
     /** 
      * tests the creation of the OrderForm.txt file using the getIsFormCreated
-     *  method.
+     * method.
      */
     @Test
     public void testOrderFormCreation() {
@@ -96,8 +71,9 @@ public class FPTest {
     }
 	
 	/**
-	 * calls compare() function at the end of this filein order to ensure 
+	 * calls compare() function at the end of this file in order to ensure
 	 * that the produced order form is exactly as expected.
+     * @throws IOException thrown if files cannot be accessed.
 	 */
     @Test
     public void testOrderForm() throws IOException {
@@ -105,14 +81,16 @@ public class FPTest {
     }
 
     // ================================= \\
-    // Request.java
+               // Request.java \\
     // ================================= \\
 
 
     /**
      * Tests the constructor of the InvalidRequestException exception class 
      * by passing invalid arguments to the Request constructor
+     * @throws InvalidRequestException thrown if request is not valid.
      */
+
     @Test(expected = InvalidRequestException.class)
     public void testInvalidRequestConstructor() throws InvalidRequestException {
         String t = "Task";
@@ -124,6 +102,7 @@ public class FPTest {
 
     /**
      * Tests Request Constructor & checkValidity with a valid test case
+     * @throws InvalidRequestException thrown if request is not valid.
      */
     @Test
     public void testRequestConstructor() throws InvalidRequestException {
@@ -147,6 +126,7 @@ public class FPTest {
     /**
      * Tests if initializeConnection() function properly connects to 
      * database
+     * @throws InvalidRequestException thrown if request is not valid.
      */
     @Test
     public void connectionTest() throws InvalidRequestException {
@@ -201,6 +181,7 @@ public class FPTest {
     
     /** 
      * Tests creating any furniture in the database using the addFurn function
+     * @throws InvalidRequestException thrown if request is not valid.
      */
     @Test
     public void addFurnitureTest() throws InvalidRequestException {
@@ -228,7 +209,8 @@ public class FPTest {
     
     /** 
      * Tests deleting furniture in the database using the deleteFurniture 
-     * function
+     * function.
+     * @throws InvalidRequestException thrown if request is not valid.
      */
     @Test
     public void deleteFurnitureTest() throws InvalidRequestException {
@@ -248,7 +230,9 @@ public class FPTest {
     }
 
 	/**
-	 * Tests an invalidRequest response when an invalid request is used
+	 * Tests an invalidRequest response when Request cannot be fulfilled by inventory.
+     * @throws InvalidRequestException thrown if request is not valid.
+     * @throws TerminatorT1000Exception when Request cannot be fulfilled by inventory.
 	 */
     @Test(expected = TerminatorT1000Exception.class)
     public void invalidRequestTest() throws InvalidRequestException, TerminatorT1000Exception {
@@ -279,8 +263,9 @@ public class FPTest {
     // ================================= \\
 
 	/**
-	 * Tets the scenario in which 2 different pieces of furniture must be used 
-	 * to fulfil a given request
+	 * Test the scenario in which 2 different pieces of furniture must be used
+	 * to fulfill a given request
+     * @throws InvalidRequestException thrown if request is not valid.
 	 */
     @Test
     public void testGet2() throws InvalidRequestException {
@@ -298,7 +283,11 @@ public class FPTest {
 		}
         assertTrue(res);
     }
-
+    /**
+     * testGet3 tests the scenario in which there are 3 different pieces of furniture
+     * must be used in order to create the specified request.
+     * @throws InvalidRequestException thrown if request is not valid.
+     */
     @Test
     public void testGet3() throws InvalidRequestException {
         InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
@@ -315,7 +304,12 @@ public class FPTest {
 		}
         assertTrue(res);
     }
-
+    /**
+     * testGet4 tests the scenario in which there are 4 different pieces
+     * of furniture must be used
+     * in order to create the specified request.
+     * @throws InvalidRequestException thrown if request is not valid.
+     */
     @Test
     public void testGet4() throws InvalidRequestException {
         InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
@@ -332,52 +326,76 @@ public class FPTest {
 		}
         assertTrue(res);
     }
-
+    /**
+     * testCombine2 takes in 2 boolean arrays and will test if
+     * the combine function that has 2 inputs
+     * works properly.
+     */
     @Test
     public void testCombine2() {
-        boolean one[] = {true, false, true};
-        boolean two[] = {false, true, false};
+        boolean[] one = {true, false, true};
+        boolean[] two = {false, true, false};
         assertTrue(Input.combine(one,two));
     }
-
+    /**
+     * testCombine2Fail takes in 2 boolean arrays and
+     * will test if the combine function that has 2 inputs
+     * works properly if there is a fail.
+     */
     @Test
     public void testCombine2Fail() {
-        boolean one[] = {true, false, true};
-        boolean two[] = {false, false, false};
+        boolean[] one = {true, false, true};
+        boolean[] two = {false, false, false};
         assertFalse(Input.combine(one,two));
     }
-
+    /**
+     * testCombine3 takes in 3 boolean arrays and will test
+     * if the combine function that has 3 inputs
+     * works properly.
+     */
     @Test
     public void testCombine3() {
-        boolean one[] = {true, false, false};
-        boolean two[] = {false, true, false};
-        boolean three[] = {false, true, true};
+        boolean[] one = {true, false, false};
+        boolean[] two = {false, true, false};
+        boolean[] three = {false, true, true};
         assertTrue(Input.combine(one,two,three));
     }
-
+    /**
+     * testCombine3Fail takes in 3 boolean arrays and will test
+     * if the combine function that has 3 inputs
+     * works properly if there is a fail.
+     */
     @Test
     public void testCombine3Fail() {
-        boolean one[] = {true, false, false};
-        boolean two[] = {false, true, false};
-        boolean three[] = {false, true, false};
+        boolean[] one = {true, false, false};
+        boolean[] two = {false, true, false};
+        boolean[] three = {false, true, false};
         assertFalse(Input.combine(one,two,three));
     }
-
+    /**
+     * testCombine4 takes in 4 boolean arrays and will test if
+     * the combine function that has 4 inputs
+     * works properly.
+     */
     @Test
     public void testCombine4() {
-        boolean one[] = {true, false, false,false};
-        boolean two[] = {true, false, true,false};
-        boolean three[] = {true, false, false,false};
-        boolean four[] = {true, true, false,true};
+        boolean[] one = {true, false, false,false};
+        boolean[] two = {true, false, true,false};
+        boolean[] three = {true, false, false,false};
+        boolean[] four = {true, true, false,true};
         assertTrue(Input.combine(one,two,three,four));
     }
-
+    /**
+     * testCombine4Fail takes in 4 boolean arrays and will test if
+     * the combine function that has 4 inputs
+     * works properly if there is a fail.
+     */
     @Test
     public void testCombine4Fail() {
-        boolean one[] = {true, false, false,false};
-        boolean two[] = {true, false, false,false};
-        boolean three[] = {true, false, false,false};
-        boolean four[] = {true, false, false,false};
+        boolean[] one = {true, false, false,false};
+        boolean[] two = {true, false, false,false};
+        boolean[] three = {true, false, false,false};
+        boolean[] four = {true, false, false,false};
         assertFalse(Input.combine(one,two,three,four));
     }
 
@@ -385,29 +403,38 @@ public class FPTest {
     // ================================= \\
     // Furniture Constructors
     // ================================= \\
-
+    /**
+     * testLampConstructor is a test that makes sure
+     * that each Lamp object is being constructed correctly.
+     */
     @Test
     public void testChairConstructor() {
         boolean isTrue = false;
         Chair test = new Chair("test","chair",true,true,true,true,1,"123");
-        if(test.isArms() == true && test.isCushion() == true && test.isLegs() == true && test.isSeat() == true
+        if(test.isArms() && test.isCushion() && test.isLegs() && test.isSeat()
         && test.getManuID().equals("123") && test.getID().equals("test") && test.getManuID().equals("123")) {
             isTrue = true;
         }
         assertTrue(isTrue);
     }
-
+    /**
+     * testChairConstructor is a test that makes sure that
+     * each Chair object is being constructed correctly.
+     */
     @Test
     public void testDeskConstructor() {
         boolean isTrue = false;
         Desk test = new Desk("test","desk",true,true,true,1,"123");
-        if(test.isDrawer() == true && test.isLegs() == true && test.isTop() == true && test.getManuID().equals("123")
+        if(test.isDrawer() && test.isLegs()  && test.isTop() && test.getManuID().equals("123")
             && test.getID().equals("test") && test.getType().equals("desk")) {
             isTrue = true;
          }
         assertTrue(isTrue);
     }
-
+    /**
+     * testFilingConstructor is a test that makes sure that each
+     * Filing object is being constructed correctly.
+     */
     @Test
     public void testFilingConstructor() {
         boolean isTrue = false;
@@ -418,7 +445,10 @@ public class FPTest {
         }
         assertTrue(isTrue);
     }
-
+    /**
+     * testLampConstructor is a test that makes sure that each Lamp
+     * object is being constructed correctly.
+     */
     @Test
     public void testLampConstructor() {
         boolean isTrue = false;
@@ -430,6 +460,12 @@ public class FPTest {
         assertTrue(isTrue);
     }
 
+    /**
+     * The compare method creates an orderForm that can be
+     * tested against a pre-made orderForm called Sample.txt.
+     * @return returns whether or not the files are the same.
+     * @throws IOException thrown if files cannot be accessed.
+     */
 	public boolean compare() throws IOException {
         String testStringName = "mesh chair";
         int testAmount = 1;
@@ -442,7 +478,7 @@ public class FPTest {
         testForm.printOrderForm();
         BufferedReader order = new BufferedReader(new FileReader("OrderForm.txt"));
         BufferedReader sample = new BufferedReader(new FileReader("./JUnit/Sample.txt"));
-        int a=0, b=0;
+        int a, b;
         while(true){
             a = order.read();
             b = sample.read();
@@ -455,8 +491,3 @@ public class FPTest {
     }
 
 }
-// copy this as a blank test
-  /*  @Test
-    public void Test(){
-
-    }*/
