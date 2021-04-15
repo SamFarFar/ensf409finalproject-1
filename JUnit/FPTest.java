@@ -131,7 +131,7 @@ public class FPTest {
     @Test
     public void connectionTest() throws InvalidRequestException {
     boolean bool = false;
-    InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+    InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","scm","ensf409");
     IL.initializeConnection();
     Request request = new Request("Desk","lamp",1);
     ArrayList<String> tester = IL.getPossibleItems(request);
@@ -146,7 +146,7 @@ public class FPTest {
     @Test
     public void validPartsTest(){
     String ID = "C0914";
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","scm","ensf409");
         IL.initializeConnection();
     boolean[] tester = IL.getValidParts(ID);
     boolean[] actual = {false,false,true,true};
@@ -159,7 +159,7 @@ public class FPTest {
     @Test
     public void validPriceTest(){
         String ID = "C0914";
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","scm","ensf409");
         IL.initializeConnection();
         int tester = IL.getPrice(ID);
         int actual = 50;
@@ -172,7 +172,7 @@ public class FPTest {
     @Test
     public void validManuIDTest(){
         String ID = "C0914";
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","scm","ensf409");
         IL.initializeConnection();
         String tester = IL.getManuID(ID);
         String actual = "002";
@@ -188,7 +188,7 @@ public class FPTest {
 		boolean bool = false;
         Lamp actual = new Lamp("L023","Desk",false,true,
                 1,"001");
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","scm","ensf409");
         IL.initializeConnection();
         Request request = new Request("Desk","lamp",1);
         IL.addFurn(actual);
@@ -215,7 +215,7 @@ public class FPTest {
     @Test
     public void deleteFurnitureTest() throws InvalidRequestException {
         boolean test = false;
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","scm","ensf409");
         IL.initializeConnection();
         Request request = new Request("Desk","lamp",1);
         ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
@@ -236,7 +236,7 @@ public class FPTest {
 	 */
     @Test(expected = TerminatorT1000Exception.class)
     public void invalidRequestTest() throws InvalidRequestException, TerminatorT1000Exception {
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","scm","ensf409");
 		IL.initializeConnection();
 		Request request = new Request("Desk","lamp",1);
 		ArrayList<String> tester = IL.getPossibleItems(request);
@@ -269,7 +269,7 @@ public class FPTest {
 	 */
     @Test
     public void testGet2() throws InvalidRequestException {
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","scm","ensf409");
         IL.initializeConnection();
         Request request = new Request("Study","lamp",1);
         ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
@@ -290,7 +290,7 @@ public class FPTest {
      */
     @Test
     public void testGet3() throws InvalidRequestException {
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","scm","ensf409");
         IL.initializeConnection();
         Request request = new Request("Medium","filing",1);
         ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
@@ -312,7 +312,7 @@ public class FPTest {
      */
     @Test
     public void testGet4() throws InvalidRequestException {
-        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
+        InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","scm","ensf409");
         IL.initializeConnection();
         Request request = new Request("Task","chair",1);
         ArrayList<String> tester = IL.sort(IL.getPossibleItems(request));
