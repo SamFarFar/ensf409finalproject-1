@@ -1,3 +1,14 @@
+/**
+@author Matteo Morrone <a href = "mailto:matteo.morrone@ucalgary.ca">
+	matteo.morrone@ucalgary.ca</a>
+@author Sam FarzamFar <a href = "mailto:sam.farzamfar@ucalgary.ca">
+	sam.farzamfar@ucalgary.ca</a>
+@author Sandip Mishra <a href = "mailto:sandip.mishra@ucalgary.ca">
+	sandip.mishra@ucalgary.ca</a>
+@version 9.8
+@since 1.0
+*/
+
 package JUnit;
 import edu.ucalgary.ensf409.*;
 
@@ -40,12 +51,15 @@ public class FPTest {
     // OrderForm.java
     // ================================= \\
 
-    // tests the constructor setting up OrderForm
+    /**
+     * Tests the creation of an OrderForm object by using its getters to 
+     * compare values with what was passed to it.
+     */
     @Test
     public void testOrderFormConstructor(){
         String testStringName = "mesh chair";
         int testAmount = 1;
-        ArrayList<String> testList  = new ArrayList<>();
+        ArrayList<String> testList = new ArrayList<>();
         testList.add("C123");
         testList.add("C234");
         testList.add("C567");
@@ -62,7 +76,10 @@ public class FPTest {
         assertTrue(isWorking);
     }
 
-    // tests the creation of the OrderForm.txt file
+    /** 
+     * tests the creation of the OrderForm.txt file using the getIsFormCreated
+     *  method.
+     */
     @Test
     public void testOrderFormCreation() {
         String testStringName = "mesh chair";
@@ -77,7 +94,11 @@ public class FPTest {
         boolean test = testForm.getIsFormCreated();
         assertTrue(test);
     }
-
+	
+	/**
+	 * calls compare() function at the end of this filein order to ensure 
+	 * that the produced order form is exactly as expected.
+	 */
     @Test
     public void testOrderForm() throws IOException {
         assertTrue(compare());
@@ -88,7 +109,10 @@ public class FPTest {
     // ================================= \\
 
 
-    // tests Request Constructor & checkValidity with invalid case
+    /**
+     * Tests the constructor of the InvalidRequestException exception class 
+     * by passing invalid arguments to the Request constructor
+     */
     @Test(expected = InvalidRequestException.class)
     public void testInvalidRequestConstructor() throws InvalidRequestException {
         String t = "Task";
@@ -98,7 +122,9 @@ public class FPTest {
 
     }
 
-    // tests Request Constructor & checkValidity with valid case
+    /**
+     * Tests Request Constructor & checkValidity with a valid test case
+     */
     @Test
     public void testRequestConstructor() throws InvalidRequestException {
        boolean tester = false;
@@ -117,9 +143,14 @@ public class FPTest {
     // ================================= \\
     // InventoryLink.java
     // ================================= \\
+    
+    /**
+     * Tests if initializeConnection() function properly connects to 
+     * database
+     */
     @Test
     public void connectionTest() throws InvalidRequestException {
-    boolean bool =false;
+    boolean bool = false;
     InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
     IL.initializeConnection();
     Request request = new Request("Desk","lamp",1);
@@ -128,7 +159,10 @@ public class FPTest {
         bool = true;
     assertTrue(bool);
 	}
-    // Tests getValidParts with ID
+	
+    /** 
+     * Tests getValidParts with a valid ID in the DB
+     */
     @Test
     public void validPartsTest(){
     String ID = "C0914";
@@ -138,7 +172,10 @@ public class FPTest {
     boolean[] actual = {false,false,true,true};
     assertArrayEquals(tester,actual);
     }
-    // Tests getPrice with ID
+    
+    /** 
+     * Tests getPrice with a valid ID in the DB
+     */
     @Test
     public void validPriceTest(){
         String ID = "C0914";
@@ -148,7 +185,10 @@ public class FPTest {
         int actual = 50;
         assertEquals(tester,actual);
     }
-    // Tests getManuID with valid ID
+    
+    /** 
+     * Tests getManuID with valid ID in the DB
+     */
     @Test
     public void validManuIDTest(){
         String ID = "C0914";
@@ -158,7 +198,10 @@ public class FPTest {
         String actual = "002";
         assertEquals(tester,actual);
     }
-    // Tests creating any furniture in the database
+    
+    /** 
+     * Tests creating any furniture in the database using the addFurn function
+     */
     @Test
     public void addFurnitureTest() throws InvalidRequestException {
 		boolean bool = false;
@@ -182,7 +225,11 @@ public class FPTest {
         assertTrue(bool);
         IL.deleteFurniture("L023");
     }
-    // Tests deleting furniture in the database /
+    
+    /** 
+     * Tests deleting furniture in the database using the deleteFurniture 
+     * function
+     */
     @Test
     public void deleteFurnitureTest() throws InvalidRequestException {
         boolean test = false;
@@ -199,9 +246,10 @@ public class FPTest {
                 18,"005");
         IL.addFurn(toBeDeleted);
     }
-        // Tests an invalidRequest response ////
-    // Not done dont know how to test if program does System.exit(1);
 
+	/**
+	 * Tests an invalidRequest response when an invalid request is used
+	 */
     @Test(expected = TerminatorT1000Exception.class)
     public void invalidRequestTest() throws InvalidRequestException, TerminatorT1000Exception {
         InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
@@ -230,8 +278,10 @@ public class FPTest {
     // Input.java
     // ================================= \\
 
-    // get2
-
+	/**
+	 * Tets the scenario in which 2 different pieces of furniture must be used 
+	 * to fulfil a given request
+	 */
     @Test
     public void testGet2() throws InvalidRequestException {
         InventoryLink IL = new InventoryLink("jdbc:mysql://localhost/inventory","matteo","pasquale");
